@@ -60,7 +60,8 @@ Log `data` includes non-indexed parameters but is difficult to search or filter.
 A Solidity contract storing one indexed and one non-indexed parameter and has an event emitting
 the value of each parameter:
 
-```solidity
+[source,solidity]
+-----------------
 pragma solidity ^0.5.1;
 contract Storage {
   uint256 public valueIndexed;
@@ -74,16 +75,16 @@ contract Storage {
     emit Event1(_valueIndexed, _valueNotIndexed);
   }
 }
-```
-....
+-----------------
 
 > Example 3
 
-....
+
 A log entry created by invoking the contract in the previous example with `valueIndexed` set to
 5 and `valueNotIndexed` set to 7:
 
-```json
+[source,json]
+-----------------
  {
    "logIndex": "0x0",
    "removed": false,
@@ -98,8 +99,7 @@ A log entry created by invoking the contract in the previous example with `value
     "0x0000000000000000000000000000000000000000000000000000000000000005"
    ]
  }
-```
-....
+-----------------
 
 == Event signature hash
 
