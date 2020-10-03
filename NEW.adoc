@@ -23,10 +23,11 @@ Log entries contain up to four topics. The first topic is the
 
 > Example 1
 
-....
+
 A log entry for an event with one indexed parameter:
 
-```json
+[source,json]
+-----------------
 {
   "logIndex": "0x0",
   "removed": false,
@@ -41,8 +42,7 @@ A log entry for an event with one indexed parameter:
     "0x0000000000000000000000000000000000000000000000000000000000000001"
   ]
 }
-```
-....
+-----------------
 
 == Event parameters
 
