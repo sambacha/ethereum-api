@@ -1,10 +1,10 @@
 :doctype: book
 
-#
+= Hyperledger Besu EVM API Objects 
 
 The following objects are parameters for or returned by Besu API methods.
 
-= Block object
+== Block object
 
 Returned by link:API-Methods.md#eth_getblockbyhash[`eth_getBlockByHash`] and link:API-Methods.md#eth_getblockbynumber[`eth_getBlockByNumber`].
 
