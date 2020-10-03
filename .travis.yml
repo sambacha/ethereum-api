@@ -1,0 +1,21 @@
+---
+os: linux
+dist: xenial
+
+language: node_js
+node_js:
+  - '10'
+before_install:
+  - npm install -g npm@latest
+  - npm --version
+
+install:
+  - npm install # do not use default npm ci
+
+script:
+  - sh tests/confirm-sol-merged.sh
+  - npm test
+
+cache:
+  directories:
+    - "node_modules"
