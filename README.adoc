@@ -1,5 +1,20 @@
-= Events and logs
-:description: Hyperledger Besu events and logs
+:url-project: https://sambacha.github.io/besu-api
+:url-docs:  https://sambacha.github.io/besu-api
+:url-org: https://sambacha.github.io/
+:url-group: {url-org}/besu-api
+:url-site-readme: {url-group}/besu-api/blob/master/README.adoc
+:url-besu: https://besu.hyperledger.org/
+:public-key: /gpg/6F6EB43E.asc
+:active-key: {url-group}{public-key}
+:docbook:
+
+:toc: 
+
+= API-first Smart Contract Design 
+
+:description: Optimizing solidity contracts for API access, focusing on Hyperledger Besu 
+
+=== Overview 
 
 Transaction mining causes smart contracts to emit events and write logs to the blockchain.
 
@@ -14,6 +29,21 @@ subscribe to logs using the link:../HowTo/Interact/APIs/RPC-PubSub.md#logs[RPC P
 
 Use link:../Reference/API-Methods.md#admin_generatelogbloomcache[`admin_generateLogBloomCache`] to
 improve log retrieval performance.
+
+== DotEnv Configuration
+
+These settings directly affect query/response time for Hyperledger Besu
+
+[source, cfg]
+-----------------
+BLOCKS_PER_BLOOM_CACHE=
+export BESU_OPTS="--add-opens java.base/sun.security.provider=ALL-UNNAMED"
+set BESU_OPTS="--add-opens java.base/sun.security.provider=ALL-UNNAMED"
+BLOCKS_PER_BLOOM_CACHE
+BESU_AUTO_LOG_BLOOM_CACHING_ENABLED=false
+BESU_KEY_VALUE_STORAGE=rocksdb
+BESU_LOGGING=DEBUG
+-----------------
 
 == Topics
 
