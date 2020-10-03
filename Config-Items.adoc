@@ -1,0 +1,151 @@
+= Genesis file
+:description: Configuration items specified in the Hyperledger Besu genesis file
+
+The genesis file contains <<configuration-items,network configuration items>> and <<genesis-block-parameters,genesis block parameters>>.
+
+== Configuration items
+
+The following table lists the network configuration items in the `config` object specified in the genesis file.
+
+[cols=",>"]
+|===
+| Item | Description
+
+| Chain ID
+| xref:../Concepts/NetworkID-And-ChainID.adoc[Chain ID for the network]
+
+| Milestone blocks
+| <<milestone-blocks,Milestone blocks for the network>>
+
+| `ethash`
+| Specifies network uses xref:../Concepts/Consensus-Protocols/Overview-Consensus.adoc[Ethash] and contains <<Fixed Difficulty,`fixeddifficulty`>>
+
+| `clique`
+| Specifies network uses xref:../HowTo/Configure/Consensus-Protocols/Clique.adoc[Clique] and contains link:../HowTo/Configure/Consensus-Protocols/Clique.md#genesis-file[Clique configuration items]
+
+| `ibft2`
+| Specifies network uses xref:../HowTo/Configure/Consensus-Protocols/IBFT.adoc[IBFT 2.0] and contains link:../HowTo/Configure/Consensus-Protocols/IBFT.md#genesis-file[IBFT 2.0 configuration items]
+
+| `transitions`
+| Specifies block at which to link:../HowTo/Configure/Consensus-Protocols/IBFT.md#adding-and-removing-validators-without-voting[change IBFT 2.0 validators]
+
+| `contractSizeLimit`
+| Maximum contract size in bytes.
+Specify in xref:../HowTo/Configure/FreeGas.adoc[free gas networks].
+The default is `24576` and the maximum size is `2147483647`.
+
+| `evmStackSize`
+| Maximum stack size.
+Specify to increase the maximum stack size in private networks with complex smart contracts.
+The default is `1024`.
+|===
+
+== Genesis block parameters
+
+The purpose of some genesis block parameters varies depending on the consensus protocol (Ethash, xref:../HowTo/Configure/Consensus-Protocols/Clique.adoc[Clique], or xref:../HowTo/Configure/Consensus-Protocols/IBFT.adoc[IBFT 2.0]).
+These parameters include:
+
+* `difficulty`
+* `extraData`
+* `mixHash`.
+
+The following table describes the genesis block parameters with the same purpose across all consensus protocols.
+
+[cols=",>"]
+|===
+| Item | Description
+
+| `coinbase`
+| Address to pay mining rewards to.
+Can be any value in the genesis block (commonly set to `0x0000000000000000000000000000000000000000`).
+
+| `gasLimit`
+| Block gas limit.
+Total gas limit for all transactions in a block.
+
+| `nonce`
+| Used in block computation.
+Can be any value in the genesis block (commonly set to `0x0`).
+
+| `timestamp`
+| Creation date and time of the block.
+Must be before the next block so we recommend specifying `0x0` in the genesis file.
+
+| `alloc`
+| Defines xref:Accounts-for-Testing.adoc[accounts with balances] or xref:../HowTo/Configure/Contracts-in-Genesis.adoc[contracts].
+|===
+
+== Milestone blocks
+
+In public networks, the milestone blocks specify the blocks at which the network changed protocol.
+
+!!!
+example "Ethereum Mainnet Milestone Blocks"
+
+ ```json
+ {
+   "config": {
+     ...
+     "homesteadBlock": 1150000,
+     "daoForkBlock": 1920000,
+     "daoForkSupport": true,
+     "eip150Block": 2463000,
+     "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+     "eip155Block": 2675000,
+     "eip158Block": 2675000,
+     "byzantiumBlock": 4370000,
+     "constantinopleBlock": 7280000,
+     "constantinopleFixBlock": 7280000,
+     ...
+   },
+ }
+ ```
+
+In private networks, the milestone block defines the protocol version for the network.
+
+!!!
+example "Private Network Milestone Block"
+
+ ```json
+ {
+   "config": {
+     ...
+     "constantinopleFixBlock": 0,
+     ...
+   },
+ }
+ ```
+
+!!!
+tip
+
+ When specifying the milestone block for private networks, you only need to specify the latest
+ milestone. It is implied this includes the preceding milestones.
+
+== Fixed difficulty
+
+Use `fixeddifficulty` to specify a fixed difficulty in private networks using Ethash.
+This will keep the network's difficulty constant and override the `difficulty` parameter from the genesis file.
+
+!!!
+example
+
+....
+```json
+{
+  "config": {
+      ...
+      "ethash": {
+        "fixeddifficulty": 1000
+      },
+
+   },
+  ...
+}
+```
+....
+
+!!!
+tip     Using `fixeddifficulty` is not recommended for use with Ethash outside of test environments.
+For production networks using Ethash, we recommend setting a low `difficulty` value in the genesis file instead.
+Ethash will adjust the difficulty of the network based on hashrate to produce blocks at the targetted frequency.
