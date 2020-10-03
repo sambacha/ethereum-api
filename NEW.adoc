@@ -56,10 +56,13 @@ Log `data` includes non-indexed parameters but is difficult to search or filter.
 
 > Example 2
 
-....
+
 A Solidity contract storing one indexed and one non-indexed parameter and has an event emitting
 the value of each parameter:
 
+
+* Storage.sol:
++
 [source, solidity]
 -----------------
 pragma solidity ^0.5.1;
@@ -138,28 +141,28 @@ uint256 public valueB;
        emit Event2(_valueB);
      }
    }
-```
-....
+-----------------
 
 The event signature hash for event 1 is `keccak('Event1(uint256)')` and the event signature hash
 for event 2 is `keccak('Event2(uint256)')`. The hashes are:
 
-* `04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3` for event 1
-* `06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e` for event 2.
+* `04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3` for **event 1**
+* `06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e` for **event 2.**
 
 > Informative
 
  You can use a library keccak (sha3) hash function, such as provided in
  [Web3.js](https://web3js.readthedocs.io/en/v1.2.11/web3-utils.html?highlight=sha3#sha3), or an online tool,
- such as https://emn178.github.io/online-tools/keccak_256.html, to generate event signature
+ such as link:https://emn178.github.io/online-tools/keccak_256.html, to generate event signature
  hashes.
 
 > Example 5
 
-....
+
 Log entries from invoking the Solidity contract in the previous example:
 
-```json
+[source, json]
+-----------------
 [
   {
     "logIndex": "0x0",
@@ -190,8 +193,8 @@ Log entries from invoking the Solidity contract in the previous example:
     ]
   }
 ]
-```
-....
+-----------------
+
 
 == Topic filters
 
@@ -209,11 +212,12 @@ following topic filters:
 
 > Example 6
 
-....
+
 The following filter option object returns log entries for the
 [Event Parameters example contract](#event-parameters) with `valueIndexed` set to 5 or 9:
 
-```json
+[source, json]
+-----------------
 {
   "fromBlock":"earliest",
   "toBlock":"latest",
@@ -223,15 +227,14 @@ The following filter option object returns log entries for the
    ["0x0000000000000000000000000000000000000000000000000000000000000005", "0x0000000000000000000000000000000000000000000000000000000000000009"]
   ]
 }
-```
-....
-:doctype: book
+-----------------
 
-= Hyperledger Besu EVM API Objects 
+
+== Hyperledger Besu EVM API Objects 
 
 The following objects are parameters for or returned by Besu API methods.
 
-== Block object
+=== Block object
 
 Returned by link:API-Methods.md#eth_getblockbyhash[`eth_getBlockByHash`] and link:API-Methods.md#eth_getblockbynumber[`eth_getBlockByNumber`].
 
