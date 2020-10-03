@@ -1,0 +1,888 @@
+= Events and logs
+:description: Hyperledger Besu events and logs
+
+Transaction mining causes smart contracts to emit events and write logs to the blockchain.
+
+The smart contract address is the link to the logs and the blockchain includes the logs, but
+contracts cannot access logs. Log storage is cheaper than contract storage (that is, it costs less
+gas) so storing and accessing the required data in logs reduces the cost. For example, use logs to
+display all transfers made using a specific contract, but not the current state of the contract.
+
+A Dapp front end can either access logs using the
+xref:../HowTo/Interact/Filters/Accessing-Logs-Using-JSON-RPC.adoc[JSON-RPC API filter methods] or
+subscribe to logs using the link:../HowTo/Interact/APIs/RPC-PubSub.md#logs[RPC Pub/Sub API].
+
+Use link:../Reference/API-Methods.md#admin_generatelogbloomcache[`admin_generateLogBloomCache`] to
+improve log retrieval performance.
+
+== Topics
+
+Log entries contain up to four topics. The first topic is the
+<<event-signature-hash,event signature hash>> and up to three topics are the indexed
+<<event-parameters,event parameters>>.
+
+!!! example
+
+....
+A log entry for an event with one indexed parameter:
+
+```json
+{
+  "logIndex": "0x0",
+  "removed": false,
+  "blockNumber": "0x84",
+  "blockHash": "0x5fc573d76ec48ec80cbc43f299ebc306a8168112e3a4485c23e84e9a40f5d336",
+  "transactionHash": "0xcb52f02342c2498df82c49ac26b2e91e182155c8b2a2add5b6dc4c249511f85a",
+  "transactionIndex": "0x0",
+  "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
+  "data": "0x",
+  "topics": [
+    "0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3",
+    "0x0000000000000000000000000000000000000000000000000000000000000001"
+  ]
+}
+```
+....
+
+== Event parameters
+
+Up to three event parameters can have the `indexed` attribute. Logs store these indexed parameters
+as `topics`. Indexed parameters are searchable and filterable.
+
+Topics are 32 bytes. If an indexed argument is an array (including `string` and `byte` datatypes),
+the log stores the keccak-256 hash of the paramater as a topic.
+
+Log `data` includes non-indexed parameters but is difficult to search or filter.
+
+!!! example
+
+....
+A Solidity contract storing one indexed and one non-indexed parameter and has an event emitting
+the value of each parameter:
+
+```solidity
+pragma solidity ^0.5.1;
+contract Storage {
+  uint256 public valueIndexed;
+  uint256 public valueNotIndexed;
+
+  event Event1(uint256 indexed valueIndexed, uint256 valueNotIndexed);
+
+  function setValue(uint256 _valueIndexed, uint256 _valueNotIndexed) public {
+    valueIndexed = _valueIndexed;
+    valueNotIndexed = _valueNotIndexed;
+    emit Event1(_valueIndexed, _valueNotIndexed);
+  }
+}
+```
+....
+
+!!! example
+
+....
+A log entry created by invoking the contract in the previous example with `valueIndexed` set to
+5 and `valueNotIndexed` set to 7:
+
+```json
+ {
+   "logIndex": "0x0",
+   "removed": false,
+   "blockNumber": "0x4d6",
+   "blockHash": "0x7d0ac7c12ac9f622d346d444c7e0fa4dda8d4ed90de80d6a28814613a4884a67",
+   "transactionHash": "0xe994022ada94371ace00c4e1e20663a01437846ced02f18b3f3afec827002781",
+   "transactionIndex": "0x0",
+   "address": "0x43d1f9096674b5722d359b6402381816d5b22f28",
+   "data": "0x0000000000000000000000000000000000000000000000000000000000000007",
+   "topics": [
+    "0xd3610b1c54575b7f4f0dc03d210b8ac55624ae007679b7a928a4f25a709331a8",
+    "0x0000000000000000000000000000000000000000000000000000000000000005"
+   ]
+ }
+```
+....
+
+== Event signature hash
+
+The first topic in a log entry is always the event signature hash. The event signature hash is
+a keccak-256 hash of the event name and input argument types, with argument names ignored. For
+example, the event `Hello(uint256 worldId)` has the signature hash `keccak('Hello(uint256)')`. The
+signature identifies to which event log topics belong.
+
+!!! example
+
+....
+A Solidity contract with two different events:
+
+``` solidity
+     pragma solidity ^0.5.1;
+     contract Storage {
+     uint256 public valueA;
+     uint256 public valueB;
+
+     event Event1(uint256 indexed valueA);
+     event Event2(uint256 indexed valueB);
+
+     function setValue(uint256 _valueA) public {
+       valueA = _valueA;
+       emit Event1(_valueA);
+     }
+
+     function setValueAgain(uint256 _valueB) public {
+       valueB = _valueB;
+       emit Event2(_valueB);
+     }
+   }
+```
+....
+
+The event signature hash for event 1 is `keccak('Event1(uint256)')` and the event signature hash
+for event 2 is `keccak('Event2(uint256)')`. The hashes are:
+
+* `04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3` for event 1
+* `06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e` for event 2.
+
+!!! tip
+
+ You can use a library keccak (sha3) hash function, such as provided in
+ [Web3.js](https://web3js.readthedocs.io/en/v1.2.11/web3-utils.html?highlight=sha3#sha3), or an online tool,
+ such as https://emn178.github.io/online-tools/keccak_256.html, to generate event signature
+ hashes.
+
+!!! example
+
+....
+Log entries from invoking the Solidity contract in the previous example:
+
+```json
+[
+  {
+    "logIndex": "0x0",
+    "removed": false,
+    "blockNumber": "0x84",
+    "blockHash": "0x5fc573d76ec48ec80cbc43f299ebc306a8168112e3a4485c23e84e9a40f5d336",
+    "transactionHash": "0xcb52f02342c2498df82c49ac26b2e91e182155c8b2a2add5b6dc4c249511f85a",
+    "transactionIndex": "0x0",
+    "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
+    "data": "0x",
+    "topics": [
+      "0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3",
+      "0x0000000000000000000000000000000000000000000000000000000000000001"
+    ]
+  },
+  {
+    "logIndex": "0x0",
+    "removed": false,
+    "blockNumber": "0x87",
+    "blockHash": "0x6643a1e58ad857f727552e4572b837a85b3ca64c4799d085170c707e4dad5255",
+    "transactionHash": "0xa95295fcea7df3b9e47ab95d2dadeb868145719ed9cc0e6c757c8a174e1fcb11",
+    "transactionIndex": "0x0",
+    "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
+    "data": "0x",
+    "topics": [
+      "0x06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e",
+      "0x0000000000000000000000000000000000000000000000000000000000000002"
+    ]
+  }
+]
+```
+....
+
+== Topic filters
+
+link:../Reference/API-Objects.md#filter-options-object[Filter options objects] have a `topics` key to
+filter logs by topics.
+
+Topics are order-dependent. A transaction with a log containing topics `[A, B]` matches with the
+following topic filters:
+
+* `[]` - Match any topic
+* `[A]` - Match A in first position
+* `[[null], [B]]` - Match any topic in first position AND B in second position
+* `[[A],[B]]` - Match A in first position AND B in second position
+* `[[A, C], [B, D]]` - Match (A OR C) in first position AND (B OR D) in second position.
+
+!!! example
+
+....
+The following filter option object returns log entries for the
+[Event Parameters example contract](#event-parameters) with `valueIndexed` set to 5 or 9:
+
+```json
+{
+  "fromBlock":"earliest",
+  "toBlock":"latest",
+  "address":"0x43d1f9096674b5722d359b6402381816d5b22f28",
+  "topics":[
+   ["0xd3610b1c54575b7f4f0dc03d210b8ac55624ae007679b7a928a4f25a709331a8"],
+   ["0x0000000000000000000000000000000000000000000000000000000000000005", "0x0000000000000000000000000000000000000000000000000000000000000009"]
+  ]
+}
+```
+....
+:doctype: book
+
+= Hyperledger Besu EVM API Objects 
+
+The following objects are parameters for or returned by Besu API methods.
+
+== Block object
+
+Returned by link:API-Methods.md#eth_getblockbyhash[`eth_getBlockByHash`] and link:API-Methods.md#eth_getblockbynumber[`eth_getBlockByNumber`].
+
+|===
+| Key | Type | Value
+
+| *number*
+| _Quantity_, Integer
+| Block number.
+`null` when block is pending.
+
+| *hash*
+| _Data_, 32 bytes
+| Hash of the block.
+`null` when block is pending.
+
+| *parentHash*
+| _Data_, 32 bytes
+| Hash of the parent block.
+
+| *nonce*
+| _Data_, 8 bytes
+| Hash of the generated proof of work.
+`null` when block is pending.
+
+| *sha3Uncles*
+| _Data_, 32 bytes
+| SHA3 of the uncle's data in the block.
+
+| *logsBloom*
+| _Data_, 256 bytes
+| Bloom filter for the block logs.
+`null` when block is pending.
+
+| *transactionsRoot*
+| _Data_, 32 bytes
+| Root of the transaction trie for the block.
+
+| *stateRoot*
+| Data, 32 bytes
+| Root of the final state trie for the block.
+
+| *receiptsRoot*
+| Data, 32 bytes
+| Root of the receipts trie for the block.
+
+| *miner*
+| Data, 20 bytes
+| Address to pay mining rewards to.
+
+| *difficulty*
+| Quantity, Integer
+| Difficulty for this block.
+
+| *totalDifficulty*
+| Quantity, Integer
+| Total difficulty of the chain until this block.
+
+| *extraData*
+| Data
+| Extra data field for this block.
+The first 32 bytes is vanity data you can set using the link:../Reference/CLI/CLI-Syntax.md#miner-extra-data[`--miner-extra-data`] command line option.
+Stores extra data when used with link:../HowTo/Configure/Consensus-Protocols/Clique.md#genesis-file[Clique] and link:../HowTo/Configure/Consensus-Protocols/IBFT.md#genesis-file[IBFT].
+
+| *size*
+| Quantity, Integer
+| Size of block in bytes.
+
+| *gasLimit*
+| Quantity
+| Maximum gas allowed in this block.
+
+| *gasUsed*
+| Quantity
+| Total gas used by all transactions in this block.
+
+| *timestamp*
+| Quantity
+| Unix timestamp for block assembly.
+
+| *transactions*
+| Array
+| Array of <<transaction-object,transaction objects>>, or 32 byte transaction hashes depending on the specified boolean parameter.
+
+| *uncles*
+| Array
+| Array of uncle hashes.
+|===
+
+= Filter options object
+
+Parameter for link:API-Methods.md#eth_newfilter[`eth_newFilter`], link:API-Methods.md#eth_getlogs[`eth_getLogs`], and link:API-Methods.md#priv_getlogs[`priv_getLogs`].
+Used to link:../HowTo/Interact/Filters/Accessing-Logs-Using-JSON-RPC.xml[`filter logs`].
+
+|===
+| Key | Type | Required/Optional | Value |
+
+| *fromBlock*
+| Quantity
+| Tag
+| Optional
+| Integer block number or `latest`, `pending`, `earliest`.
+See link:../HowTo/Interact/APIs/Using-JSON-RPC-API.md#block-parameter[Block Parameter].
+Default is `latest`.
+
+| *toBlock*
+| Quantity
+| Tag
+| Optional
+| Integer block number or `latest`, `pending`, `earliest`.
+See link:../HowTo/Interact/APIs/Using-JSON-RPC-API.md#block-parameter[Block Parameter].
+Default is `latest`.
+
+| *address*
+| Data
+| Array
+| Optional
+| Contract address or array of addresses from which link:../Concepts/Events-and-Logs.xml[logs] originate.
+
+| *topics*
+| Array of Data, 32 bytes each
+| Optional
+| Array of topics by which to link:../Concepts/Events-and-Logs.md#topic-filters[filter logs].
+|
+|===
+
+link:API-Methods.md#eth_getlogs[`eth_getLogs`] and link:API-Methods.md#priv_getlogs[`priv_getLogs`] have an extra key.
+
+|===
+| Key | Type | Required/Optional | Value
+
+| *blockhash*
+| Data, 32 bytes
+| Optional.
+| Hash of block for which to return logs.
+If you specify `blockhash`, you cannot specify `fromBlock` and `toBlock`.
+|===
+
+= Log object
+
+Returned by link:API-Methods.md#eth_getfilterchanges[`eth_getFilterChanges`] and link:API-Methods.md#priv_getlogs[`priv_getLogs`].
+<<transaction-receipt-object,`Transaction receipt objects`>> can contain an array of log objects.
+
+|===
+| Key | Type | Value
+
+| *removed*
+| Tag
+| `true` if log removed because of a chain reorganization.
+`false` if a valid log.
+
+| *logIndex*
+| Quantity, Integer
+| Log index position in the block.
+`null` when log is pending.
+
+| *transactionIndex*
+| Quantity, Integer
+| Index position of the starting transaction for the log.
+`null` when log is pending.
+
+| *transactionHash*
+| Data, 32 bytes
+| Hash of the starting transaction for the log.
+`null` when log is pending.
+
+| *blockHash*
+| Data, 32 bytes
+| Hash of the block that includes the log.
+`null` when log is pending.
+
+| *blockNumber*
+| Quantity
+| Number of block that includes the log.
+`null` when log is pending.
+
+| *address*
+| Data, 20 bytes
+| Address the log originated from.
+
+| *data*
+| Data
+| Non-indexed arguments of the log.
+
+| *topics*
+| Array of Data, 32 bytes each
+| link:../Concepts/Events-and-Logs.md#event-signature-hash[Event signature hash] and 0 to 3 link:../Concepts/Events-and-Logs.md#event-parameters[indexed log arguments].
+|===
+
+= Pending transaction object
+
+Returned by link:API-Methods.md#txpool_besupendingtransactions[`txpool_besuPendingTransactions`].
+
+|===
+| Key | Type | Value
+
+| *from*
+| Data, 20 bytes
+| Address of the sender.
+
+| *gas*
+| Quantity
+| Gas provided by the sender.
+
+| *gasPrice*
+| Quantity
+| Gas price, in wei, provided by the sender.
+
+| *hash*
+| Data, 32 bytes
+| Hash of the transaction.
+
+| *input*
+| Data
+| Data sent with the transaction to create or invoke a contract.
+
+| *nonce*
+| Quantity
+| Number of transactions made by the sender before this one.
+
+| *to*
+| Data, 20 bytes
+| Address of the receiver.
+`null` if a contract creation transaction.
+
+| *value*
+| Quantity
+| Value transferred, in wei.
+
+| *v*
+| Quantity
+| ECDSA Recovery ID.
+
+| *r*
+| Data, 32 bytes
+| ECDSA signature r.
+
+| *s*
+| Data, 32 bytes
+| ECDSA signature s.
+|===
+
+= Private transaction object
+
+Returned by link:API-Methods.md#priv_getprivatetransaction[`priv_getPrivateTransaction`].
+
+|===
+| Key | Type | Value
+
+| *from*
+| Data, 20 bytes
+| Address of the sender.
+
+| *gas*
+| Quantity
+| Gas provided by the sender.
+
+| *gasPrice*
+| Quantity
+| Gas price, in Wei, provided by the sender.
+
+| *hash*
+| Data, 32 bytes
+| Hash of the transaction.
+
+| *input*
+| Data
+| The data to create or invoke a contract.
+
+| *nonce*
+| Quantity
+| Number of transactions made by the sender to the privacy group before this one.
+
+| *to*
+| Data, 20 bytes
+| `null` if a contract creation transaction, otherwise, the contract address.
+
+| *value*
+| Quantity
+| `null` because private transactions cannot transfer Ether.
+
+| *v*
+| Quantity
+| ECDSA Recovery ID.
+
+| *r*
+| Data, 32 bytes
+| ECDSA signature r.
+
+| *s*
+| Data, 32 bytes
+| ECDSA signature s.
+
+| *privateFrom*
+| Data, 32 bytes
+| https://docs.orion.pegasys.tech/en/stable/[Orion] public key of the sender.
+
+| *privateFor*
+| Array of Data, 32 bytes each
+| https://docs.orion.pegasys.tech/en/stable/[Orion] public keys of recipients.
+Not returned if using `privacyGroupId` to link:../Concepts/Privacy/Privacy-Groups.md#privacy-types[send the transaction].
+
+| *privacyGroupId*
+| Data, 32 bytes
+| https://docs.orion.pegasys.tech/en/stable/[Orion] privacy group ID of recipients.
+Not returned if using `privateFor` to link:../Concepts/Privacy/Privacy-Groups.md#privacy-types[send the transaction].
+
+| *restriction*
+| String
+| Must be link:../Concepts/Privacy/Private-Transactions.xml[`restricted`].
+|===
+
+= Range object
+
+Returned by link:API-Methods.md#debug_storagerangeat[`debug_storageRangeAt`].
+
+|===
+| Key | Type | Value
+
+| *storage*
+| Object
+| Key hash and value.
+Preimage key is null if it falls outside the cache.
+
+| *nextKey*
+| Hash
+| Hash of next key if further storage in range.
+Otherwise, not included.
+|===
+
+== Structured log object
+
+Log information returned as part of the <<trace-object,Trace object>>.
+
+|===
+| Key | Type | Value
+
+| *pc*
+| Integer
+| Current program counter.
+
+| *op*
+| String
+| Current OpCode.
+
+| *gas*
+| Integer
+| Gas remaining.
+
+| *gasCost*
+| Integer
+| Cost in wei of each gas unit.
+
+| *depth*
+| Integer
+| Execution depth.
+
+| *exceptionalHaltReasons*
+| Array
+| One or more strings representing an error condition causing the EVM execution to terminate.
+These strings suggest that EVM execution terminated for reasons such as running out of gas or attempting to execute an unknown instruction.
+Generally a single exceptional halt reason returns but it's possible for more than one to occur at once.
+
+| *stack*
+| Array of 32 byte arrays
+| EVM execution stack before executing current operation.
+
+| *memory*
+| Array of 32 byte arrays
+| Memory space of the contract before executing current operation.
+
+| *storage*
+| Object
+| Storage entries changed by the current transaction.
+|===
+
+= Trace object
+
+Returned by link:API-Methods.md#debug_traceblock[`debug_traceBlock`], link:API-Methods.md#debug_traceblockbyhash[`debug_traceBlockByHash`], link:API-Methods.md#debug_traceblockbynumber[`debug_traceBlockByNumber`], and link:API-Methods.md#debug_tracetransaction[`debug_traceTransaction`].
+
+|===
+| Key | Type | Value
+
+| *gas*
+| Integer
+| Gas used by the transaction.
+
+| *failed*
+| Boolean
+| True if transaction failed, otherwise, false.
+
+| *returnValue*
+| String
+| Bytes returned from transaction execution (without a `0x` prefix).
+
+| *structLogs*
+| Array
+| Array of structured log objects.
+|===
+
+= Transaction object
+
+Returned by link:API-Methods.md#eth_gettransactionbyhash[`eth_getTransactionByHash`], link:API-Methods.md#eth_gettransactionbyblockhashandindex[`eth_getTransactionByBlockHashAndIndex`], and link:API-Methods.md#eth_gettransactionbyblocknumberandindex[`eth_getTransactionsByBlockNumberAndIndex`].
+
+|===
+| Key | Type | Value
+
+| *blockHash*
+| Data, 32 bytes
+| Hash of the block containing this transaction.
+`null` when transaction is pending.
+
+| *blockNumber*
+| Quantity
+| Block number of the block containing this transaction.
+`null` when transaction is pending.
+
+| *from*
+| Data, 20 bytes
+| Address of the sender.
+
+| *gas*
+| Quantity
+| Gas provided by the sender.
+
+| *gasPrice*
+| Quantity
+| Gas price, in wei, provided by the sender.
+
+| *hash*
+| Data, 32 bytes
+| Hash of the transaction.
+
+| *input*
+| Data
+| Data sent with the transaction to create or invoke a contract.
+For link:../Concepts/Privacy/Privacy-Overview.xml[private transactions], it's a pointer to the transaction location in https://docs.orion.pegasys.tech/en/stable/[Orion].
+
+| *nonce*
+| Quantity
+| Number of transactions made by the sender before this one.
+
+| *to*
+| Data, 20 bytes
+| Address of the receiver.
+`null` if a contract creation transaction.
+
+| *transactionIndex*
+| Quantity, Integer
+| Index position of the transaction in the block.
+`null` when transaction is pending.
+
+| *value*
+| Quantity
+| Value transferred, in wei.
+
+| *v*
+| Quantity
+| ECDSA Recovery ID.
+
+| *r*
+| Data, 32 bytes
+| ECDSA signature r.
+
+| *s*
+| Data, 32 bytes
+| ECDSA signature s.
+|===
+
+= Transaction call object
+
+Parameter for link:API-Methods.md#eth_call[`eth_call`] and link:API-Methods.md#eth_estimategas[`eth_estimateGas`].
+
+!!!note
+
+ All parameters are optional for [`eth_estimateGas`](API-Methods.md#eth_estimategas).
+
+|===
+| Key | Type | Required/Optional | Value
+
+| *from*
+| Data, 20 bytes
+| Optional
+| Address of the transaction sender.
+
+| *to*
+| Data, 20 bytes
+| Required
+| Address of the transaction receiver.
+
+| *gas*
+| Quantity, Integer
+| Optional
+| Gas provided for the transaction execution.
+`eth_call` consumes zero gas, but other executions might need this parameter.
+`eth_estimateGas` ignores this value.
+
+| *gasPrice*
+| Quantity, Integer
+| Optional
+| Price used for each paid gas.
+
+| *value*
+| Quantity, Integer
+| Optional
+| Value sent with this transaction.
+
+| *data*
+| Data
+| Optional
+| Hash of the method signature and encoded parameters.
+For details, see https://solidity.readthedocs.io/en/develop/abi-spec.html[Ethereum Contract ABI].
+|===
+
+= Transaction receipt object
+
+Returned by link:API-Methods.md#eth_gettransactionreceipt[`eth_getTransactionReceipt`].
+
+|===
+| Key | Type | Value
+
+| *blockHash*
+| Data, 32 bytes
+| Hash of block containing this transaction.
+
+| *blockNumber*
+| Quantity
+| Block number of block containing this transaction.
+
+| *contractAddress*
+| Data, 20 bytes
+| Contract address created, if contract creation transaction, otherwise, `null`.
+
+| *cumulativeGasUsed*
+| Quantity
+| Total amount of gas used by previous transactions in the block and this transaction.
+
+| *from*
+| Data, 20 bytes
+| Address of the sender.
+
+| *gasUsed*
+| Quantity
+| Amount of gas used by this specific transaction.
+
+| *logs*
+| Array
+| Array of <<log-object,log objects>> generated by this transaction.
+
+| *logsBloom*
+| Data, 256 bytes
+| Bloom filter for light clients to quickly retrieve related logs.
+
+| *status*
+| Quantity
+| Either `0x1` (success) or `0x0` (failure)
+
+| *to*
+| Data, 20 bytes
+| Address of the receiver, if sending ether, otherwise, null.
+
+| *transactionHash*
+| Data, 32 bytes
+| Hash of the transaction.
+
+| *transactionIndex*
+| Quantity, Integer
+| Index position of transaction in the block.
+
+| *revertReason*
+| String
+| ABI-encoded string that displays the link:../HowTo/Send-Transactions/Revert-Reason.xml[reason for reverting the transaction].
+Only available if revert reason is link:../Reference/CLI/CLI-Syntax.md#revert-reason-enabled[enabled].
+|===
+
+!!!note
+
+ For pre-Byzantium transactions, the transaction receipt object includes the following instead
+ of `status`:
+
+|===
+| Key | Type | Value
+
+| *root*
+| Data, 32 bytes
+| Post-transaction stateroot
+|===
+
+= Transaction trace object
+
+Returned by link:API-Methods.md#trace_replayblocktransactions[`trace_replayBlockTransactions`].
+
+|===
+| Key | Type | Value
+
+| *output*
+| Boolean
+| Transaction result.
+1 for success and 0 for failure.
+
+| *stateDiff*
+| Object
+| link:Trace-Types.md#statediff[State changes in the requested block].
+
+| *trace*
+| Array
+| link:Trace-Types.md#trace[Ordered list of calls to other contracts].
+
+| *vmTrace*
+| Object
+| link:Trace-Types.md#vmtrace[Ordered list of EVM actions].
+
+| *transactionHash*
+| Data, 32 bytes
+| Hash of the replayed transaction.
+|===
+
+= Private transaction receipt object
+
+Returned by link:API-Methods.md#priv_getTransactionReceipt[`priv_getTransactionReceipt`].
+
+|===
+| Key | Type | Value
+
+| *contractAddress*
+| Data, 20 bytes
+| Contract address created if a contract creation transaction, otherwise, `null`.
+
+| *from*
+| Data, 20 bytes
+| Address of the sender.
+
+| *output*
+| Data
+| RLP-encoded return value of a contract call if a value returns, otherwise, `null`.
+
+| *commitmentHash*
+| Data, 32 bytes
+| Hash of the privacy marker transaction.
+
+| *transactionHash*
+| Data, 32 bytes
+| Hash of the private transaction.
+
+| *privateFrom*
+| Data, 32 bytes
+| https://docs.orion.pegasys.tech/en/stable/[Orion] public key of the sender.
+
+| *privateFor* or *privacyGroupId*
+| Array or Data, 32 bytes
+| https://docs.orion.pegasys.tech/en/stable/[Orion] public keys or privacy group ID of the recipients.
+
+| *status*
+| Quantity
+| Either `0x1` (success) or `0x0` (failure).
+
+| *logs*
+| Array
+| Array of <<log-object,log objects>> generated by this private transaction.
+|===
