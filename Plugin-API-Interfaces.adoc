@@ -1,0 +1,73 @@
+= Plugin API interfaces
+:description: Plugin interfaces
+
+API interfaces in Hyperledger Besu allow users to xref:../Concepts/Plugins.adoc[build plugins] to extend Besu functionality.
+
+For more information about the available interfaces, see the https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/index.html[Plugin API Javadoc].
+
+== Core plugin classes
+
+The following table lists the interfaces providing core plugin classes.
+
+|===
+| Interface | Description
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/BesuContext.html[*BesuContext*]
+| Allows plugins to access Besu services.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/BesuPlugin.html[*BesuPlugin*]
+| Used to manage the plugin lifecycle.
+|===
+
+== Plugin services
+
+The following table lists interfaces providing services you can retrieve.
+
+|===
+| Interface | Description
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/BesuEvents.html[*BesuEvents*]
+| Allows plugins to attach to events during Besu operation.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/BesuConfiguration.html[*BesuConfiguration*]
+| Provides file system locations of Besu's storage.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/query/IbftQueryService.html[*IbftQueryService*]
+| Allows query of the IBFT 2.0 aspects of the blockchain.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/metrics/MetricCategoryRegistry.html[*MetricCategoryRegistry*]
+| Adds a new metrics category to the CLI.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/MetricsSystem.html[*MetricsSystem*]
+| Register metrics with the Prometheus endpoint.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/query/PoaQueryService.html[*PoaQueryService*]
+| Query the current state of Clique and IBFT 2.0 consensus protocols.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/PicoCLIOptions.html[*PicoCLIOptions*]
+| Adds CLI commands to the Besu command line.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/SecurityModuleService.html[*SecurityModuleService*]
+| Allows plugins to register a security module.
+
+| https://javadoc.io/doc/org.hyperledger.besu/plugin-api/latest/org/hyperledger/besu/plugin/services/StorageService.html[*StorageService*]
+| Allows plugins to register as a storage engine.
+For example, to connect to a hardware security module (HSM).
+|===
+
+To use the interfaces in your plugin, ensure the https://github.com/PegaSysEng/PluginsAPIDemo/blob/master/build.gradle[Gradle build file] contains the `+https://hyperledger-org.bintray.com/besu-repo+` repository and the `plugin-api` dependency.
+
+!!!
+warning "Known issue"
+
+....
+As indicated in [issue #406](https://github.com/hyperledger/besu-docs/issues/406),
+plugins may need to access the parsed command line during registration, but the command line is not yet
+initialized at this stage.
+
+It's in our roadmap to improve lifecycle steps and provide additional visibility for some data.
+A workaround is to create a supplier during the `register` step and store it in memory.
+
+The `start` step can be ignored and your plugin module will be instanciated when
+the command line interface is parsed and available.
+....
