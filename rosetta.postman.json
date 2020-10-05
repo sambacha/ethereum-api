@@ -1,0 +1,1525 @@
+{
+	"info": {
+		"_postman_id": "8ec4e373-6821-4bec-8e16-195dada934bc",
+		"name": "Rosetta",
+		"description": "Build Once. Integrate Your Blockchain Everywhere.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "network",
+			"item": [
+				{
+					"name": "Get List of Available Networks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/network/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"network",
+								"list"
+							]
+						},
+						"description": "This endpoint returns a list of NetworkIdentifiers that the Rosetta\nserver supports.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"network_identifiers\": [\n  {\n   \"blockchain\": \"bitcoin\",\n   \"network\": \"mainnet\",\n   \"sub_network_identifier\": {\n    \"network\": \"shard 1\",\n    \"metadata\": \"cupidatat\"\n   }\n  },\n  {\n   \"blockchain\": \"bitcoin\",\n   \"network\": \"mainnet\",\n   \"sub_network_identifier\": {\n    \"network\": \"shard 1\",\n    \"metadata\": \"eiusmod ut occaecat\"\n   }\n  }\n ]\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"list"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Network Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"cupidatat\",\n        \"network\": \"magna consequat quis\",\n        \"sub_network_identifier\": {\n            \"network\": \"ea occaecat et ut\",\n            \"metadata\": \"esse qui do sit eiusmod\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/network/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"network",
+								"status"
+							]
+						},
+						"description": "This endpoint returns the current status of the network requested. Any\nNetworkIdentifier returned by /network/list should be accessible here.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"current_block_identifier\": {\n  \"index\": 1123941,\n  \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n },\n \"current_block_timestamp\": 1582833600000,\n \"genesis_block_identifier\": {\n  \"index\": 1123941,\n  \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n },\n \"peers\": [\n  {\n   \"peer_id\": \"0x52bc44d5378309ee2abf1539bf71de1b7d7be3b5\",\n   \"metadata\": \"sunt pariatur nostrud\"\n  },\n  {\n   \"peer_id\": \"0x52bc44d5378309ee2abf1539bf71de1b7d7be3b5\",\n   \"metadata\": \"Lorem culpa eiusmod\"\n  }\n ],\n \"oldest_block_identifier\": {\n  \"index\": 1123941,\n  \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n },\n \"sync_status\": {\n  \"current_index\": 100,\n  \"target_index\": 150,\n  \"stage\": \"header sync\"\n }\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"status"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Network Options",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"cupidatat\",\n        \"network\": \"magna consequat quis\",\n        \"sub_network_identifier\": {\n            \"network\": \"ea occaecat et ut\",\n            \"metadata\": \"esse qui do sit eiusmod\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/network/options",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"network",
+								"options"
+							]
+						},
+						"description": "This endpoint returns the version information and allowed\nnetwork-specific types for a NetworkIdentifier. Any\nNetworkIdentifier returned by /network/list should be accessible here.\n\nBecause options are retrievable in the context of a NetworkIdentifier,\nit is possible to define unique options for each network.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/options",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"options"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"version\": {\n  \"rosetta_version\": \"1.2.5\",\n  \"node_version\": \"1.0.2\",\n  \"middleware_version\": \"0.2.7\",\n  \"metadata\": \"cupidatat\"\n },\n \"allow\": {\n  \"operation_statuses\": [\n   {\n    \"status\": \"SUCCESS\",\n    \"successful\": true\n   },\n   {\n    \"status\": \"SUCCESS\",\n    \"successful\": true\n   }\n  ],\n  \"operation_types\": [\n   \"TRANSFER\",\n   \"TRANSFER\"\n  ],\n  \"errors\": [\n   {\n    \"code\": 12,\n    \"message\": \"Invalid account format\",\n    \"retriable\": true,\n    \"details\": \"dolor consequat magna\"\n   },\n   {\n    \"code\": 12,\n    \"message\": \"Invalid account format\",\n    \"retriable\": false,\n    \"details\": \"Ut mollit commodo eu ipsum\"\n   }\n  ],\n  \"historical_balance_lookup\": true\n }\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/network/options",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"network",
+										"options"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "block",
+			"item": [
+				{
+					"name": "Get a Block",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"cillum consectetur\",\n        \"network\": \"voluptate qui sint\",\n        \"sub_network_identifier\": {\n            \"network\": \"Lorem qui\",\n            \"metadata\": \"eu id quis eiusmod\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": \"<long>\",\n        \"hash\": \"<string>\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/block",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"block"
+							]
+						},
+						"description": "Get a block by its Block Identifier. If transactions are returned in\nthe same call to the node as fetching the block, the response should\ninclude these transactions in the Block object. If not, an array of\nTransaction Identifiers should be returned so /block/transaction\nfetches can be done to get all transaction information.\n\nWhen requesting a block by the hash component of the BlockIdentifier,\nthis request MUST be idempotent: repeated invocations for the same\nhash-identified block must return the exact same block contents.\n\nNo such restriction is imposed when requesting a block by height,\ngiven that a chain reorg event might cause the specific block at\nheight `n` to be set to a different one.\n"
+					},
+					"response": [
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"nisi minim\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/block",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"block"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						},
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"nisi minim\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/block",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"block"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"block\": {\n  \"block_identifier\": {\n   \"index\": 1123941,\n   \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n  },\n  \"parent_block_identifier\": {\n   \"index\": 1123941,\n   \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n  },\n  \"timestamp\": 1582833600000,\n  \"transactions\": [\n   {\n    \"transaction_identifier\": {\n     \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    },\n    \"operations\": [\n     {\n      \"operation_identifier\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"Transfer\",\n      \"status\": \"Reverted\",\n      \"related_operations\": [\n       {\n        \"index\": 0,\n        \"operation_identifier\": {\n         \"index\": 0\n        }\n       }\n      ],\n      \"account\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"amount\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"coin_change\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"metadata\": \"ullamco aliquip\"\n     },\n     {\n      \"operation_identifier\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"Transfer\",\n      \"status\": \"Reverted\",\n      \"related_operations\": [\n       {\n        \"index\": 0,\n        \"operation_identifier\": {\n         \"index\": 0\n        }\n       }\n      ],\n      \"account\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"amount\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"coin_change\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"metadata\": \"et aute occaecat\"\n     }\n    ],\n    \"metadata\": \"irure culpa cupidatat\"\n   },\n   {\n    \"transaction_identifier\": {\n     \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    },\n    \"operations\": [\n     {\n      \"operation_identifier\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"Transfer\",\n      \"status\": \"Reverted\",\n      \"related_operations\": [\n       {\n        \"index\": 0,\n        \"operation_identifier\": {\n         \"index\": 0\n        }\n       }\n      ],\n      \"account\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"amount\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"coin_change\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"metadata\": \"esse elit\"\n     },\n     {\n      \"operation_identifier\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"Transfer\",\n      \"status\": \"Reverted\",\n      \"related_operations\": [\n       {\n        \"index\": 0,\n        \"operation_identifier\": {\n         \"index\": 0\n        }\n       }\n      ],\n      \"account\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"amount\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"coin_change\": {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"metadata\": \"veniam exercitation\"\n     }\n    ],\n    \"metadata\": \"Lorem quis ad\"\n   }\n  ],\n  \"metadata\": \"laboris quis sunt ipsum\"\n },\n \"other_transactions\": [\n  {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  },\n  {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  }\n ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Block Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"magna\",\n        \"network\": \"ipsum\",\n        \"sub_network_identifier\": {\n            \"network\": \"deserunt commodo aliquip eu\",\n            \"metadata\": \"qui consequat aute\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": -76927274,\n        \"hash\": \"ullamco in ut\"\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"sunt do commodo ut\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/block/transaction",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"block",
+								"transaction"
+							]
+						},
+						"description": "Get a transaction in a block by its Transaction Identifier. This endpoint\nshould only be used when querying a node for a block does not return all\ntransactions contained within it.\n\nAll transactions returned by this endpoint must be appended to any\ntransactions returned by the /block method by consumers of this data.\nFetching a transaction by hash is considered an Explorer Method\n(which is classified under the Future Work section).\n\nThis method can be used to let consumers to paginate results when the \nblock trasactions count is too big to be returned in a single BlockResponse.\n\nCalling this endpoint requires reference to a BlockIdentifier because\ntransaction parsing can change depending on which block contains the\ntransaction. For example, in Bitcoin it is necessary to know which block\ncontains a transaction to determine the destination of fee payments.\nWithout specifying a block identifier, the node\nwould have to infer which block to use (which could change during a re-org).\n\nImplementations that require fetching previous transactions to populate\nthe response (ex: Previous UTXOs in Bitcoin) may find it useful to run a\ncache within the Rosetta server in the /data directory\n(on a path that does not conflict with the node).\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"commodo do nulla\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/block/transaction",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"block",
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"transaction\": {\n  \"transaction_identifier\": {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  },\n  \"operations\": [\n   {\n    \"operation_identifier\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"type\": \"Transfer\",\n    \"status\": \"Reverted\",\n    \"related_operations\": [\n     {\n      \"index\": 0,\n      \"operation_identifier\": {\n       \"index\": 0\n      }\n     }\n    ],\n    \"account\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"amount\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"coin_change\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": \"qui et ut\"\n   },\n   {\n    \"operation_identifier\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"type\": \"Transfer\",\n    \"status\": \"Reverted\",\n    \"related_operations\": [\n     {\n      \"index\": 0,\n      \"operation_identifier\": {\n       \"index\": 0\n      }\n     }\n    ],\n    \"account\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"amount\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"coin_change\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": \"dolor deserunt Lorem in labore\"\n   }\n  ],\n  \"metadata\": \"enim aliqua irure quis in\"\n }\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"commodo do nulla\"\n        }\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/block/transaction",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"block",
+										"transaction"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "mempool",
+			"item": [
+				{
+					"name": "Get All Mempool Transactions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"cupidatat\",\n        \"network\": \"magna consequat quis\",\n        \"sub_network_identifier\": {\n            \"network\": \"ea occaecat et ut\",\n            \"metadata\": \"esse qui do sit eiusmod\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mempool",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mempool"
+							]
+						},
+						"description": "Get all Transaction Identifiers in the mempool"
+					},
+					"response": [
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mempool",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mempool"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						},
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"est\"\n        }\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mempool",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mempool"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"transaction_identifiers\": [\n  {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  },\n  {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  }\n ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Mempool Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"ipsum\",\n        \"network\": \"aliquip quis Lorem\",\n        \"sub_network_identifier\": {\n            \"network\": \"voluptate est dolore irure\",\n            \"metadata\": \"ea occaecat in deserunt qui\"\n        }\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"anim adipisicing\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mempool/transaction",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mempool",
+								"transaction"
+							]
+						},
+						"description": "Get a transaction in the mempool by its Transaction Identifier. This is\na separate request than fetching a block transaction (/block/transaction)\nbecause some blockchain nodes need to know that a transaction query is\nfor something in the mempool instead of a transaction in a block.\n\nTransactions may not be fully parsable until they are in a block (ex: may\nnot be possible to determine the fee to pay before a transaction is\nexecuted). On this endpoint, it is ok that returned transactions are\nonly estimates of what may actually be included in a block.\n"
+					},
+					"response": [
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"in v\"\n        }\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mempool/transaction",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mempool",
+										"transaction"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						},
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"in v\"\n        }\n    },\n    \"transaction_identifier\": {\n        \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mempool/transaction",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mempool",
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"transaction\": {\n  \"transaction_identifier\": {\n   \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n  },\n  \"operations\": [\n   {\n    \"operation_identifier\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"type\": \"Transfer\",\n    \"status\": \"Reverted\",\n    \"related_operations\": [\n     {\n      \"index\": 0,\n      \"operation_identifier\": {\n       \"index\": 0\n      }\n     }\n    ],\n    \"account\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"amount\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"coin_change\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": \"commodo\"\n   },\n   {\n    \"operation_identifier\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"type\": \"Transfer\",\n    \"status\": \"Reverted\",\n    \"related_operations\": [\n     {\n      \"index\": 0,\n      \"operation_identifier\": {\n       \"index\": 0\n      }\n     }\n    ],\n    \"account\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"amount\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"coin_change\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": \"labore ut\"\n   }\n  ],\n  \"metadata\": \"quis consequat laborum\"\n },\n \"metadata\": \"dolore Excepteur dolor sit mollit\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "construction",
+			"item": [
+				{
+					"name": "Derive an Address from a PublicKey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"incididunt officia\",\n        \"network\": \"voluptate\",\n        \"sub_network_identifier\": {\n            \"network\": \"in ex est\",\n            \"metadata\": \"Duis reprehenderit\"\n        }\n    },\n    \"public_key\": {\n        \"hex_bytes\": \"<string>\",\n        \"curve_type\": \"<string>\"\n    },\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/derive",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"derive"
+							]
+						},
+						"description": "Derive returns the network-specific address associated with a public key.\n\nBlockchains that require an on-chain action to create an\naccount should not implement this method.\n"
+					},
+					"response": [
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"fugiat ea esse non\"\n        }\n    },\n    \"public_key\": {\n        \"hex_bytes\": \"<string>\",\n        \"curve_type\": \"<string>\"\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/derive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"derive"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						},
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"fugiat ea esse non\"\n        }\n    },\n    \"public_key\": {\n        \"hex_bytes\": \"<string>\",\n        \"curve_type\": \"<string>\"\n    },\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/derive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"derive"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"address\": \"dolore nisi cupidatat\",\n \"metadata\": \"sint pariatur enim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Request to Fetch Metadata",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"ut officia veniam dolor\",\n        \"network\": \"consequat magna\",\n        \"sub_network_identifier\": {\n            \"network\": \"sunt eu veniam qui ea\",\n            \"metadata\": \"amet dolore incididunt\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"culpa nulla consequat\",\n            \"status\": \"dolore\",\n            \"related_operations\": [\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"proident aute ut\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"dolor\",\n            \"status\": \"eu\",\n            \"related_operations\": [\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"consequat occaecat\"\n        }\n    ],\n    \"metadata\": \"<object>\",\n    \"max_fee\": [\n        {\n            \"value\": \"fugiat in\",\n            \"currency\": {\n                \"symbol\": \"ad dolore fugiat sunt\",\n                \"decimals\": 17470611,\n                \"metadata\": \"incididunt aliqua magna id\"\n            },\n            \"metadata\": \"elit adipisicing aute aliqua Duis\"\n        },\n        {\n            \"value\": \"sed labore\",\n            \"currency\": {\n                \"symbol\": \"ut quis sed\",\n                \"decimals\": 72202407,\n                \"metadata\": \"occaecat \"\n            },\n            \"metadata\": \"sunt Duis veniam fugiat\"\n        }\n    ],\n    \"suggested_fee_multiplier\": \"<double>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/preprocess",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"preprocess"
+							]
+						},
+						"description": "Preprocess is called prior to `/construction/payloads` to construct a\nrequest for any metadata that is needed for transaction construction\ngiven (i.e. account nonce).\n\nThe `options` object returned from this endpoint will be sent to the `/construction/metadata`\nendpoint UNMODIFIED by the caller (in an offline execution environment). If\nyour Construction API implementation has configuration options, they MUST\nbe specified in the `/construction/preprocess` request (in the `metadata`\nfield).\n"
+					},
+					"response": [
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"pariatur aute sunt do\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"reprehenderit ex\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"mollit velit reprehenderit culpa\"\n        }\n    ],\n    \"metadata\": \"<object>\",\n    \"max_fee\": [\n        {\n            \"value\": \"1238089899992\",\n            \"currency\": {\n                \"symbol\": \"BTC\",\n                \"decimals\": 8,\n                \"metadata\": \"anim ad laborum nostrud sed\"\n            },\n            \"metadata\": \"magna in incididunt ad\"\n        },\n        {\n            \"value\": \"1238089899992\",\n            \"currency\": {\n                \"symbol\": \"BTC\",\n                \"decimals\": 8,\n                \"metadata\": \"culpa laborum\"\n            },\n            \"metadata\": \"tempor dolore aliqua\"\n        }\n    ],\n    \"suggested_fee_multiplier\": \"<double>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/preprocess",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"preprocess"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						},
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"pariatur aute sunt do\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"reprehenderit ex\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"mollit velit reprehenderit culpa\"\n        }\n    ],\n    \"metadata\": \"<object>\",\n    \"max_fee\": [\n        {\n            \"value\": \"1238089899992\",\n            \"currency\": {\n                \"symbol\": \"BTC\",\n                \"decimals\": 8,\n                \"metadata\": \"anim ad laborum nostrud sed\"\n            },\n            \"metadata\": \"magna in incididunt ad\"\n        },\n        {\n            \"value\": \"1238089899992\",\n            \"currency\": {\n                \"symbol\": \"BTC\",\n                \"decimals\": 8,\n                \"metadata\": \"culpa laborum\"\n            },\n            \"metadata\": \"tempor dolore aliqua\"\n        }\n    ],\n    \"suggested_fee_multiplier\": \"<double>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/preprocess",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"preprocess"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"options\": \"dolore Duis\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Metadata for Transaction Construction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"pariatur deserunt\",\n        \"network\": \"Excepteur sunt minim\",\n        \"sub_network_identifier\": {\n            \"network\": \"Excepteur reprehenderit ut\",\n            \"metadata\": \"dolore magna \"\n        }\n    },\n    \"options\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/metadata",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"metadata"
+							]
+						},
+						"description": "Get any information required to construct a transaction for a specific\nnetwork. Metadata returned here could be a recent hash to use, an\naccount sequence number, or even arbitrary chain state. The request\nused when calling this endpoint is created by calling `/construction/preprocess`\nin an offline environment.\n\nYou should NEVER assume that the request sent to this endpoint will be\ncreated by the caller or populated with any custom parameters. This must\noccur in `/construction/preprocess`.\n\nIt is important to clarify that this endpoint should not pre-construct\nany transactions for the client (this should happen in `/construction/payloads`).\nThis endpoint is left purposely unstructured because of the wide scope\nof metadata that could be required.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"sed non\"\n        }\n    },\n    \"options\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"metadata"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"metadata\": \"nulla velit id minim\",\n \"suggested_fee\": [\n  {\n   \"value\": \"1238089899992\",\n   \"currency\": {\n    \"symbol\": \"BTC\",\n    \"decimals\": 8,\n    \"metadata\": \"sunt amet\"\n   },\n   \"metadata\": \"dolore id\"\n  },\n  {\n   \"value\": \"1238089899992\",\n   \"currency\": {\n    \"symbol\": \"BTC\",\n    \"decimals\": 8,\n    \"metadata\": \"mollit\"\n   },\n   \"metadata\": \"dolore irure\"\n  }\n ]\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"sed non\"\n        }\n    },\n    \"options\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"metadata"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate an Unsigned Transaction and Signing Payloads",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"occaecat veniam\",\n        \"network\": \"sunt qui\",\n        \"sub_network_identifier\": {\n            \"network\": \"occaecat quis\",\n            \"metadata\": \"\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"anim\",\n            \"status\": \"proident veniam\",\n            \"related_operations\": [\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"ma\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"tempor\",\n            \"status\": \"et\",\n            \"related_operations\": [\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"elit eu\"\n        }\n    ],\n    \"metadata\": \"<object>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/payloads",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"payloads"
+							]
+						},
+						"description": "Payloads is called with an array of operations\nand the response from `/construction/metadata`. It returns an\nunsigned transaction blob and a collection of payloads that must\nbe signed by particular addresses using a certain SignatureType.\n\nThe array of operations provided in transaction construction often times\ncan not specify all \"effects\" of a transaction (consider invoked transactions\nin Ethereum). However, they can deterministically specify the \"intent\"\nof the transaction, which is sufficient for construction. For this reason,\nparsing the corresponding transaction in the Data API (when it lands on chain)\nwill contain a superset of whatever operations were provided during construction.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"ad qui mollit anim\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"Excepteur\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"ipsum in eiusmod\"\n        }\n    ],\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/payloads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"payloads"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"unsigned_transaction\": \"eiusmod magna\",\n \"payloads\": [\n  {\n   \"address\": \"consectetur Lorem sit Ut\",\n   \"hex_bytes\": \"p\",\n   \"signature_type\": \"ecdsa_recovery\"\n  },\n  {\n   \"address\": \"eu dolor esse\",\n   \"hex_bytes\": \"in ut\",\n   \"signature_type\": \"ed25519\"\n  }\n ]\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"ad qui mollit anim\"\n        }\n    },\n    \"operations\": [\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"Excepteur\"\n        },\n        {\n            \"operation_identifier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"Transfer\",\n            \"status\": \"Reverted\",\n            \"related_operations\": [\n                {\n                    \"index\": 0,\n                    \"operation_identifier\": {\n                        \"index\": 0\n                    }\n                }\n            ],\n            \"account\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"coin_change\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": \"ipsum in eiusmod\"\n        }\n    ],\n    \"metadata\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/payloads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"payloads"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Network Transaction from Signatures",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"incididunt laboris\",\n        \"network\": \"in\",\n        \"sub_network_identifier\": {\n            \"network\": \"sit do aliquip in eu\",\n            \"metadata\": \"quis officia\"\n        }\n    },\n    \"unsigned_transaction\": \"<string>\",\n    \"signatures\": [\n        {\n            \"signing_payload\": {\n                \"address\": \"ipsum deserunt cillum velit\",\n                \"hex_bytes\": \"commodo dolore deserunt aliqua irure\",\n                \"signature_type\": \"ecdsa_recovery\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ed25519\",\n            \"hex_bytes\": \"<string>\"\n        },\n        {\n            \"signing_payload\": {\n                \"address\": \"dolor laborum nulla exercitation\",\n                \"hex_bytes\": \"cupidatat culpa sit labore irure\",\n                \"signature_type\": \"ecdsa\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ecdsa_recovery\",\n            \"hex_bytes\": \"<string>\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/combine",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"combine"
+							]
+						},
+						"description": "Combine creates a network-specific transaction from an unsigned\ntransaction and an array of provided signatures.\n\nThe signed transaction returned from this method will be sent to the\n`/construction/submit` endpoint by the caller.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"nisi enim irure elit\"\n        }\n    },\n    \"unsigned_transaction\": \"<string>\",\n    \"signatures\": [\n        {\n            \"signing_payload\": {\n                \"address\": \"proident dolore aliqu\",\n                \"hex_bytes\": \"amet\",\n                \"signature_type\": \"ed25519\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ecdsa_recovery\",\n            \"hex_bytes\": \"<string>\"\n        },\n        {\n            \"signing_payload\": {\n                \"address\": \"proident tempor\",\n                \"hex_bytes\": \"sunt ut laborum consectetur\",\n                \"signature_type\": \"ed25519\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ecdsa_recovery\",\n            \"hex_bytes\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/combine",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"combine"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"signed_transaction\": \"in sunt adipisicing\"\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"nisi enim irure elit\"\n        }\n    },\n    \"unsigned_transaction\": \"<string>\",\n    \"signatures\": [\n        {\n            \"signing_payload\": {\n                \"address\": \"proident dolore aliqu\",\n                \"hex_bytes\": \"amet\",\n                \"signature_type\": \"ed25519\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ecdsa_recovery\",\n            \"hex_bytes\": \"<string>\"\n        },\n        {\n            \"signing_payload\": {\n                \"address\": \"proident tempor\",\n                \"hex_bytes\": \"sunt ut laborum consectetur\",\n                \"signature_type\": \"ed25519\"\n            },\n            \"public_key\": {\n                \"hex_bytes\": \"<string>\",\n                \"curve_type\": \"<string>\"\n            },\n            \"signature_type\": \"ecdsa_recovery\",\n            \"hex_bytes\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/combine",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"combine"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Parse a Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"proident adipisicing\",\n        \"network\": \"nulla\",\n        \"sub_network_identifier\": {\n            \"network\": \"adipisicing ut\",\n            \"metadata\": \"do dolore amet\"\n        }\n    },\n    \"signed\": \"<boolean>\",\n    \"transaction\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/parse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"parse"
+							]
+						},
+						"description": "Parse is called on both unsigned and signed transactions to\nunderstand the intent of the formulated transaction.\n\nThis is run as a sanity check before signing (after `/construction/payloads`)\nand before broadcast (after `/construction/combine`). \n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"minim tempor\"\n        }\n    },\n    \"signed\": \"<boolean>\",\n    \"transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/parse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"parse"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"operations\": [\n  {\n   \"operation_identifier\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"type\": \"Transfer\",\n   \"status\": \"Reverted\",\n   \"related_operations\": [\n    {\n     \"index\": 0,\n     \"operation_identifier\": {\n      \"index\": 0\n     }\n    }\n   ],\n   \"account\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"amount\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"coin_change\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"metadata\": \"do qui\"\n  },\n  {\n   \"operation_identifier\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"type\": \"Transfer\",\n   \"status\": \"Reverted\",\n   \"related_operations\": [\n    {\n     \"index\": 0,\n     \"operation_identifier\": {\n      \"index\": 0\n     }\n    }\n   ],\n   \"account\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"amount\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"coin_change\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   },\n   \"metadata\": \"mollit dolor eu esse minim\"\n  }\n ],\n \"signers\": [\n  \"ad\",\n  \"sint irure\"\n ],\n \"metadata\": \"tempor ut\"\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"minim tempor\"\n        }\n    },\n    \"signed\": \"<boolean>\",\n    \"transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/parse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"parse"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get the Hash of a Signed Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"nulla Ut\",\n        \"network\": \"do ipsum\",\n        \"sub_network_identifier\": {\n            \"network\": \"tempor quis\",\n            \"metadata\": \"Lorem dolore\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/hash",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"hash"
+							]
+						},
+						"description": "TransactionHash returns the network-specific transaction hash for\na signed transaction.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"qui veniam\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/hash",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"hash"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"transaction_identifier\": {\n  \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n },\n \"metadata\": \"anim exercitati\"\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"qui veniam\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/hash",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"hash"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Submit a Signed Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"est aute quis\",\n        \"network\": \"dolor ex Duis veniam\",\n        \"sub_network_identifier\": {\n            \"network\": \"magna\",\n            \"metadata\": \"laborum\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/construction/submit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"construction",
+								"submit"
+							]
+						},
+						"description": "Submit a pre-signed transaction to the node. This call should not block\non the transaction being included in a block. Rather, it should return\nimmediately with an indication of whether or not the transaction was\nincluded in the mempool.\n\nThe transaction submission response should only return a 200 status\nif the submitted transaction could be included in the mempool.\nOtherwise, it should return an error.\n"
+					},
+					"response": [
+						{
+							"name": "Expected response to a valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"sint velit laboris nulla sit\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/submit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"submit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"transaction_identifier\": {\n  \"hash\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f\"\n },\n \"metadata\": \"anim exercitati\"\n}"
+						},
+						{
+							"name": "unexpected error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"sint velit laboris nulla sit\"\n        }\n    },\n    \"signed_transaction\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/construction/submit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"construction",
+										"submit"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get an Account Balance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"mollit ad\",\n        \"network\": \"consequat do\",\n        \"sub_network_identifier\": {\n            \"network\": \"incididunt officia tempor sed\",\n            \"metadata\": \"sit ut irure\"\n        }\n    },\n    \"account_identifier\": {\n        \"address\": \"<string>\",\n        \"sub_account\": {\n            \"address\": \"<string>\",\n            \"metadata\": \"<object>\"\n        },\n        \"metadata\": \"<object>\"\n    },\n    \"block_identifier\": {\n        \"index\": \"<long>\",\n        \"hash\": \"<string>\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/balance",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"balance"
+					]
+				},
+				"description": "Get an array of all AccountBalances for an AccountIdentifier and the\nBlockIdentifier at which the balance lookup was performed. The BlockIdentifier\nmust always be returned because some consumers of account balance data need\nto know specifically at which block the balance was calculated to\ncompare balances they compute from operations with the balance returned\nby the node.\n\nIt is important to note that making a balance request for an account\nwithout populating the SubAccountIdentifier should not result in the\nbalance of all possible SubAccountIdentifiers being returned. Rather,\nit should result in the balance pertaining to no SubAccountIdentifiers\nbeing returned (sometimes called the liquid balance). To get all\nbalances associated with an account, it may be necessary to\nperform multiple balance requests with unique AccountIdentifiers.\n\nIt is also possible to perform a historical balance lookup (if the server\nsupports it) by passing in an optional BlockIdentifier.\n"
+			},
+			"response": [
+				{
+					"name": "unexpected error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"exercitation ad pariatur laborum adipisicing\"\n        }\n    },\n    \"account_identifier\": {\n        \"address\": \"0x3a065000ab4183c6bf581dc1e55a605455fc6d61\",\n        \"sub_account\": {\n            \"address\": \"0x6b175474e89094c44da98b954eedeac495271d0f\",\n            \"metadata\": \"<object>\"\n        },\n        \"metadata\": \"<object>\"\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/account/balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"account",
+								"balance"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"code\": 12,\n \"message\": \"Invalid account format\",\n \"retriable\": false,\n \"details\": \"velit amet anim\"\n}"
+				},
+				{
+					"name": "Expected response to a valid request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"network_identifier\": {\n        \"blockchain\": \"bitcoin\",\n        \"network\": \"mainnet\",\n        \"sub_network_identifier\": {\n            \"network\": \"shard 1\",\n            \"metadata\": \"exercitation ad pariatur laborum adipisicing\"\n        }\n    },\n    \"account_identifier\": {\n        \"address\": \"0x3a065000ab4183c6bf581dc1e55a605455fc6d61\",\n        \"sub_account\": {\n            \"address\": \"0x6b175474e89094c44da98b954eedeac495271d0f\",\n            \"metadata\": \"<object>\"\n        },\n        \"metadata\": \"<object>\"\n    },\n    \"block_identifier\": {\n        \"index\": 1123941,\n        \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/account/balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"account",
+								"balance"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"block_identifier\": {\n  \"index\": 1123941,\n  \"hash\": \"0x1f2cc6c5027d2f201a5453ad1119574d2aed23a392654742ac3c78783c071f85\"\n },\n \"balances\": [\n  {\n   \"value\": \"1238089899992\",\n   \"currency\": {\n    \"symbol\": \"BTC\",\n    \"decimals\": 8,\n    \"metadata\": \"dolore do\"\n   },\n   \"metadata\": \"et qui elit ut\"\n  },\n  {\n   \"value\": \"1238089899992\",\n   \"currency\": {\n    \"symbol\": \"BTC\",\n    \"decimals\": 8,\n    \"metadata\": \"in adipisicing dolor\"\n   },\n   \"metadata\": \"dolor c\"\n  }\n ],\n \"coins\": [\n  {\n   \"coin_identifier\": {\n    \"identifier\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f:1\"\n   },\n   \"amount\": {\n    \"value\": \"1238089899992\",\n    \"currency\": {\n     \"symbol\": \"BTC\",\n     \"decimals\": 8,\n     \"metadata\": \"nisi\"\n    },\n    \"metadata\": \"irure nulla quis mollit\"\n   }\n  },\n  {\n   \"coin_identifier\": {\n    \"identifier\": \"0x2f23fd8cca835af21f3ac375bac601f97ead75f2e79143bdf71fe2c4be043e8f:1\"\n   },\n   \"amount\": {\n    \"value\": \"1238089899992\",\n    \"currency\": {\n     \"symbol\": \"BTC\",\n     \"decimals\": 8,\n     \"metadata\": \"nulla\"\n    },\n    \"metadata\": \"aute Lorem voluptate\"\n   }\n  }\n ],\n \"metadata\": \"amet elit enim\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
