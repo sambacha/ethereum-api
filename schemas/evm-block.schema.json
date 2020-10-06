@@ -1,0 +1,87 @@
+{
+    "$id": "EVM Blockchain Block Schema",
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "properties": {
+        "header": {
+            "type": "object",
+            "properties": {
+                "parentHash": {
+                    "type": "string"
+                },
+                "uncleHash": {
+                    "type": "string"
+                },
+                "coinbase": {
+                    "type": "string"
+                },
+                "stateRoot": {
+                    "type": "string"
+                },
+                "transactionsTrie": {
+                    "type": "string"
+                },
+                "receiptTrie": {
+                    "type": "string"
+                },
+                "bloom": {
+                    "type": "string"
+                },
+                "difficulty": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "gasLimit": {
+                    "type": "string"
+                },
+                "gasUsed": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "extraData": {
+                    "type": "string"
+                },
+                "mixHash": {
+                    "type": "string"
+                },
+                "nonce": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "parentHash",
+                "uncleHash",
+                "coinbase",
+                "stateRoot",
+                "transactionsTrie",
+                "receiptTrie",
+                "bloom",
+                "difficulty",
+                "number",
+                "gasLimit",
+                "gasUsed",
+                "timestamp",
+                "extraData",
+                "mixHash",
+                "nonce"
+            ]
+        },
+        "transactions": {
+            "type": "array",
+            "items": true
+        },
+        "uncleHeaders": {
+            "type": "array",
+            "items": true
+        }
+    },
+    "required": [
+        "header",
+        "transactions",
+        "uncleHeaders"
+    ]
+}
