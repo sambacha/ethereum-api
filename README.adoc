@@ -34,9 +34,9 @@ Use these to help design how to best interact with a node
 
 === Cloudflare JSON-RPC Gateway
 
-[cloudflare-eth.com/](https://cloudflare-eth.com/)
+link:cloudflare-eth.com/[cloudflare-eth.com]
 
-[https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway](https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway)
+link:https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway[cloudflare.com/distributed-web-gateway/#ethereum-gateway]
 
 ==== Setup DNS
 Go to your DNS settings for your domain. If your website is on Cloudflare, the DNS settings are accessible from your 
