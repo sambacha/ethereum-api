@@ -14,7 +14,57 @@
 
 :description: Optimizing solidity contracts for API access, focusing on Hyperledger Besu 
 
-=== Overview 
+3 Main Ways of Designing an API for Contract Interaction
+
+- Direct RPC / IPC (e.g. direct polling to a client such as Geth)
+- 3rd Party Provider (e.g. Infura/Alchemey/Quicknode) also The Graph.
+- Middleware Client (e.g. Kafka Broker or some other MQ)
+
+
+== Schemas 
+
+Use these to help design how to best interact with a node
+
+- Truffle Contract Object
+- Chain State
+- Sample Postman API's
+- Besu RPC Postman Deff. 
+
+== Connectivity to Ethereum Mainnet
+
+=== Cloudflare JSON-RPC Gateway
+
+[cloudflare-eth.com/](https://cloudflare-eth.com/)
+
+[https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway](https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway)
+
+==== Setup DNS
+Go to your DNS settings for your domain. If your website is on Cloudflare, the DNS settings are accessible from your 
+dashboard. If your website is not on Cloudflare, and you need help finding the DNS records, see here.
+
+==== Create `CNAME` Record Pointing to `https://cloudflare-eth.com/`
+
+Add a CNAME record from your domain (e.g. www.example.com) to cloudflare-eth.com Note: if your website is on Cloudflare, the 
+little cloud next to this record will automatically turn gray. Because you’ve CNAME’d to our gateway, you’ll automatically 
+receive Cloudflare's enterprise-level performance and security enhancements, but you won’t be able to control those settings 
+yourself.
+
+Once you have added those records:
+- Type your domain name (e.g. www.example.com) into the text box below and click "Submit".
+
+This will generate an SSL certificate, which will allow traffic from your domain to be served securely over HTTPS. Be prepared 
+to wait up to 90 seconds. You will receive a confirmation message when the certificate has been successfully issued. When this 
+has been issued, then any Ethereum RPC query to your website will automatically resolve to https://cloudflare-eth.com/ and the 
+response will be served from the Ethereum network.
+
+> Note: Ensure you have configured any CAA Policies to enable Cloudflare to issue a certificate 
+
+
+== API Design Overview 
+
+- JSON RPC
+- RESTful API
+- GraphQL 
 
 Transaction mining causes smart contracts to emit events and write logs to the blockchain.
 
