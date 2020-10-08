@@ -4,16 +4,16 @@
 
 > No Longer considered `experimental` , will retain this naming convention for backwards comp. reasons
 
-## solidity Parsers 
+## solidity Parsers
 
-The standard antlr4 grammar produces a few less fields than the Consensys Dilligence one 
+The standard antlr4 grammar produces a few less fields than the Consensys Dilligence one
 
 Explore the differences in `ast` formats here: [https://astexplorer.net/](https://astexplorer.net/)
 
 ### Smart contract interfaces ( abi json files) can have different formats, for example:
 
-
 ### abi-json
+
 ```js
 {
   abi: "...",
@@ -26,6 +26,7 @@ Explore the differences in `ast` formats here: [https://astexplorer.net/](https:
 ### 0x/solcompiler
 
 0x/sol-compiler outputs JSON in this format:
+
 ```js
 {
   compiledOutput:
@@ -35,8 +36,11 @@ Explore the differences in `ast` formats here: [https://astexplorer.net/](https:
         object: "0x..."
 }
 ```
-### Truffle 
+
+### Truffle
+
 truffle compile outputs JSON in this format:
+
 ```js
 {
   abi: "...",
