@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "@open-rpc/playground",
   "version": "0.0.0-development",
   "homepage": "https://playground.open-rpc.org/",
@@ -86,4 +87,25 @@
       "^.+\\.module\\.(css|sass|scss)$"
     ]
   }
+=======
+  "name": "besu-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "swagger-ui-bundle.js",
+  "scripts": {
+    "fmt": "npx prettier --write swagger.json",
+    "lint": "npx lint-openapi swagger.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sambacha/besu-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sambacha/besu-api/issues"
+  },
+  "homepage": "https://github.com/sambacha/besu-api#readme"
+>>>>>>> c721ebe... feat(swagger-ui): github-pages deploy
 }
