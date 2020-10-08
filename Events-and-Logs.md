@@ -6,23 +6,15 @@ description: Hyperledger Besu events and logs
 
 Transaction mining causes smart contracts to emit events and write logs to the blockchain.
 
-The smart contract address is the link to the logs and the blockchain includes the logs, but
-contracts cannot access logs. Log storage is cheaper than contract storage (that is, it costs less
-gas) so storing and accessing the required data in logs reduces the cost. For example, use logs to
-display all transfers made using a specific contract, but not the current state of the contract.
+The smart contract address is the link to the logs and the blockchain includes the logs, but contracts cannot access logs. Log storage is cheaper than contract storage (that is, it costs less gas) so storing and accessing the required data in logs reduces the cost. For example, use logs to display all transfers made using a specific contract, but not the current state of the contract.
 
-A Dapp front end can either access logs using the
-[JSON-RPC API filter methods](../HowTo/Interact/Filters/Accessing-Logs-Using-JSON-RPC.md) or
-subscribe to logs using the [RPC Pub/Sub API](../HowTo/Interact/APIs/RPC-PubSub.md#logs).
+A Dapp front end can either access logs using the [JSON-RPC API filter methods](../HowTo/Interact/Filters/Accessing-Logs-Using-JSON-RPC.md) or subscribe to logs using the [RPC Pub/Sub API](../HowTo/Interact/APIs/RPC-PubSub.md#logs).
 
-Use [`admin_generateLogBloomCache`](../Reference/API-Methods.md#admin_generatelogbloomcache) to
-improve log retrieval performance.
+Use [`admin_generateLogBloomCache`](../Reference/API-Methods.md#admin_generatelogbloomcache) to improve log retrieval performance.
 
 ## Topics
 
-Log entries contain up to four topics. The first topic is the
-[event signature hash](#event-signature-hash) and up to three topics are the indexed
-[event parameters](#event-parameters).
+Log entries contain up to four topics. The first topic is the [event signature hash](#event-signature-hash) and up to three topics are the indexed [event parameters](#event-parameters).
 
 !!! example
 
@@ -47,11 +39,9 @@ Log entries contain up to four topics. The first topic is the
 
 ## Event parameters
 
-Up to three event parameters can have the `indexed` attribute. Logs store these indexed parameters
-as `topics`. Indexed parameters are searchable and filterable.
+Up to three event parameters can have the `indexed` attribute. Logs store these indexed parameters as `topics`. Indexed parameters are searchable and filterable.
 
-Topics are 32 bytes. If an indexed argument is an array (including `string` and `byte` datatypes),
-the log stores the keccak-256 hash of the paramater as a topic.
+Topics are 32 bytes. If an indexed argument is an array (including `string` and `byte` datatypes), the log stores the keccak-256 hash of the paramater as a topic.
 
 Log `data` includes non-indexed parameters but is difficult to search or filter.
 
@@ -100,10 +90,7 @@ Log `data` includes non-indexed parameters but is difficult to search or filter.
 
 ## Event signature hash
 
-The first topic in a log entry is always the event signature hash. The event signature hash is
-a keccak-256 hash of the event name and input argument types, with argument names ignored. For
-example, the event `Hello(uint256 worldId)` has the signature hash `keccak('Hello(uint256)')`. The
-signature identifies to which event log topics belong.
+The first topic in a log entry is always the event signature hash. The event signature hash is a keccak-256 hash of the event name and input argument types, with argument names ignored. For example, the event `Hello(uint256 worldId)` has the signature hash `keccak('Hello(uint256)')`. The signature identifies to which event log topics belong.
 
 !!! example
 
@@ -130,11 +117,10 @@ signature identifies to which event log topics belong.
        }
     ```
 
-The event signature hash for event 1 is `keccak('Event1(uint256)')` and the event signature hash
-for event 2 is `keccak('Event2(uint256)')`. The hashes are:
+The event signature hash for event 1 is `keccak('Event1(uint256)')` and the event signature hash for event 2 is `keccak('Event2(uint256)')`. The hashes are:
 
-* `04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3` for event 1
-* `06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e` for event 2.
+- `04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3` for event 1
+- `06df6fb2d6d0b17a870decb858cc46bf7b69142ab7b9318f7603ed3fd4ad240e` for event 2.
 
 !!! tip
 
@@ -182,17 +168,15 @@ for event 2 is `keccak('Event2(uint256)')`. The hashes are:
 
 ## Topic filters
 
-[Filter options objects](../Reference/API-Objects.md#filter-options-object) have a `topics` key to
-filter logs by topics.
+[Filter options objects](../Reference/API-Objects.md#filter-options-object) have a `topics` key to filter logs by topics.
 
-Topics are order-dependent. A transaction with a log containing topics `[A, B]` matches with the
-following topic filters:
+Topics are order-dependent. A transaction with a log containing topics `[A, B]` matches with the following topic filters:
 
-* `[]` - Match any topic
-* `[A]` - Match A in first position
-* `[[null], [B]]` - Match any topic in first position AND B in second position
-* `[[A],[B]]` - Match A in first position AND B in second position
-* `[[A, C], [B, D]]` - Match (A OR C) in first position AND (B OR D) in second position.
+- `[]` - Match any topic
+- `[A]` - Match A in first position
+- `[[null], [B]]` - Match any topic in first position AND B in second position
+- `[[A],[B]]` - Match A in first position AND B in second position
+- `[[A, C], [B, D]]` - Match (A OR C) in first position AND (B OR D) in second position.
 
 !!! example
 
