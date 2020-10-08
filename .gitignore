@@ -1,0 +1,11 @@
+
+.idea
+node_modules
+_build/openapi3.yaml
+_build/postman.json
+.vscode
+
+.DS_Store
+*.tgz
+*.tar.gz
+*.zip
