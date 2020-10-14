@@ -4,14 +4,15 @@ info:
   title: Hyperledger Besu JSON-RPC API
   description: >-
     Hyperledger Besu JSON-RPC API enables interaction with a Besu Ethereum node
-
-
+    
+    
     ## Notice
-
+    
     This is a public end-point! It is not encrypted. Encrypted RPC access involves registration!
-
-
+    
+    
     https://github.com/freight-trust
+
   contact: {}
 paths:
   /:

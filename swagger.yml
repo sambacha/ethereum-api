@@ -5,15 +5,15 @@
 openapi: 3.0.0
 info:
   title: Hyperledger Besu JSON-RPC APIs
-  description: 'Hyperledger Besu - Enterprise Ethereum OpenAPI v3'
+  description: "Hyperledger Besu - Enterprise Ethereum OpenAPI v3"
   contact: {}
-  version: '1.0'
+  version: "1.0"
 servers:
-  - url: 'http://127.0.0.1:8545'
+  - url: "http://127.0.0.1:8545"
     variables: {}
-  - url: 'http://localhost:8545'
+  - url: "http://localhost:8545"
     variables: {}
-  - url: 'http://127.0.0.1:8590'
+  - url: "http://127.0.0.1:8590"
     variables: {}
 paths:
   /:
@@ -21,28 +21,28 @@ paths:
       tags:
         - web
       summary: web3_clientVersion
-      description: ''
+      description: ""
       operationId: web3_clientVersion
       parameters: []
       requestBody:
-        description: ''
+        description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/web3_clientVersion_Request'
+              $ref: "#/components/schemas/web3_clientVersion_Request"
             example:
-              jsonrpc: '2.0'
+              jsonrpc: "2.0"
               method: web3_clientVersion
               params: []
               id: 1
         required: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       servers:
-        - url: 'http://127.0.0.1:8545'
+        - url: "http://127.0.0.1:8545"
           variables: {}
 components:
   schemas:
@@ -63,12 +63,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: web3_clientVersion
         params: []
         id: 1
@@ -89,12 +89,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: net_peerCount
         params: []
         id: 53
@@ -115,12 +115,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_protocolVersion
         params: []
         id: 1
@@ -141,12 +141,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_newPendingTransactionFilter
         params: []
         id: 1
@@ -167,15 +167,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_uninstallFilter
         params:
-          - '0x70355a0b574b437eaa19fe95adfedc0a'
+          - "0x70355a0b574b437eaa19fe95adfedc0a"
         id: 1
     eth_getFilterLogs_Request:
       title: eth_getFilterLogs_Request
@@ -194,15 +194,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getFilterLogs
         params:
-          - '0x5ace5de3985749b6a1b2b0d3f3e1fb69'
+          - "0x5ace5de3985749b6a1b2b0d3f3e1fb69"
         id: 1
     eth_getLogs_Request:
       title: eth_getLogs_Request
@@ -220,18 +220,18 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param'
-          description: ''
+            $ref: "#/components/schemas/Param"
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getLogs
         params:
           - fromBlock: earliest
             toBlock: latest
-            address: '0x2e1f232a9439c3d459fceca0beef13acc8259dd8'
+            address: "0x2e1f232a9439c3d459fceca0beef13acc8259dd8"
             topics: []
         id: 1
     Param:
@@ -253,11 +253,11 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
       example:
         fromBlock: earliest
         toBlock: latest
-        address: '0x2e1f232a9439c3d459fceca0beef13acc8259dd8'
+        address: "0x2e1f232a9439c3d459fceca0beef13acc8259dd8"
         topics: []
     eth_newBlockFilter_Request:
       title: eth_newBlockFilter_Request
@@ -276,12 +276,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_newBlockFilter
         params: []
         id: 1
@@ -302,15 +302,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getFilterChanges
         params:
-          - '0xf8bf5598d9e04fbe84523d42640b9b0e'
+          - "0xf8bf5598d9e04fbe84523d42640b9b0e"
         id: 1
     eth_newFilter_Request:
       title: eth_newFilter_Request
@@ -328,13 +328,13 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param1'
-          description: ''
+            $ref: "#/components/schemas/Param1"
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_newFilter
         params:
           - fromBlock: earliest
@@ -357,7 +357,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
       example:
         fromBlock: earliest
         toBlock: latest
@@ -379,12 +379,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_chainId
         params: []
         id: 1
@@ -405,12 +405,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_gasPrice
         params: []
         id: 1
@@ -430,9 +430,9 @@ components:
         result:
           type: string
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         id: 1
-        result: '0xac182cc23bb94696217aa17ca15bd466106af9ba7ea7420aae24ff37338d6e3b'
+        result: "0xac182cc23bb94696217aa17ca15bd466106af9ba7ea7420aae24ff37338d6e3b"
     eth_blockNumber_Request:
       title: eth_blockNumber_Request
       required:
@@ -450,12 +450,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_blockNumber
         params: []
         id: 1
@@ -476,15 +476,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getBalance
         params:
-          - '0xdd37f65db31c107f773e82a4f85c693058fef7a9'
+          - "0xdd37f65db31c107f773e82a4f85c693058fef7a9"
           - latest
         id: 53
     eth_getStorageAt_Request:
@@ -504,16 +504,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getStorageAt
         params:
           - 0x‭3B3F3E‬
-          - '0x0'
+          - "0x0"
           - latest
         id: 53
     eth_getTransactionCount_Request:
@@ -533,15 +533,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getTransactionCount
         params:
-          - '0x9d8f8572f345e1ae53db1dFA4a7fce49B467bD7f'
+          - "0x9d8f8572f345e1ae53db1dFA4a7fce49B467bD7f"
           - latest
         id: 1
     eth_getBlockTransactionCountByHash_Request:
@@ -561,15 +561,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getBlockTransactionCountByHash
         params:
-          - '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          - "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"
         id: 1
     eth_getBlockTransactionCountByNumber_Request:
       title: eth_getBlockTransactionCountByNumber_Request
@@ -588,15 +588,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getBlockTransactionCountByNumber
         params:
-          - '0xe8'
+          - "0xe8"
         id: 51
     eth_getUncleCountByBlockHash_Request:
       title: eth_getUncleCountByBlockHash_Request
@@ -615,15 +615,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getUncleCountByBlockHash
         params:
-          - '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          - "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"
         id: 1
     eth_getUncleByBlockHashAndIndex_Request:
       title: eth_getUncleByBlockHashAndIndex_Request
@@ -642,16 +642,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getUncleByBlockHashAndIndex
         params:
-          - '0xc48fb64230a82f65a08e7280bd8745e7fea87bc7c206309dee32209fe9a985f7'
-          - '0x0'
+          - "0xc48fb64230a82f65a08e7280bd8745e7fea87bc7c206309dee32209fe9a985f7"
+          - "0x0"
         id: 1
     eth_getUncleByBlockNumberAndIndex_Request:
       title: eth_getUncleByBlockNumberAndIndex_Request
@@ -670,16 +670,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getUncleByBlockNumberAndIndex
         params:
-          - '0x7689D2'
-          - '0x0'
+          - "0x7689D2"
+          - "0x0"
         id: 1
     eth_getUncleCountByBlockNumber_Request:
       title: eth_getUncleCountByBlockNumber_Request
@@ -698,12 +698,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getUncleCountByBlockNumber
         params:
           - latest
@@ -725,15 +725,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getCode
         params:
-          - '0xa50a51c09a5c451c52bb714527e1974b686d8e77'
+          - "0xa50a51c09a5c451c52bb714527e1974b686d8e77"
           - latest
         id: 1
     eth_sendRawTransaction_Request:
@@ -753,15 +753,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_sendRawTransaction
         params:
-          - '0xf86a018203e882520894f17f52151ebef6c7334fad080c5704d77216b732896c6b935b8bbd400000801ba093129415f03b4794fd1512e79ee7f097e4271f66721020f8407aac92179893a5a0451b875d89721ec98be55201092980b0a87bb1c48507fccb86da713596b2a09e'
+          - "0xf86a018203e882520894f17f52151ebef6c7334fad080c5704d77216b732896c6b935b8bbd400000801ba093129415f03b4794fd1512e79ee7f097e4271f66721020f8407aac92179893a5a0451b875d89721ec98be55201092980b0a87bb1c48507fccb86da713596b2a09e"
         id: 1
     eth_getTransactionReceipt_Request:
       title: eth_getTransactionReceipt_Request
@@ -780,15 +780,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getTransactionReceipt
         params:
-          - '0x96c6830efd87a70020d4d1647c93402d747c05ecf6beeb068dee621f8d13d8d1'
+          - "0x96c6830efd87a70020d4d1647c93402d747c05ecf6beeb068dee621f8d13d8d1"
         id: 1
     eth_call_request:
       title: eth_call_request
@@ -806,8 +806,8 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param2'
-          description: ''
+            $ref: "#/components/schemas/Param2"
+          description: ""
         id:
           type: integer
           format: int32
@@ -820,8 +820,8 @@ components:
         value:
           type: string
       example:
-        to: '0x69498dd54bd25aa0c886cf1f8b8ae0856d55ff13'
-        value: '0x1'
+        to: "0x69498dd54bd25aa0c886cf1f8b8ae0856d55ff13"
+        value: "0x1"
     eth_estimateGas_Request:
       title: eth_estimateGas_Request
       required:
@@ -838,8 +838,8 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param3'
-          description: ''
+            $ref: "#/components/schemas/Param3"
+          description: ""
         id:
           type: integer
           format: int32
@@ -854,9 +854,9 @@ components:
         value:
           type: string
       example:
-        from: '0x687422eea2cb73b5d3e242ba5456b782919afc85'
-        to: '0xdd37f65db31c107f773e82a4f85c693058fef7a9'
-        value: '0x1'
+        from: "0x687422eea2cb73b5d3e242ba5456b782919afc85"
+        to: "0xdd37f65db31c107f773e82a4f85c693058fef7a9"
+        value: "0x1"
     eth_getBlockByHash_Request:
       title: eth_getBlockByHash_Request
       required:
@@ -874,7 +874,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
@@ -895,7 +895,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
@@ -916,15 +916,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getTransactionByHash
         params:
-          - '0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44'
+          - "0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44"
         id: 53
     eth_getTransactionByBlockHashAndIndex_Request:
       title: eth_getTransactionByBlockHashAndIndex_Request
@@ -943,16 +943,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getTransactionByBlockHashAndIndex
         params:
-          - '0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44'
-          - '0x1'
+          - "0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44"
+          - "0x1"
         id: 1
     eth_getTransactionByBlockNumberAndIndex_Request:
       title: eth_getTransactionByBlockNumberAndIndex_Request
@@ -971,16 +971,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getTransactionByBlockNumberAndIndex
         params:
           - latest
-          - '0x0'
+          - "0x0"
         id: 1
     eth_getWork_Request:
       title: eth_getWork_Request
@@ -999,12 +999,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eth_getWork
         params: []
         id: 1
@@ -1025,12 +1025,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_getAccountsWhitelist
         params: []
         id: 1
@@ -1057,11 +1057,11 @@ components:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_addAccountsToWhitelist
         params:
-          - - '0xb9b81ee349c3807e46bc71aa2632203c5b462032'
-            - '0xb9b81ee349c3807e46bc71aa2632203c5b462034'
+          - - "0xb9b81ee349c3807e46bc71aa2632203c5b462032"
+            - "0xb9b81ee349c3807e46bc71aa2632203c5b462034"
         id: 1
     perm_removeAccountsFromWhitelist_Request:
       title: perm_removeAccountsFromWhitelist_Request
@@ -1086,11 +1086,11 @@ components:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_removeAccountsFromWhitelist
         params:
-          - - '0xb9b81ee349c3807e46bc71aa2632203c5b462032'
-            - '0xb9b81ee349c3807e46bc71aa2632203c5b462034'
+          - - "0xb9b81ee349c3807e46bc71aa2632203c5b462032"
+            - "0xb9b81ee349c3807e46bc71aa2632203c5b462034"
         id: 1
     perm_getNodesWhitelist_Request:
       title: perm_getNodesWhitelist_Request
@@ -1109,12 +1109,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_getNodesWhitelist
         params: []
         id: 1
@@ -1141,11 +1141,11 @@ components:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_addNodesToWhitelist
         params:
-          - - 'enode://7e4ef30e9ec683f26ad76ffca5b5148fa7a6575f4cfad4eb0f52f9c3d8335f4a9b6f9e66fcc73ef95ed7a2a52784d4f372e7750ac8ae0b544309a5b391a23dd7@127.0.0.1:30303'
-            - 'enode://2feb33b3c6c4a8f77d84a5ce44954e83e5f163e7a65f7f7a7fec499ceb0ddd76a46ef635408c513d64c076470eac86b7f2c8ae4fcd112cb28ce82c0d64ec2c94@127.0.0.1:30304'
+          - - "enode://7e4ef30e9ec683f26ad76ffca5b5148fa7a6575f4cfad4eb0f52f9c3d8335f4a9b6f9e66fcc73ef95ed7a2a52784d4f372e7750ac8ae0b544309a5b391a23dd7@127.0.0.1:30303"
+            - "enode://2feb33b3c6c4a8f77d84a5ce44954e83e5f163e7a65f7f7a7fec499ceb0ddd76a46ef635408c513d64c076470eac86b7f2c8ae4fcd112cb28ce82c0d64ec2c94@127.0.0.1:30304"
         id: 1
     perm_removeNodesFromWhitelist_Request:
       title: perm_removeNodesFromWhitelist_Request
@@ -1170,11 +1170,11 @@ components:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_removeNodesFromWhitelist
         params:
-          - - 'enode://7e4ef30e9ec683f26ad76ffca5b5148fa7a6575f4cfad4eb0f52f9c3d8335f4a9b6f9e66fcc73ef95ed7a2a52784d4f372e7750ac8ae0b544309a5b391a23dd7@127.0.0.1:30303'
-            - 'enode://2feb33b3c6c4a8f77d84a5ce44954e83e5f163e7a65f7f7a7fec499ceb0ddd76a46ef635408c513d64c076470eac86b7f2c8ae4fcd112cb28ce82c0d64ec2c94@127.0.0.1:30304'
+          - - "enode://7e4ef30e9ec683f26ad76ffca5b5148fa7a6575f4cfad4eb0f52f9c3d8335f4a9b6f9e66fcc73ef95ed7a2a52784d4f372e7750ac8ae0b544309a5b391a23dd7@127.0.0.1:30303"
+            - "enode://2feb33b3c6c4a8f77d84a5ce44954e83e5f163e7a65f7f7a7fec499ceb0ddd76a46ef635408c513d64c076470eac86b7f2c8ae4fcd112cb28ce82c0d64ec2c94@127.0.0.1:30304"
         id: 1
     perm_reloadPermissionsFromFile_Request:
       title: perm_reloadPermissionsFromFile_Request
@@ -1193,12 +1193,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: perm_reloadPermissionsFromFile
         params: []
         id: 1
@@ -1219,16 +1219,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: clique_getSignerMetrics
         params:
-          - '1'
-          - '100'
+          - "1"
+          - "100"
         id: 1
     clique_getSigners_Request:
       title: clique_getSigners_Request
@@ -1247,12 +1247,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: clique_getSigners
         params:
           - latest
@@ -1274,15 +1274,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: clique_getSignersAtHash
         params:
-          - '0x98b2ddb5106b03649d2d337d42154702796438b3c74fd25a5782940e84237a48'
+          - "0x98b2ddb5106b03649d2d337d42154702796438b3c74fd25a5782940e84237a48"
         id: 1
     ibft_discardValidatorVote_Request:
       title: ibft_discardValidatorVote_Request
@@ -1301,15 +1301,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: ibft_discardValidatorVote
         params:
-          - '0x42eb768f2244c8811c63729a21a3569731535f06'
+          - "0x42eb768f2244c8811c63729a21a3569731535f06"
         id: 1
     ibft_proposeValidatorVote_Request:
       title: ibft_proposeValidatorVote_Request
@@ -1328,7 +1328,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
@@ -1349,15 +1349,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: ibft_getValidatorsByBlockNumber
         params:
-          - '0x09'
+          - "0x09"
         id: 1
     ibft_getValidatorsByBlockHash_Request:
       title: ibft_getValidatorsByBlockHash_Request
@@ -1376,15 +1376,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: ibft_getValidatorsByBlockHash
         params:
-          - '0x98b2ddb5106b03649d2d337d42154702796438b3c74fd25a5782940e84237a48'
+          - "0x98b2ddb5106b03649d2d337d42154702796438b3c74fd25a5782940e84237a48"
         id: 1
     ibft_getPendingVotes_Request:
       title: ibft_getPendingVotes_Request
@@ -1403,12 +1403,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: ibft_getPendingVotes
         params: []
         id: 1
@@ -1429,16 +1429,16 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: ibft_getSignerMetrics
         params:
-          - '1'
-          - '100'
+          - "1"
+          - "100"
         id: 1
     debug_traceTransaction_Request:
       title: debug_traceTransaction_Request
@@ -1456,8 +1456,8 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param4'
-          description: ''
+            $ref: "#/components/schemas/Param4"
+          description: ""
         id:
           type: integer
           format: int32
@@ -1484,15 +1484,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: debug_traceBlockByHash
         params:
-          - '0xaceb3b2c9b25b0589230873921eb894b28722011b8df63977145517d754875a5'
+          - "0xaceb3b2c9b25b0589230873921eb894b28722011b8df63977145517d754875a5"
         id: 1
     debug_traceBlock_Request:
       title: debug_traceBlock_Request
@@ -1511,15 +1511,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: debug_traceBlock
         params:
-          - '0xf90277f90208a05a41d0e66b4120775176c09fcf39e7c0520517a13d2b57b18d33d342df038bfca01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794e6a7a1d47ff21b6321162aea7c6cb457d5476bcaa00e0df2706b0a4fb8bd08c9246d472abbe850af446405d9eba1db41db18b4a169a04513310fcb9f6f616972a3b948dc5d547f280849a87ebb5af0191f98b87be598a0fe2bf2a941abf41d72637e5b91750332a30283efd40c424dc522b77e6f0ed8c4b9010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000860153886c1bbd82b44382520b8252088455c426598b657468706f6f6c2e6f7267a0b48c515a9dde8d346c3337ea520aa995a4738bb595495506125449c1149d6cf488ba4f8ecd18aab215f869f86780862d79883d2000825208945df9b87991262f6ba471f09758cde1c0fc1de734827a69801ca088ff6cf0fefd94db46111149ae4bfc179e9b94721fffd821d38d16464b3f71d0a045e0aff800961cfce805daef7016b9b675c137a6a41a548f7b60a3484c06a33ac0'
+          - "0xf90277f90208a05a41d0e66b4120775176c09fcf39e7c0520517a13d2b57b18d33d342df038bfca01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794e6a7a1d47ff21b6321162aea7c6cb457d5476bcaa00e0df2706b0a4fb8bd08c9246d472abbe850af446405d9eba1db41db18b4a169a04513310fcb9f6f616972a3b948dc5d547f280849a87ebb5af0191f98b87be598a0fe2bf2a941abf41d72637e5b91750332a30283efd40c424dc522b77e6f0ed8c4b9010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000860153886c1bbd82b44382520b8252088455c426598b657468706f6f6c2e6f7267a0b48c515a9dde8d346c3337ea520aa995a4738bb595495506125449c1149d6cf488ba4f8ecd18aab215f869f86780862d79883d2000825208945df9b87991262f6ba471f09758cde1c0fc1de734827a69801ca088ff6cf0fefd94db46111149ae4bfc179e9b94721fffd821d38d16464b3f71d0a045e0aff800961cfce805daef7016b9b675c137a6a41a548f7b60a3484c06a33ac0"
         id: 1
     debug_traceBlockByNumber_Request:
       title: debug_traceBlockByNumber_Request
@@ -1538,15 +1538,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: debug_traceBlockByNumber
         params:
-          - '0xaceb3b2c9b25b0589230873921eb894b28722011b8df63977145517d754875a5'
+          - "0xaceb3b2c9b25b0589230873921eb894b28722011b8df63977145517d754875a5"
         id: 1
     debug_accountRange_Request:
       title: debug_accountRange_Request
@@ -1565,7 +1565,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
@@ -1586,7 +1586,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
@@ -1607,12 +1607,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: admin_nodeInfo
         params: []
         id: 1
@@ -1633,15 +1633,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: admin_addPeer
         params:
-          - 'enode://c93f69ddd83d3db3e93e5165d60b4f5d93a9731df776beee94c5f8a0c770e41bdea69094136402db0cef7af63f0aa636ff676d4a88c6d37276dfa4160c21ed5f@127.0.0.1:30303'
+          - "enode://c93f69ddd83d3db3e93e5165d60b4f5d93a9731df776beee94c5f8a0c770e41bdea69094136402db0cef7af63f0aa636ff676d4a88c6d37276dfa4160c21ed5f@127.0.0.1:30303"
         id: 1
     admin_removePeer_Request:
       title: admin_removePeer_Request
@@ -1660,15 +1660,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: admin_removePeer
         params:
-          - 'enode://f59c0ab603377b6ec88b89d5bb41b98fc385030ab1e4b03752db6f7dab364559d92c757c13116ae6408d2d33f0138e7812eb8b696b2a22fe3332c4b5127b22a3@127.0.0.1:30304'
+          - "enode://f59c0ab603377b6ec88b89d5bb41b98fc385030ab1e4b03752db6f7dab364559d92c757c13116ae6408d2d33f0138e7812eb8b696b2a22fe3332c4b5127b22a3@127.0.0.1:30304"
         id: 1
     admin_changeLogLevel_Request:
       title: admin_changeLogLevel_Request
@@ -1687,12 +1687,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: admin_changeLogLevel
         params:
           - DEBUG
@@ -1714,12 +1714,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: txpool_pantheonTransactions
         params: []
         id: 1
@@ -1740,12 +1740,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: txpool_pantheonTransactions
         params: []
         id: 1
@@ -1766,15 +1766,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: eea_sendRawTransaction
         params:
-          - '0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833'
+          - "0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"
         id: 1
     priv_distributeRawTransaction_Request:
       title: priv_distributeRawTransaction_Request
@@ -1793,15 +1793,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_distributeRawTransaction
         params:
-          - '0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833'
+          - "0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"
         id: 1
     priv_getPrivacyPrecompileAddress_Request:
       title: priv_getPrivacyPrecompileAddress_Request
@@ -1820,12 +1820,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_getPrivacyPrecompileAddress
         params: []
         id: 1
@@ -1846,15 +1846,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_getPrivateTransaction
         params:
-          - '0x623c4ce5275a87b91f4f1c521012d39ca19311c787bde405490f4c0426a71498'
+          - "0x623c4ce5275a87b91f4f1c521012d39ca19311c787bde405490f4c0426a71498"
         id: 1
     priv_getTransactionReceipt_Request:
       title: priv_getTransactionReceipt_Request
@@ -1873,15 +1873,15 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_getTransactionReceipt
         params:
-          - '0xf3ab9693ad92e277bf785e1772f29fb1864904bbbe87b0470455ddb082caab9d'
+          - "0xf3ab9693ad92e277bf785e1772f29fb1864904bbbe87b0470455ddb082caab9d"
         id: 1
     priv_createPrivacyGroup_Request:
       title: priv_createPrivacyGroup_Request
@@ -1899,13 +1899,13 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/Param5'
-          description: ''
+            $ref: "#/components/schemas/Param5"
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_createPrivacyGroup
         params:
           - addresses:
@@ -1926,7 +1926,7 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         name:
           type: string
         description:
@@ -1954,12 +1954,12 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_deletePrivacyGroup
         params:
           - ewuTVoc5nlvWMwTFdRRK/wvV0dcyQo/Pauvx5bNEbTk=
@@ -1987,7 +1987,7 @@ components:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_findPrivacyGroup
         params:
           - - negmDcN2P4ODpqn/6WkJ02zT/0w0bjhGpkZ8UP6vARk=
@@ -2010,41 +2010,41 @@ components:
           type: array
           items:
             type: string
-          description: ''
+          description: ""
         id:
           type: integer
           format: int32
       example:
-        jsonrpc: '2.0'
+        jsonrpc: "2.0"
         method: priv_getTransactionCount
         params:
-          - '0xfe3b557e8fb62b89f4916b721be55ceb828dbd73'
+          - "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73"
           - kAbelwaVW7okoEn1+okO+AbA4Hhz/7DaCOWVQz9nx5M=
         id: 1
 tags:
   - name: web
-    description: ''
+    description: ""
   - name: net
-    description: ''
+    description: ""
   - name: eth
-    description: ''
+    description: ""
   - name: permissioning
-    description: ''
+    description: ""
   - name: clique
-    description: ''
+    description: ""
   - name: ibft
-    description: ''
+    description: ""
   - name: debug
-    description: ''
+    description: ""
   - name: miner
-    description: ''
+    description: ""
   - name: admin
-    description: ''
+    description: ""
   - name: rpc
-    description: ''
+    description: ""
   - name: txpool
-    description: ''
+    description: ""
   - name: eea
-    description: ''
+    description: ""
   - name: priv
-    description: ''
+    description: ""
