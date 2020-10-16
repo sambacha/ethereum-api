@@ -22,7 +22,7 @@
 
 == Service Providers
 
-[Alchemyapi Referral](https://dashboard.alchemyapi.io/signup?referral=496d4069-ca19-4c95-9cee-cd15c699a355)
+link:https://dashboard.alchemyapi.io/signup?referral=496d4069-ca19-4c95-9cee-cd15c699a355[Alchemyapi Referral]
 
 
 == Schemas 
