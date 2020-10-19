@@ -12,6 +12,8 @@
 
 = API-first Smart Contract Design 
 
+== View the JSON RPC API 
+
 link:https://sambacha.github.io/besu-api/[View the JSON RPC Catalog]
 
 :description: Optimizing solidity contracts for API access, focusing on Hyperledger Besu 
