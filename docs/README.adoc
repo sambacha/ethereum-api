@@ -12,6 +12,10 @@
 
 = API-first Smart Contract Design 
 
+== View the JSON RPC API 
+
+link:https://sambacha.github.io/besu-api/[View the JSON RPC Catalog]
+
 :description: Optimizing solidity contracts for API access, focusing on Hyperledger Besu 
 
 3 Main Ways of Designing an API for Contract Interaction
@@ -19,6 +23,10 @@
 - Direct RPC / IPC (e.g. direct polling to a client such as Geth)
 - 3rd Party Provider (e.g. Infura/Alchemey/Quicknode) also The Graph.
 - Middleware Client (e.g. Kafka Broker or some other MQ)
+
+== Service Providers
+
+link:https://dashboard.alchemyapi.io/signup?referral=496d4069-ca19-4c95-9cee-cd15c699a355[Alchemyapi Referral]
 
 
 == Schemas 
