@@ -1,0 +1,538 @@
+skinparam defaultMonospacedFontName Andale Mono
+!define TBD [//to be completed <&warning>//]
+!define directory(name) class name << (D,cyan) Directory >>
+!define file(name) class name << (F,turquoise) File >>
+!define hashIdField(h1) - {field} <&key> id: ID //= hash(// ""h1"" //)//
+!define hashIdField(h1,h2) - {field} <&key> id: ID //= hash(// ""h1""//,// ""h2"" //)//
+!define hashIdField(h1,h2,h3) - {field} <&key> id: ID //= hash(// ""h1""//,// ""h2""//,// ""h3"" //)//
+!define hashIdField(h1,h2,h3,h4) - {field} <&key> id: ID //= hash(// ""h1""//,// ""h2""//,// ""h3"" //,// ""h4"" //)//
+!define UNKNOWN_ID - {field} <&key> id: ID = TBD
+
+!define object(name) class name << (O,lawngreen) Data Object >>
+!define interface(name) class name << (I,blueviolet) Interface >>
+!define enum(name) class name << (E,yellow) Enum >>
+!define resource(name) class name << (R,orchid) Resource >>
+!define extern(name) class name << (R,darkorange) External Resource >>
+!define externObject(name) class name << (O,khaki) External Object >>
+!define collection(name) class name << (C,deeppink) Collection >>
+
+'
+' Resources
+'
+
+!ifdef SHOW_PROJECT
+  !ifdef EXTERN_PROJECT
+    extern(Project) {
+      + directory: String
+      + {method} resolve (\n\ttype: String,\n\tname: String\n): Array<NameRecord>
+    }
+  !else
+    resource(Project) {
+      + directory: String
+      + {method} resolve (\n\ttype: String,\n\tname: String\n): Array<NameRecord>
+      ..
+      hashIdField(directory)
+    }
+  !endif
+!endif
+
+!ifdef SHOW_NAME_RECORD
+  !ifdef EXTERN_NAME_RECORD
+    extern(NameRecord) {
+      + type: String
+      + name: String
+      + {method} resource: T
+      + {method} previous: Maybe<NameRecord<T>>
+    }
+  !else
+    class NameRecord< T: Resource > << (R,orchid) Resource >> {
+      + type: String
+      + name: String
+      + {method} resource: T
+      + {method} previous: Maybe<NameRecord<T>>
+      ..
+      hashIdField(type,name,resource,previous)
+      - resourceId: ID
+      - previousId: ID
+    }
+
+    interface(Named) {
+      + name: String
+    }
+
+    NameRecord o-- "1" Named
+    NameRecord o-- "0..1" NameRecord
+
+    !ifdef SHOW_NAME_RECORD_INTERNAL
+      class T << (R,motivation) Resource >> {
+        + name: String
+        ..
+        - <&key> id: ID
+      }
+
+      T .right.|> Named : << implements >>
+    !endif
+
+  !endif
+!endif
+
+!ifdef SHOW_CONTRACT
+  !ifdef EXTERN_CONTRACT
+    extern(Contract) {
+      + name: String
+      + abi: ABI
+      + {method} createBytecode: Maybe<Bytecode>
+      + {method} callBytecode: Maybe<Bytecode>
+      + {method} compilation: Maybe<Compilation>
+      + {method} processedSource: Maybe<ProcessedSource>
+      + {method} interface: ContractInterface
+    }
+  !else
+    resource(Contract) {
+      + name: String
+      + abi: ABI
+      + {method} createBytecode: Maybe<Bytecode>
+      + {method} callBytecode: Maybe<Bytecode>
+      + {method} compilation: Maybe<Compilation>
+      + {method} processedSource: Maybe<ProcessedSource>
+      + {method} interface: ContractInterface
+      ..
+      hashIdField(name,abi,processedSource,compilation)
+      - createBytecodeId
+      - callBytecodeId
+    }
+  !endif
+!endif
+
+!ifdef SHOW_INSTANCE
+  !define SHOW_INSTANCE_CREATION
+  !define SHOW_LINKED_BYTECODE
+
+  resource(ContractInstance) {
+    + address : Address
+    + network : Network
+    + creation : Maybe<ContractInstanceCreation>
+    + callBytecode : LinkedBytecode
+    + {method} contract : Maybe<Contract>
+    ..
+    hashIdField(network,address)
+    - contractId: ID
+  }
+
+  ContractInstanceCreation "0..1" ---* ContractInstance
+!endif
+
+!ifdef SHOW_INTERFACE
+  resource(ContractInterface) {
+    + constructor : Maybe<Constructor>
+    + fallback : Maybe<Fallback>
+    + functions : Set<Function>
+    + events : Set<Event>
+    ..
+    UNKNOWN_ID
+  }
+
+  ContractInterface o-- "n" ContractInterface
+
+  !ifdef SHOW_INTERFACE_INTERNAL
+    object(ConstructorInterface) {
+      + inputs : Array<Parameter>
+      + stateMutability : StateMutability
+    }
+
+    object(FallbackInterface) {
+      + stateMutability : StateMutability
+    }
+
+    object(FunctionInterface) {
+      + name : String
+      + inputs : Array<Parameter>
+      + outputs : Array<Parameter>
+      + stateMutability : StateMutability
+    }
+
+    object(EventInterface) {
+      + name : String
+      + inputs : Array<EventParameter>
+      + anonymous : Boolean
+    }
+
+    ContractInterface *-- "0..1" ConstructorInterface
+    ContractInterface *-- "0..1" FallbackInterface
+    ContractInterface *-- "n" FunctionInterface
+    ContractInterface *-- "n" EventInterface
+
+    object(Parameter) {
+      + name : String
+      + type : Type
+    }
+
+    object(EventParameter) {
+      + name : String
+      + type : Type
+      + indexed : Boolean
+    }
+
+    enum(StateMutability) {
+      + pure
+      + view
+      + nonpayable
+      + payable
+    }
+
+    ConstructorInterface *-- "n" Parameter
+    ConstructorInterface *-- "1" StateMutability
+
+    FallbackInterface *-- "1" StateMutability
+
+    FunctionInterface *-- "n" Parameter
+    FunctionInterface *-- "1" StateMutability
+
+    EventInterface *-- "n" EventParameter
+  !endif
+!endif
+
+!ifdef SHOW_CONSTRUCTOR
+  !define SHOW_LINKED_BYTECODE
+
+  object(Constructor) {
+    + createBytecode: LinkedBytecode
+  }
+!endif
+
+
+!ifdef SHOW_BYTECODE
+  !define SHOW_LINK_REFERENCE
+
+  !ifdef EXTERN_BYTECODE
+    extern(Bytecode) {
+      + bytes: Bytes
+      + linkReferences : Set<LinkReference>
+      + {method} instructions: Array<Instruction>
+      ..
+    }
+  !else
+    resource(Bytecode) {
+      + bytes: Bytes
+      + linkReferences : Set<LinkReference>
+      + {method} instructions: Array<Instruction>
+      ..
+      hashIdField(bytes)
+    }
+  !endif
+
+  !ifdef SHOW_SOURCE_MAP || SHOW_BYTECODE_INTERNAL
+    object(Instruction) {
+      + programCounter: Integer
+      + opcode: String
+      + pushData: Bytes
+      + meta: InstructionMeta
+    }
+
+    object(InstructionMeta) {
+      + cost: Integer
+      + pops: Integer
+      + pushes: Integer
+      + dynamic: Integer
+    }
+
+    Instruction *-right- "1" InstructionMeta
+    Instruction "n" --* Bytecode
+  !endif
+!endif
+
+!ifdef SHOW_SOURCE
+    resource(Source) {
+      + contents: String
+      + sourcePath: Maybe<String>
+      ..
+      hashIdField(contents,sourcePath)
+    }
+!endif
+
+
+
+!ifdef SHOW_COMPILATION
+  !define SHOW_PROCESSED_SOURCE
+  !define SHOW_METADATA
+
+  !ifdef EXTERN_COMPILATION
+    extern(Compilation) {
+      + compiler : Compiler
+      + {method} sources : Array<Maybe<Source>>
+      + {method} processedSources : Array<ProcessedSource>
+      + sourceMaps: Array<SourceMap>
+      + metadata: Metadata
+      ..
+    }
+  !else
+    resource(Compilation) {
+      + compiler : Compiler
+      + {method} sources : Array<Maybe<Source>>
+      + {method} processedSources : Array<ProcessedSource>
+      + sourceMaps: Array<SourceMap>
+      + metadata: Metadata
+      ..
+      hashIdField(compiler,sourceIds)
+      - sourceIds: Array<Maybe<ID>>
+      - contractIds : Array<Maybe<ID>>
+    }
+  !endif
+
+  ProcessedSource "n" --* Compilation
+!endif
+
+!ifdef SHOW_NETWORK
+  !ifdef EXTERN_NETWORK
+    extern(Network) {
+      + name : String
+      + networkId : NetworkID
+      + historicBlock: Block
+      ..
+    }
+  !else
+    resource(Network) {
+      + name : String
+      + networkId : NetworkID
+      + historicBlock: Block
+      ..
+      hashIdField(networkId,historicBlock)
+    }
+  !endif
+
+
+    !ifdef SHOW_NETWORK_INTERNAL
+      object(Block) {
+        + height : Integer
+        + hash : BlockHash
+      }
+
+      resource(NetworkGenealogy) {
+        + ancestor: Network
+        + descendant: Network
+        ..
+        hashIdField(ancestor, descendant)
+      }
+
+      NetworkGenealogy o--  "2" Network
+      Network o-- "0..1" Network : <<refines>>
+      Network *-- "1" Block
+    !endif
+!endif
+
+'
+' Shared Data Objects
+'
+
+!ifdef (SHOW_BYTECODE && SHOW_INSTANCE) || (SHOW_BYTECODE && SHOW_CONSTRUCTOR)
+  !define SHOW_LINKED_BYTECODE
+!endif
+
+!ifdef SHOW_LINKED_BYTECODE
+  !define SHOW_LINK_VALUE
+
+    object(LinkedBytecode) {
+      + bytecode : Bytecode
+      + linkValues : Set<LinkValue>
+    }
+!endif
+
+!ifdef SHOW_COMPILER
+  object(Compiler) {
+    + name : String
+    + version : String
+    + settings : Object
+  }
+
+!endif
+
+!ifdef SHOW_INSTANCE_CREATION
+    object(ContractInstanceCreation) {
+      + transactionHash: TransactionHash
+      + constructorArgs: Array<Value>
+      + {method} constructor: Constructor
+    }
+!endif
+
+!ifdef SHOW_LINK_VALUE
+  !define SHOW_LINK_REFERENCE
+    object(LinkValue) {
+      + value: Bytes
+      + {method} linkReference: LinkReference
+      ..
+      - bytecodeIds: Array<Maybe<ID>>
+      - index: Integer
+    }
+!endif
+
+!ifdef SHOW_LINK_REFERENCE
+  !ifdef EXTERN_BYTECODE
+    externObject(LinkReference) {
+      + offsets: Array<ByteOffset>
+      + name: Maybe<String>
+      + length: Integer
+    }
+  !else
+    object(LinkReference) {
+      + offsets: Array<ByteOffset>
+      + name: Maybe<String>
+      + length: Integer
+    }
+  !endif
+!endif
+
+!ifdef SHOW_SOURCE_MAP
+    object(SourceMap) {
+      + json: String
+    }
+!endif
+
+!ifdef SHOW_SOURCE_RANGE
+  object(SourceRange) {
+      + start: ByteOffset
+      + length: Length
+      + meta: Object
+      + {method} source: Source
+      ..
+      - sourceId: ID
+    }
+!endif
+
+!ifdef SHOW_PROCESSED_SOURCE
+  !ifdef EXTERN_COMPILATION
+    externObject(ProcessedSource) {
+      + ast: AST
+      + {method} source: Source
+      ..
+    }
+  !else
+    object(ProcessedSource) {
+      + ast: AST
+      + {method} source: Source
+      ..
+      - sourceId: ID
+    }
+  !endif
+!endif
+
+!ifdef SHOW_ABI
+    object(ABI) {
+      + json: String
+    }
+!endif
+
+!ifdef SHOW_AST
+  object(AST) {
+    + json: String
+  }
+!endif
+
+!ifdef SHOW_METADATA
+  object(Metadata) {
+    + json: String
+  }
+!endif
+
+'
+' Relations
+'
+
+!ifdef SHOW_PROJECT && SHOW_NAME_RECORD
+  Project o-- "n" NameRecord
+!endif
+
+!ifdef SHOW_CONTRACT && SHOW_NAME_RECORD
+  Named <|.. Contract : << implements >>
+!endif
+
+!ifdef SHOW_NAME_RECORD && SHOW_NETWORK
+  Named <|.. Network : << implements >>
+!endif
+
+
+!ifdef SHOW_CONTRACT && SHOW_ABI
+  Contract *-right- "1" ABI
+!endif
+
+!ifdef SHOW_CONTRACT && SHOW_INSTANCE
+  ContractInstance "n" o--- "0..1" Contract
+!endif
+
+!ifdef SHOW_CONTRACT && SHOW_BYTECODE
+  Contract o-- "0..2" Bytecode
+!endif
+
+!ifdef SHOW_CONTRACT && SHOW_INTERFACE
+  ContractInterface "1" ---o Contract
+!endif
+
+!ifdef SHOW_CONTRACT && SHOW_PROCESSED_SOURCE
+  Contract o-- "0..1" Compilation
+  Contract o.. "1" ProcessedSource
+!endif
+
+!ifdef SHOW_LINKED_BYTECODE && SHOW_BYTECODE
+  LinkedBytecode o---- "1" Bytecode
+!endif
+
+!ifdef SHOW_LINKED_BYTECODE && SHOW_LINK_VALUE
+  LinkedBytecode *-- "n" LinkValue
+!endif
+
+!ifdef SHOW_BYTECODE && SHOW_LINK_REFERENCE
+  LinkReference "n" -* Bytecode
+!endif
+
+!ifdef SHOW_LINK_VALUE && SHOW_LINK_REFERENCE
+  LinkValue ....> "1" LinkReference
+!endif
+
+
+!ifdef SHOW_PROCESSED_SOURCE && SHOW_SOURCE
+  ProcessedSource o-- "1" Source
+!endif
+
+!ifdef SHOW_INSTANCE && SHOW_NETWORK
+  Network "1" ---o ContractInstance
+!endif
+
+!ifdef SHOW_INSTANCE_CREATION && SHOW_CONSTRUCTOR
+  ContractInstanceCreation o-- "1" Constructor
+!endif
+
+!ifdef SHOW_INSTANCE && SHOW_LINKED_BYTECODE
+  ContractInstance *-- "1" LinkedBytecode
+!endif
+
+!ifdef SHOW_CONSTRUCTOR && SHOW_LINKED_BYTECODE
+  Constructor *-- "1" LinkedBytecode
+!endif
+
+!ifdef SHOW_COMPILATION && SHOW_COMPILER
+  Compilation *-left- "1" Compiler
+!endif
+
+!ifdef SHOW_COMPILATION && SHOW_SOURCE
+  Compilation o-right- "n" Source
+!endif
+
+
+!ifdef SHOW_COMPILATION && SHOW_SOURCE_MAP
+  Compilation *-- "0..1" SourceMap
+!endif
+
+!ifdef SHOW_COMPILATION && SHOW_METADATA
+  Compilation *-- "0..1" Metadata
+!endif
+
+!ifdef SHOW_PROCESSED_SOURCE && SHOW_AST
+  ProcessedSource *-left- "0..1" AST
+!endif
+
+!ifdef SHOW_SOURCE_RANGE && SHOW_BYTECODE
+  SourceRange o-- "1" Instruction
+!endif
+
+!ifdef SHOW_SOURCE_RANGE && SHOW_SOURCE
+  Source "1" --o SourceRange
+!endif
