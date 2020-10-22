@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Model &mdash; Truffle DB - Proposal  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Software Design" href="design.html" />
+    <link rel="prev" title="1. Saving new artifacts and updating existing" href="requirements/truffle.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Truffle DB - Proposal
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#name-referenced-resources">Name referenced resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-model-resources">Data Model Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#contracts-constructors-and-instances">Contracts, Constructors, and Instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sources-bytecodes-and-compilations">Sources, Bytecodes, and Compilations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-interfaces">Contract Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network">Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#combined-data-model">Combined Data Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Software Design</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Truffle DB - Proposal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Data Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/data-model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-model">
+<h1>Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h1>
+<p>This section serves to describe the relationships between the various
+components in an <a class="reference internal" href="glossary.html#term-artifact"><span class="xref std std-term">Artifact</span></a>. It seeks to present an explicit set of named
+resource types and how they relate to one another.</p>
+<p>This data model seeks to identify explicitly any implicit relationships and to
+add semantic color to these. It is a work in progress and likely to be
+incomplete and/or wrong.</p>
+<div class="section" id="name-referenced-resources">
+<h2>Name referenced resources<a class="headerlink" href="#name-referenced-resources" title="Permalink to this headline">¶</a></h2>
+<p>Certain resources are <em>named</em>, meaning that these entities may be referenced
+by user-defined semantic identifiers. Since Truffle targets the full dev.
+lifecycle, this means names refer to different things at different times.</p>
+<p><a class="reference internal" href="glossary.html#term-contract"><span class="xref std std-term">Contracts</span></a> and <a class="reference internal" href="glossary.html#term-network"><span class="xref std std-term">Networks</span></a>, for example, both use names. These resources
+represent entities that change over time. Contracts are written, rewritten,
+and/or updated many times between a project’s start and past its production
+deployment. Development networks reset, and public networks fork.</p>
+<p>To represent these entities across the entire project lifecycle, Truffle DB
+models names as a linked list of references to immutable entities.</p>
+<p>Each named resource contains the non-nullable string attribute <code class="docutils literal notranslate"><span class="pre">name</span></code> and the
+nullable attribute <code class="docutils literal notranslate"><span class="pre">role</span></code>, any serializable object. The pair
+(<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">role</span></code>) <strong>together</strong> represent the full semantic name.</p>
+<p class="plantuml">
+<object data="_images/plantuml-cdc9fcb95578c2db44cf671b0730c4bc09d40e49.svg" type="image/svg+xml" style="width:163px;height:98px;">
+<img src="_images/plantuml-cdc9fcb95578c2db44cf671b0730c4bc09d40e49.png" alt="!include uml/macros.iuml
+
+interface(Named) {
+  + name: String
+  + role: Maybe&lt;Object&gt;
+}" />
+
+</object></p>
+<p><strong>Name&lt;T&gt;</strong> can be considered generically to represent a linked list of
+current and past resource name references for a given resource type <code class="docutils literal notranslate"><span class="pre">T</span></code>.
+Each Name&lt;T&gt; has the same <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">role</span></code> attributes, plus the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code> to represent the underlying named resource type</li>
+<li><code class="docutils literal notranslate"><span class="pre">ref</span></code> to point to the underlying entity</li>
+<li><code class="docutils literal notranslate"><span class="pre">previous</span></code> to point to the previous name</li>
+</ul>
+</div></blockquote>
+<p>Further, Name&lt;T&gt; records are stored statically by <code class="docutils literal notranslate"><span class="pre">current</span></code> values.</p>
+<p class="plantuml">
+<object data="_images/plantuml-44a7f7d97b9a3bba1b14d29854050352b16292d7.svg" type="image/svg+xml" style="width:462px;height:388px;">
+<img src="_images/plantuml-44a7f7d97b9a3bba1b14d29854050352b16292d7.png" alt="!include uml/macros.iuml
+
+class Name&lt; T: Resource &gt; &lt;&lt; (R,orchid) Resource &gt;&gt; {
+  + &lt;u&gt;current&lt;/u&gt; (\n\ttype: String,\n\tname: String,\n\trole: Maybe&lt;Object&gt;\n):\n\tMaybe&lt;Name&lt;T&gt;&gt;
+  --
+  + type: String
+  + name: String
+  + role: Maybe&lt;Object&gt;
+  + {method} ref: T
+  + previous: Maybe&lt;Name&lt;T&gt;&gt;
+  ..
+  - refId: ID
+}
+
+interface(Named) {
+  + name: String
+  + role: Maybe&lt;Object&gt;
+}
+
+class T &lt;&lt; (R,motivation) Resource &gt;&gt; {
+  + name: String
+  + role: Maybe&lt;Object&gt;
+  ..
+  - &lt;&amp;key&gt; id: ID
+}
+
+Name o-- &quot;1&quot; T
+Name o-- &quot;0..1&quot; Name
+
+T .right.|&gt; Named : &lt;&lt; implements &gt;&gt;" />
+
+</object></p>
+</div>
+<div class="section" id="data-model-resources">
+<h2>Data Model Resources<a class="headerlink" href="#data-model-resources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="contracts-constructors-and-instances">
+<h3>Contracts, Constructors, and Instances<a class="headerlink" href="#contracts-constructors-and-instances" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<object data="_images/plantuml-e73463bf56cf53955e1b6b8449712d7e1e6c756b.svg" type="image/svg+xml" style="width:603px;height:979px;">
+<img src="_images/plantuml-e73463bf56cf53955e1b6b8449712d7e1e6c756b.png" alt="scale 0.75
+
+!define SHOW_CONTRACT
+!define SHOW_INSTANCE
+!define SHOW_CONSTRUCTOR
+!define SHOW_INTERFACE
+
+!define SHOW_COMPILATION
+!define EXTERN_COMPILATION
+
+!define SHOW_BYTECODE
+!define EXTERN_BYTECODE
+
+!define SHOW_NETWORK
+!define EXTERN_NETWORK
+
+!include uml/macros.iuml" />
+
+</object></p>
+</div>
+<div class="section" id="sources-bytecodes-and-compilations">
+<h3>Sources, Bytecodes, and Compilations<a class="headerlink" href="#sources-bytecodes-and-compilations" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<object data="_images/plantuml-e9147eb3f2fd48370e6ec239004ba66ea4d7f91a.svg" type="image/svg+xml" style="width:608px;height:816px;">
+<img src="_images/plantuml-e9147eb3f2fd48370e6ec239004ba66ea4d7f91a.png" alt="scale 0.75
+
+!define SHOW_CONTRACT
+!define EXTERN_CONTRACT
+
+!define SHOW_BYTECODE
+!define SHOW_SOURCE
+!define SHOW_COMPILATION
+!define SHOW_COMPILER
+!define SHOW_SOURCE_MAP
+
+!include uml/macros.iuml" />
+
+</object></p>
+</div>
+<div class="section" id="contract-interfaces">
+<h3>Contract Interfaces<a class="headerlink" href="#contract-interfaces" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<object data="_images/plantuml-59db39335fa7b7b64cb08dcb9b2fcbc2d3765994.svg" type="image/svg+xml" style="width:706px;height:350px;">
+<img src="_images/plantuml-59db39335fa7b7b64cb08dcb9b2fcbc2d3765994.png" alt="scale 0.75
+
+!define SHOW_INTERFACE
+!define SHOW_INTERFACE_INTERNAL
+
+!include uml/macros.iuml" />
+
+</object></p>
+</div>
+<div class="section" id="network">
+<h3>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<object data="_images/plantuml-4a5fd22b5e8fe51e67d7d35534497242f44d383e.svg" type="image/svg+xml" style="width:357px;height:111px;">
+<img src="_images/plantuml-4a5fd22b5e8fe51e67d7d35534497242f44d383e.png" alt="scale 0.75
+
+!define SHOW_NETWORK
+!define SHOW_NETWORK_INTERNAL
+
+!include uml/macros.iuml" />
+
+</object></p>
+<p>A network resource comprises a friendly name, a network ID, a known historic
+block, and possibly an originating fork.</p>
+<p>Networks that specify a <code class="docutils literal notranslate"><span class="pre">fork</span></code> value must specify a <code class="docutils literal notranslate"><span class="pre">historicBlock</span></code> whose
+<code class="docutils literal notranslate"><span class="pre">height</span></code> is larger than the fork network’s historic block height.</p>
+</div>
+</div>
+<div class="section" id="combined-data-model">
+<h2>Combined Data Model<a class="headerlink" href="#combined-data-model" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<object data="_images/plantuml-6a7e6c70ea4c8042eec172cf9cbb8c24cc2aff44.svg" type="image/svg+xml" style="width:855px;height:1446px;">
+<img src="_images/plantuml-6a7e6c70ea4c8042eec172cf9cbb8c24cc2aff44.png" alt="scale 0.75
+
+!define SHOW_NETWORK
+!define SHOW_NETWORK_INTERNAL
+
+!define SHOW_BYTECODE
+
+!define SHOW_COMPILATION
+!define SHOW_COMPILER
+
+!define SHOW_SOURCE
+
+!define SHOW_CONTRACT
+!define SHOW_INTERFACE
+!define SHOW_INSTANCE
+!define SHOW_ABI
+!define SHOW_AST
+!define SHOW_INSTRUCTION
+!define SHOW_SOURCE_MAP
+!define SHOW_CONSTRUCTOR
+
+!include uml/macros.iuml" />
+
+</object></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="design.html" class="btn btn-neutral float-right" title="Software Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="requirements/truffle.html" class="btn btn-neutral" title="1. Saving new artifacts and updating existing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Truffle Suite.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

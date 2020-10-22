@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="304px" preserveAspectRatio="none" style="width:561px;height:304px;" version="1.1" viewBox="0 0 561 304" width="561px" zoomAndPan="magnify"><defs><filter height="300%" id="fdx3l9ioreqb0" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster Metadata--><rect fill="#FFFFFF" filter="url(#fdx3l9ioreqb0)" height="165" style="stroke: #000000; stroke-width: 1.5;" width="166" x="384" y="27"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="74" x="430" y="41.9951">«external»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="72" x="431" y="58.292">Metadata</text><!--cluster Interaction--><rect fill="#FFFFFF" filter="url(#fdx3l9ioreqb0)" height="269" style="stroke: #000000; stroke-width: 1.5;" width="274" x="82" y="24"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="85" x="176.5" y="38.9951">Interaction</text><ellipse cx="466.8406" cy="94.0236" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="46.8406" ry="14.5236" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="435.8406" y="98.6721">Read ABI</text><ellipse cx="467.1107" cy="159.8221" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="67.1107" ry="15.8221" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="99" x="417.6107" y="164.4706">Read instance</text><ellipse cx="218.8518" cy="80.0704" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="88.3518" ry="20.0704" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="150" x="143.8518" y="84.7188">Call read-only method</text><ellipse cx="218.8655" cy="161.7731" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="119.3655" ry="26.2731" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="218" x="109.8655" y="166.4215">Invoke method via a transaction</text><ellipse cx="219.241" cy="250.1482" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="121.241" ry="26.6482" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="222" x="108.241" y="254.7966">Send ETH to a contract instance</text><!--entity User--><ellipse cx="22" cy="130.5" fill="#FEFECE" filter="url(#fdx3l9ioreqb0)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M22,138.5 L22,165.5 M9,146.5 L35,146.5 M22,165.5 L9,180.5 M22,165.5 L35,180.5 " fill="none" filter="url(#fdx3l9ioreqb0)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="32" x="6" y="200.4951">User</text><!--link ReadInstance to ReadABI--><path d="M467,143.758 C467,133.717 467,123.675 467,113.634 " fill="none" id="ReadInstance-ReadABI" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="467,108.383,463,117.383,467,113.383,471,117.383,467,108.383" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Call to ReadInstance--><path d="M287.165,92.868 C311.934,98.862 339.834,107.121 364,118 C369.845,120.631 370.299,123.071 376,126 C390.282,133.338 406.529,139.959 421.251,145.367 " fill="none" id="Call-ReadInstance" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="426.181,147.154,419.0818,140.3275,421.48,145.4508,416.3567,147.849,426.181,147.154" style="stroke: #A80036; stroke-width: 1.0;"/><!--link SendTransaction to ReadInstance--><path d="M338.677,161.035 C357.717,160.88 376.895,160.724 394.384,160.582 " fill="none" id="SendTransaction-ReadInstance" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="399.755,160.539,390.7222,156.6137,394.7552,160.5804,390.7885,164.6134,399.755,160.539" style="stroke: #A80036; stroke-width: 1.0;"/><!--link User to Call--><path d="M38.128,145.666 C47.6091,136.322 60.5505,125.086 74,118 C96.6461,106.068 123.312,97.682 147.502,91.883 " fill="none" id="User-Call" style="stroke: #A80036; stroke-width: 1.0;"/><!--link User to SendTransaction--><path d="M38.3013,162 C52.4872,162 75.0305,162 99.4221,162 " fill="none" id="User-SendTransaction" style="stroke: #A80036; stroke-width: 1.0;"/><!--link User to Send--><path d="M38.2291,178.147 C47.746,187.424 60.6896,198.656 74,206 C92.7682,216.3556 114.287,224.5916 134.87,231.0033 " fill="none" id="User-Send" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+left to right direction
+
+:User: as :User:
+
+rectangle Metadata << external >> {
+  (Read ABI) as (ReadABI)
+  (Read instance) as (ReadInstance)
+  (ReadInstance) -> ReadABI
+}
+
+rectangle Interaction {
+  (Call read-only method) as (Call)
+  (Invoke method via a transaction) as (SendTransaction)
+  (Send ETH to a contract instance) as (Send)
+
+  Call - -> ReadInstance
+  SendTransaction - -> ReadInstance
+}
+
+User - - Call
+User - - SendTransaction
+User - - Send
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

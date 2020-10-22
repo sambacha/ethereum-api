@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="442px" preserveAspectRatio="none" style="width:400px;height:442px;" version="1.1" viewBox="0 0 400 442" width="400px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lsim8f6165qn" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Bytecode--><rect fill="#FEFECE" filter="url(#f1lsim8f6165qn)" height="92.3516" id="Bytecode" style="stroke: #A80036; stroke-width: 1.5;" width="237" x="72.75" y="8"/><ellipse cx="153" cy="26.9688" fill="#DA70D6" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M154.2031,27.1094 Q154.5625,27.1875 154.8359,27.4609 Q155.1094,27.7344 155.5,28.5156 L157.7344,32.9688 L155.0469,32.9688 L153.5469,29.8438 Q153.4844,29.7031 153.375,29.4688 Q152.7188,28.0781 151.8281,28.0781 L151.0469,28.0781 L151.0469,32.9688 L148.6094,32.9688 L148.6094,20.5781 L152.1406,20.5781 Q154.5313,20.5781 155.5703,21.4219 Q156.6094,22.2656 156.6094,24.1719 Q156.6094,25.4531 155.9922,26.2109 Q155.375,26.9688 154.2031,27.1094 Z M151.0469,22.6406 L151.0469,26.0156 L152.2031,26.0156 Q153.2188,26.0156 153.6484,25.6172 Q154.0781,25.2188 154.0781,24.3125 Q154.0781,23.4219 153.6484,23.0313 Q153.2188,22.6406 152.2031,22.6406 L151.0469,22.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="72" x="171.5" y="24.1387">«Resource»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="58" x="178.5" y="38.1074">Bytecode</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="73.75" x2="308.75" y1="45.9375" y2="45.9375"/><ellipse cx="83.75" cy="57.8398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="112" x="92.75" y="60.1479">bytes: Array&lt;Byte&gt;</text><ellipse cx="83.75" cy="70.6445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="183" x="92.75" y="72.9526">instructions: Array&lt;Instruction&gt;</text><ellipse cx="83.75" cy="83.4492" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="211" x="92.75" y="85.7573">linkReferences : Set&lt;LinkReference&gt;</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="73.75" x2="308.75" y1="92.3516" y2="92.3516"/><!--class Instruction--><rect fill="#FEFECE" filter="url(#f1lsim8f6165qn)" height="105.1563" id="Instruction" style="stroke: #A80036; stroke-width: 1.5;" width="162" x="6" y="160.5"/><ellipse cx="42.15" cy="179.4688" fill="#7CFC00" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M42.2594,175.0469 Q41.3219,175.0469 40.8922,176.0469 Q40.4625,177.0469 40.4625,179.2813 Q40.4625,181.5156 40.8922,182.5156 Q41.3219,183.5156 42.2594,183.5156 Q43.2125,183.5156 43.6422,182.5156 Q44.0719,181.5156 44.0719,179.2813 Q44.0719,177.0469 43.6422,176.0469 Q43.2125,175.0469 42.2594,175.0469 Z M37.9156,179.2813 Q37.9156,176.1094 39.0172,174.4766 Q40.1188,172.8438 42.2594,172.8438 Q44.4156,172.8438 45.5172,174.4766 Q46.6188,176.1094 46.6188,179.2813 Q46.6188,182.4531 45.5172,184.0781 Q44.4156,185.7031 42.2594,185.7031 Q40.1188,185.7031 39.0172,184.0781 Q37.9156,182.4531 37.9156,179.2813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="87" x="58.85" y="176.6387">«Data Object»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="68.85" y="190.6074">Instruction</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="167" y1="198.4375" y2="198.4375"/><ellipse cx="17" cy="210.3398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="136" x="26" y="212.6479">programCounter: String</text><ellipse cx="17" cy="223.1445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="89" x="26" y="225.4526">opcode: Integer</text><ellipse cx="17" cy="235.9492" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="26" y="238.2573">pushData: String</text><ellipse cx="17" cy="248.7539" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="26" y="251.062">meta: InstructionMeta</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="167" y1="257.6563" y2="257.6563"/><!--class InstructionMeta--><rect fill="#FEFECE" filter="url(#f1lsim8f6165qn)" height="105.1563" id="InstructionMeta" style="stroke: #A80036; stroke-width: 1.5;" width="130" x="22" y="326.5"/><ellipse cx="37" cy="345.4688" fill="#7CFC00" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M37.1094,341.0469 Q36.1719,341.0469 35.7422,342.0469 Q35.3125,343.0469 35.3125,345.2813 Q35.3125,347.5156 35.7422,348.5156 Q36.1719,349.5156 37.1094,349.5156 Q38.0625,349.5156 38.4922,348.5156 Q38.9219,347.5156 38.9219,345.2813 Q38.9219,343.0469 38.4922,342.0469 Q38.0625,341.0469 37.1094,341.0469 Z M32.7656,345.2813 Q32.7656,342.1094 33.8672,340.4766 Q34.9688,338.8438 37.1094,338.8438 Q39.2656,338.8438 40.3672,340.4766 Q41.4688,342.1094 41.4688,345.2813 Q41.4688,348.4531 40.3672,350.0781 Q39.2656,351.7031 37.1094,351.7031 Q34.9688,351.7031 33.8672,350.0781 Q32.7656,348.4531 32.7656,345.2813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="87" x="56.5" y="342.6387">«Data Object»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="98" x="51" y="356.6074">InstructionMeta</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="23" x2="151" y1="364.4375" y2="364.4375"/><ellipse cx="33" cy="376.3398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="42" y="378.6479">cost: Integer</text><ellipse cx="33" cy="389.1445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="76" x="42" y="391.4526">pops: Integer</text><ellipse cx="33" cy="401.9492" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="42" y="404.2573">pushes: Integer</text><ellipse cx="33" cy="414.7539" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="42" y="417.062">dynamic: Integer</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="23" x2="151" y1="423.6563" y2="423.6563"/><!--class LinkReference--><rect fill="#FEFECE" filter="url(#f1lsim8f6165qn)" height="79.5469" id="LinkReference" style="stroke: #A80036; stroke-width: 1.5;" width="186" x="203.5" y="173"/><ellipse cx="248.25" cy="191.9688" fill="#7CFC00" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M248.3594,187.5469 Q247.4219,187.5469 246.9922,188.5469 Q246.5625,189.5469 246.5625,191.7813 Q246.5625,194.0156 246.9922,195.0156 Q247.4219,196.0156 248.3594,196.0156 Q249.3125,196.0156 249.7422,195.0156 Q250.1719,194.0156 250.1719,191.7813 Q250.1719,189.5469 249.7422,188.5469 Q249.3125,187.5469 248.3594,187.5469 Z M244.0156,191.7813 Q244.0156,188.6094 245.1172,186.9766 Q246.2188,185.3438 248.3594,185.3438 Q250.5156,185.3438 251.6172,186.9766 Q252.7188,188.6094 252.7188,191.7813 Q252.7188,194.9531 251.6172,196.5781 Q250.5156,198.2031 248.3594,198.2031 Q246.2188,198.2031 245.1172,196.5781 Q244.0156,194.9531 244.0156,191.7813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="87" x="269.25" y="189.1387">«Data Object»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="268.75" y="203.1074">LinkReference</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="204.5" x2="388.5" y1="210.9375" y2="210.9375"/><ellipse cx="214.5" cy="222.8398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="223.5" y="225.1479">offsets : Array&lt;ByteOffset&gt;</text><ellipse cx="214.5" cy="235.6445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="223.5" y="237.9526">length : Integer</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="204.5" x2="388.5" y1="244.5469" y2="244.5469"/><!--link Instruction to InstructionMeta--><path d="M87,278.894 C87,294.688 87,311.368 87,326.447 " fill="none" id="Instruction-InstructionMeta" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="87,265.891,83,271.891,87,277.891,91,271.891,87,265.891" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="77.4219" y="315.4533">1</text><!--link Bytecode to Instruction--><path d="M153.437,111.706 C142.915,127.59 131.538,144.765 121.221,160.339 " fill="none" id="Bytecode-Instruction" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="160.919,100.411,154.2707,103.204,154.2918,110.415,160.9401,107.6221,160.919,100.411" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="115.5997" y="149.3328">n</text><!--link Bytecode to LinkReference--><path d="M228.753,111.45 C242.354,131.787 257.393,154.273 269.793,172.814 " fill="none" id="Bytecode-LinkReference" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="221.37,100.411,221.3801,107.6221,228.0404,110.3863,228.0303,103.1752,221.37,100.411" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="256.3342" y="162.0756">n</text><!--
+@startuml
+
+
+
+
+class Bytecode << (R,orchid) Resource >> {
+  + bytes: Array<Byte>
+  + instructions: Array<Instruction>
+  + linkReferences : Set<LinkReference>
+}
+
+class Instruction << (O,lawngreen) Data Object >> {
+  + programCounter: String
+  + opcode: Integer
+  + pushData: String
+  + meta: InstructionMeta
+}
+
+class InstructionMeta << (O,lawngreen) Data Object >> {
+  + cost: Integer
+  + pops: Integer
+  + pushes: Integer
+  + dynamic: Integer
+}
+
+Instruction *- - "1" InstructionMeta
+Bytecode *- - "n" Instruction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class LinkReference << (O,lawngreen) Data Object >> {
+  + offsets : Array<ByteOffset>
+  + length : Integer
+}
+
+
+
+
+
+
+Bytecode *- - "n" LinkReference
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

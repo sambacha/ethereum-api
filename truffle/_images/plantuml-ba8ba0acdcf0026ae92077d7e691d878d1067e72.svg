@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="224px" preserveAspectRatio="none" style="width:392px;height:224px;" version="1.1" viewBox="0 0 392 224" width="392px" zoomAndPan="magnify"><defs><filter height="300%" id="f13ym72ozwf60m" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster ArtifactorInterface--><rect fill="#FFFFFF" filter="url(#f13ym72ozwf60m)" height="109" style="stroke: #000000; stroke-width: 1.5;" width="359" x="22" y="24"/><path d="M103,25 L103,33.2969 L93,43.2969 L22,43.2969 " fill="none" style="stroke: #000000; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="71" x="25" y="37.9951">interface</text><!--entity Save--><ellipse cx="105" cy="88" fill="#FEFECE" filter="url(#f13ym72ozwf60m)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="45.5" y="117.9951">save(abstraction)</text><!--entity SaveAll--><ellipse cx="286" cy="88" fill="#FEFECE" filter="url(#f13ym72ozwf60m)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="142" x="215" y="117.9951">saveAll(abstractions)</text><!--entity Artifactor--><rect fill="#FEFECE" filter="url(#f13ym72ozwf60m)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="81" x="154.5" y="177"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="149.5" y="182"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="149.5" y="203.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="61" x="164.5" y="199.9951">Artifactor</text><!--link Save to Artifactor--><path d="M112.062,97.239 C126.731,114.3534 160.764,154.0577 180.371,176.9328 " fill="none" id="Save-Artifactor" style="stroke: #A80036; stroke-width: 1.0;"/><!--link SaveAll to Artifactor--><path d="M278.859,97.239 C264.027,114.3534 229.617,154.0577 209.792,176.9328 " fill="none" id="SaveAll-Artifactor" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+component Artifactor
+
+frame "interface" as ArtifactorInterface {
+   () "save(abstraction)" as Save
+   () "saveAll(abstractions)" as SaveAll
+}
+
+Artifactor -up- Save
+Artifactor -up- SaveAll
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Linux
+OS Version: 4.15.0-1077-gcp
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

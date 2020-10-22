@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="227px" preserveAspectRatio="none" style="width:651px;height:227px;" version="1.1" viewBox="0 0 651 227" width="651px" zoomAndPan="magnify"><defs><filter height="300%" id="f1325000mvym29" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster ResolverInterface--><rect fill="#FFFFFF" filter="url(#f1325000mvym29)" height="112" style="stroke: #000000; stroke-width: 1.5;" width="618" x="22" y="24"/><path d="M103,25 L103,33.2969 L93,43.2969 L22,43.2969 " fill="none" style="stroke: #000000; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="71" x="25" y="37.9951">interface</text><!--entity Require--><ellipse cx="172" cy="91" fill="#FEFECE" filter="url(#f1325000mvym29)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="249" x="47.5" y="120.9951">require(contractName, searchPath?)</text><!--entity Resolve--><ellipse cx="482" cy="91" fill="#FEFECE" filter="url(#f1325000mvym29)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="269" x="347.5" y="120.9951">resolve(contractName, importedFrom?)</text><!--entity Resolver--><rect fill="#FEFECE" filter="url(#f1325000mvym29)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="287" y="180"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="282" y="185"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="282" y="206.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="297" y="202.9951">Resolver</text><!--link Require to Resolver--><path d="M181.232,98.254 C204.564,114.059 266.534,156.0395 301.703,179.8633 " fill="none" id="Require-Resolver" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Resolve to Resolver--><path d="M472.768,98.254 C449.436,114.059 387.466,156.0395 352.297,179.8633 " fill="none" id="Resolve-Resolver" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+component Resolver
+
+frame "interface" as ResolverInterface {
+   () "require(contractName, searchPath?)" as Require
+   () "resolve(contractName, importedFrom?)" as Resolve
+}
+
+
+Resolver -up- Require
+Resolver -up- Resolve
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Model &mdash; Truffle DB - Proposal  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Software Design" href="design.html" />
+    <link rel="prev" title="Use Cases" href="use-cases.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Truffle DB - Proposal
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use-cases.html">Use Cases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-model-breakdown">Data Model Breakdown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-a-smart-contract">What is a Smart Contract?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-bytecode">Contract Bytecode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-sourcecode">Contract Sourcecode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-mapping">Source Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linking">Linking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#combined-data-model">Combined Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#legend-for-section-diagrams">Legend for Section Diagrams</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Software Design</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Truffle DB - Proposal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Data Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/data-model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-model">
+<h1>Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h1>
+<p>This section serves to describe the relationships between the various
+components in an <a class="reference internal" href="glossary.html#term-artifact"><span class="xref std std-term">Artifact</span></a>. It seeks to present an explicit set of named
+resource types and how they relate to one another.</p>
+<p>This data model seeks to identify explicitly any implicit relationships and to
+add semantic color to these. It is a work in progress and likely to be
+incomplete and/or wrong.</p>
+<div class="section" id="data-model-breakdown">
+<h2>Data Model Breakdown<a class="headerlink" href="#data-model-breakdown" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-a-smart-contract">
+<h3>What is a Smart Contract?<a class="headerlink" href="#what-is-a-smart-contract" title="Permalink to this headline">¶</a></h3>
+<p>This data model distinguishes between <a class="reference internal" href="glossary.html#term-contract-type"><span class="xref std std-term">Contract Types</span></a> and <a class="reference internal" href="glossary.html#term-contract-instance"><span class="xref std std-term">Contract Instances</span></a>:</p>
+<p class="plantuml">
+<object data="_images/plantuml-bdf826d1a305856e272239a177e42a41db65aa37.svg" type="image/svg+xml" style="width:666px;height:494px;">
+<img src="_images/plantuml-bdf826d1a305856e272239a177e42a41db65aa37.png" alt="!include uml/macros.iuml
+
+object(ContractInstance) {
+ + address : Address
+ + network : Network
+ + transactionHash : TransactionHash
+ + constructorArgs : Array&lt;Value&gt;
+ + contractType : ContractType
+ + callBytecode : Bytecode
+ + linkValues : Set&lt;LinkValue&gt;
+}
+
+object(ContractType) {
+ + name : String
+ + abi : ABI
+ + compilation : Compilation
+ + createBytecode : Bytecode
+}
+
+object(Network) {
+ + name : String
+ + networkId : NetworkID
+}
+
+object(Compilation) {
+ + compiler : Compiler
+ + sources : Sources
+ + contractTypes: ContractTypes
+}
+
+object(Bytecode) {
+ + bytes: Array&lt;Byte&gt;
+ + instructions: Array&lt;Instruction&gt;
+ + sourceMap : SourceMap
+ + linkReferences : Set&lt;LinkReference&gt;
+}
+
+object(LinkValue) {
+ + linkReference : LinkReference
+ + value : Bytes
+}
+
+ContractInstance o-- &quot;1&quot; ContractType
+ContractInstance *-- &quot;1&quot; Bytecode
+ContractInstance *-- &quot;n&quot; LinkValue
+ContractInstance o-right- &quot;1&quot; Network
+
+ContractType *-- &quot;1&quot; Bytecode
+ContractType o-- &quot;0..1&quot; Compilation" />
+
+</object></p>
+<p>A contract instance:</p>
+<ul class="simple">
+<li>instantiates a single contract type (<code class="docutils literal notranslate"><span class="pre">contractType</span></code>).</li>
+<li>is located at a particular network address (<code class="docutils literal notranslate"><span class="pre">address</span></code>, <code class="docutils literal notranslate"><span class="pre">network</span></code>).</li>
+<li>was deployed via a specific transaction (<code class="docutils literal notranslate"><span class="pre">transactionHash</span></code>).</li>
+<li>contains runtime bytecode (<code class="docutils literal notranslate"><span class="pre">callBytecode</span></code>).</li>
+<li>may contain known semantic information about compile-time and run-time
+parameters (<code class="docutils literal notranslate"><span class="pre">linkValues</span></code>, <code class="docutils literal notranslate"><span class="pre">constructorArgs</span></code>).</li>
+</ul>
+<p>A contract type:</p>
+<ul class="simple">
+<li>has a name (<code class="docutils literal notranslate"><span class="pre">name</span></code>)</li>
+<li>specifies a public external interface (<code class="docutils literal notranslate"><span class="pre">abi</span></code>)</li>
+<li>contains bytecode for deployment (<code class="docutils literal notranslate"><span class="pre">createBytecode</span></code>)</li>
+<li>may have known compilation information (<code class="docutils literal notranslate"><span class="pre">compilation</span></code>)</li>
+</ul>
+</div>
+<div class="section" id="contract-bytecode">
+<h3>Contract Bytecode<a class="headerlink" href="#contract-bytecode" title="Permalink to this headline">¶</a></h3>
+<p>Bytecode is represented by an object that contains:</p>
+<ul class="simple">
+<li>An unlinked bytes array (<code class="docutils literal notranslate"><span class="pre">bytes</span></code>)</li>
+<li>A list of any known link references (<code class="docutils literal notranslate"><span class="pre">linkReferences</span></code>)</li>
+<li>Possibly a mapping to known source ranges (<code class="docutils literal notranslate"><span class="pre">sourceMap</span></code>)</li>
+<li>An array of instruction objects containing information derived from the bytecode and sourcemap (<code class="docutils literal notranslate"><span class="pre">instructions</span></code>)</li>
+</ul>
+<p>Each link reference is represented by an object that specifies:</p>
+<ul class="simple">
+<li>The length of the link in number of bytes (<code class="docutils literal notranslate"><span class="pre">length</span></code>)</li>
+<li>The starting byte offsets for all corresponding gaps in the bytecode
+(<code class="docutils literal notranslate"><span class="pre">offsets</span></code>)</li>
+</ul>
+<p class="plantuml">
+<object data="_images/plantuml-eb8853eac9dae24b621a75719da290496fcfbcee.svg" type="image/svg+xml" style="width:714px;height:468px;">
+<img src="_images/plantuml-eb8853eac9dae24b621a75719da290496fcfbcee.png" alt=" !include uml/macros.iuml
+
+ object(Bytecode) {
+  + bytes: Array&lt;Byte&gt;
+  + sourceMap : SourceMap
+  + instructions: Array&lt;Instruction&gt;
+  + linkReferences : Set&lt;LinkReference&gt;
+ }
+
+ object(LinkReference) {
+  + offsets : Array&lt;ByteOffset&gt;
+  + length : Integer
+ }
+
+ object(SourceMap) {
+  + ranges : Map&lt;ByteOffset =&gt; SourceRange&gt;
+  + sources: Sources
+ }
+
+ object(Instruction) {
+  + programCounter: String
+  + opcode: Integer
+  + pushData: String
+  + sourceRanges: String
+  + meta: Object
+ }
+
+object(Meta) {
+  + cost: Integer
+  + pops: Integer
+  + pushes: Integer
+  + dynamic: Integer
+ }
+
+ Bytecode *-- &quot;n&quot; Instruction
+ Instruction *-- &quot;1&quot; Meta
+ Bytecode *-- &quot;n&quot; LinkReference
+ Bytecode *-- &quot;0..1&quot; SourceMap" />
+
+</object></p>
+</div>
+<div class="section" id="contract-sourcecode">
+<h3>Contract Sourcecode<a class="headerlink" href="#contract-sourcecode" title="Permalink to this headline">¶</a></h3>
+<p>Sources are compiled in ordered groupings of individual source files.</p>
+<p>Compilation outputs one or more <a class="reference internal" href="glossary.html#term-contract-type"><span class="xref std std-term">Contract Types</span></a> from a given list of sources.</p>
+<p class="plantuml">
+<object data="_images/plantuml-12225019cf0c7fb71bcddb7989c615da1baaa311.svg" type="image/svg+xml" style="width:753px;height:263px;">
+<img src="_images/plantuml-12225019cf0c7fb71bcddb7989c615da1baaa311.png" alt="!include uml/macros.iuml
+
+object(Compilation) {
+ + compiler : Compiler
+ + sources : Sources
+ + contractTypes: ContractTypes
+}
+
+collection(ContractTypes) {
+ + contractTypes : Set&lt;ContractType&gt;
+}
+
+object(Compiler) {
+ + name : String
+ + version : String
+ + settings : Object
+}
+
+object(Source) {
+ + contents : String
+ + sourcePath : String
+ + ast : AST
+}
+
+collection(Sources) {
+ + sources : Map&lt;FileIndex =&gt; Source&gt;
+}
+
+Compilation *-left- &quot;n&quot; ContractTypes
+
+Compilation *-down- &quot;1&quot; Compiler
+Compilation *-right- &quot;1&quot; Sources
+
+Sources *-- &quot;n&quot; Source" />
+
+</object></p>
+<p>Each source:</p>
+<ul class="simple">
+<li>contains human-readable code (<code class="docutils literal notranslate"><span class="pre">contents</span></code>)</li>
+<li>may be found on disk somewhere (<code class="docutils literal notranslate"><span class="pre">sourcePath</span></code>)</li>
+<li>can be parsed as an abstract syntax tree (<code class="docutils literal notranslate"><span class="pre">ast</span></code>)</li>
+</ul>
+</div>
+<div class="section" id="source-mapping">
+<h3>Source Mapping<a class="headerlink" href="#source-mapping" title="Permalink to this headline">¶</a></h3>
+<p>As part of compilation, bytecode can reference underlying source ranges by way
+of <a class="reference internal" href="glossary.html#term-source-map"><span class="xref std std-term">Source Maps</span></a>.</p>
+<p class="plantuml">
+<object data="_images/plantuml-c096b5f4a665dbd150bb194a77b25d058ffccfa4.svg" type="image/svg+xml" style="width:769px;height:468px;">
+<img src="_images/plantuml-c096b5f4a665dbd150bb194a77b25d058ffccfa4.png" alt=" !include uml/macros.iuml
+
+ object(Bytecode) {
+  + bytes: Array&lt;Byte&gt;
+  + sourceMap : SourceMap
+  + instructions: Array&lt;Instruction&gt;
+  + linkReferences : Set&lt;LinkReference&gt;
+ }
+
+ object(Instruction) {
+  + programCounter: String
+  + opcode: Integer
+  + pushData: String
+  + sourceRanges: String
+  + meta: Object
+ }
+
+object(Meta) {
+  + cost: Integer
+  + pops: Integer
+  + pushes: Integer
+  + dynamic: Integer
+ }
+
+ object(Source) {
+  + contents : String
+  + sourcePath : String
+  + ast : AST
+ }
+
+ collection(Sources) {
+  + sources : Map&lt;FileIndex =&gt; Source&gt;
+ }
+
+ object(SourceMap) {
+  + ranges : Map&lt;ByteOffset =&gt; SourceRange&gt;
+  + sources: Sources
+ }
+
+ object(SourceRange) {
+  + source : Source
+  + start : ByteOffset
+  + length : Length
+  + meta : Object
+ }
+
+ Bytecode *-- &quot;1&quot; SourceMap
+ Bytecode *-- &quot;n&quot; Instruction
+ Instruction *-- &quot;1&quot; Meta
+ SourceMap o-left- &quot;1&quot; Sources
+ SourceMap *-- &quot;n&quot; SourceRange
+ SourceRange o-left- &quot;1&quot; Source
+
+ Sources *-- &quot;n&quot; Source" />
+
+</object></p>
+</div>
+<div class="section" id="linking">
+<h3>Linking<a class="headerlink" href="#linking" title="Permalink to this headline">¶</a></h3>
+<p>Bytecode may contain gaps to be filled in. These gaps are identified via
+<a class="reference internal" href="glossary.html#term-link-reference"><span class="xref std std-term">Link References</span></a>. Corresponding <a class="reference internal" href="glossary.html#term-link-value"><span class="xref std std-term">Link Values</span></a> are contained within
+<a class="reference internal" href="glossary.html#term-contract-instance"><span class="xref std std-term">Contract Instances</span></a>.</p>
+<p class="plantuml">
+<object data="_images/plantuml-a6e610796a2e602f044650cd608d1af2ebbea3dc.svg" type="image/svg+xml" style="width:308px;height:608px;">
+<img src="_images/plantuml-a6e610796a2e602f044650cd608d1af2ebbea3dc.png" alt="!include uml/macros.iuml
+
+object(ContractInstance) {
+ + address : Address
+ + network : Network
+ + transactionHash : TransactionHash
+ + constructorArgs : Array&lt;Value&gt;
+ + contractType : ContractType
+ + callBytecode : Bytecode
+ + linkValues : Set&lt;LinkValue&gt;
+}
+
+object(Bytecode) {
+ + bytes: Array&lt;Byte&gt;
+ + sourceMap : SourceMap
+ + instructions: Array&lt;Instruction&gt;
+ + linkReferences : Set&lt;LinkReference&gt;
+}
+
+object(LinkValue) {
+ + linkReference : LinkReference
+ + value : Bytes
+}
+
+object(LinkReference) {
+ + offsets : Array&lt;ByteOffset&gt;
+ + length : Integer
+}
+
+
+ContractInstance *-- &quot;1&quot; Bytecode
+ContractInstance *-- &quot;n&quot; LinkValue
+
+LinkReference &quot;n&quot; --* Bytecode
+
+LinkValue ..&gt; &quot;1&quot; LinkReference" />
+
+</object></p>
+</div>
+</div>
+<div class="section" id="combined-data-model">
+<h2>Combined Data Model<a class="headerlink" href="#combined-data-model" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<object data="_images/plantuml-3d0b61a423dfc6d4580f0609ff623f3b710891c3.svg" type="image/svg+xml" style="width:1033px;height:978px;">
+<img src="_images/plantuml-3d0b61a423dfc6d4580f0609ff623f3b710891c3.png" alt=" !include uml/macros.iuml
+
+ object(ContractInstance) {
+  + address : Address
+  + network : Network
+  + transactionHash : TransactionHash
+  + constructorArgs : Array&lt;Value&gt;
+  + contractType : ContractType
+  + callBytecode : Bytecode
+  + linkValues : Set&lt;LinkValue&gt;
+ }
+
+ object(ContractType) {
+  + name : String
+  + abi : ABI
+  + compilation : Compilation
+  + createBytecode : Bytecode
+ }
+
+ collection(ContractTypes) {
+  + contractTypes : Set&lt;ContractType&gt;
+ }
+
+ object(Source) {
+  + contents : String
+  + sourcePath : String
+  + ast : AST
+ }
+
+ collection(Sources) {
+  + sources : Map&lt;FileIndex =&gt; Source&gt;
+ }
+
+ object(Network) {
+  + name : String
+  + networkId : NetworkID
+ }
+
+ object(Compilation) {
+  + compiler : Compiler
+  + sources : Sources
+  + contractTypes: ContractTypes
+ }
+
+ object(Compiler) {
+  + name : String
+  + version : String
+  + settings : Object
+ }
+
+ object(Bytecode) {
+  + bytes: Array&lt;Byte&gt;
+  + sourceMap : SourceMap
+  + instructions: Array&lt;Instruction&gt;
+  + linkReferences : Set&lt;LinkReference&gt;
+ }
+
+ object(Instruction) {
+  + programCounter: String
+  + opcode: Integer
+  + pushData: String
+  + sourceRanges: String
+  + meta: Object
+ }
+
+object(Meta) {
+  + cost: Integer
+  + pops: Integer
+  + pushes: Integer
+  + dynamic: Integer
+ }
+
+ object(SourceMap) {
+  + sourceMap : Map&lt;ByteOffset =&gt; SourceRange&gt;
+  + sources: Sources
+ }
+
+ object(SourceRange) {
+  + source : Source
+  + start : ByteOffset
+  + length : Length
+  + meta : Object
+ }
+
+ object(LinkValue) {
+  + linkReference : LinkReference
+  + value : Bytes
+ }
+
+ object(LinkReference) {
+  + offsets : Array&lt;ByteOffset&gt;
+  + length : Integer
+ }
+
+
+ ContractInstance o-- &quot;1&quot; ContractType
+ ContractInstance *-- &quot;1&quot; Bytecode
+ ContractInstance *-- &quot;n&quot; LinkValue
+ ContractInstance o-right- &quot;1&quot; Network
+
+ ContractType &quot;n&quot; --* ContractTypes
+ ContractType *-- &quot;1&quot; Bytecode
+ ContractType o-- &quot;0..1&quot; Compilation
+
+ ContractTypes &quot;n&quot; --* Compilation
+
+ Compilation *-down- &quot;1&quot; Compiler
+ Compilation *-right- &quot;1&quot; Sources
+
+ Sources *-- &quot;n&quot; Source
+
+ Bytecode *-- &quot;0..1&quot; SourceMap
+ Bytecode *-- &quot;n&quot; Instruction
+ Instruction *-- &quot;1&quot; Meta
+
+ SourceMap o-left- &quot;1&quot; Sources
+ SourceMap *-- &quot;n&quot; SourceRange
+ SourceRange o-left- &quot;1&quot; Source
+
+ LinkReference &quot;n&quot; --* Bytecode
+
+ LinkValue ..&gt; &quot;1&quot; LinkReference" />
+
+</object></p>
+</div>
+<div class="section" id="legend-for-section-diagrams">
+<h2>Legend for Section Diagrams<a class="headerlink" href="#legend-for-section-diagrams" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<object data="_images/plantuml-59f2ce901c1d53bb25e66f09e6c8d0dbbcf7303b.svg" type="image/svg+xml" style="width:308px;height:300px;">
+<img src="_images/plantuml-59f2ce901c1d53bb25e66f09e6c8d0dbbcf7303b.png" alt="!include uml/macros.iuml
+
+object(A) {
+}
+object(B) {
+}
+object(D) {
+}
+collection(C) {
+}
+
+A *-- &quot;0..1&quot; B
+
+B o-- &quot;n&quot; D
+
+A *-- &quot;1&quot; C
+
+C *-- &quot;n&quot; D
+
+A &quot;1&quot; &lt;.. D" />
+
+</object></p>
+<p>In this example: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, and <strong>D</strong> are named resource types in
+the data model.</p>
+<p>Resources of these types are related as follows.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Each <em>[resource of type]</em> <strong>A</strong> optionally owns a single <em>[resource of type]</em> <strong>B</strong></li>
+<li>Each <strong>B</strong> refers to any whole number of <strong>D</strong>s</li>
+<li>Each <strong>A</strong> owns a single collection <strong>C</strong></li>
+<li>Each <strong>C</strong> owns a whole number of <strong>D</strong>s</li>
+<li>Each <strong>D</strong> relates to a single <strong>A</strong></li>
+</ul>
+</div></blockquote>
+<p>Generally, a given resource can have only one owner (or zero). Resources can
+refer to objects owned by another.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="design.html" class="btn btn-neutral float-right" title="Software Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="use-cases.html" class="btn btn-neutral" title="Use Cases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Truffle Suite.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

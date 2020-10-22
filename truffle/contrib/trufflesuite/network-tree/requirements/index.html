@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Requirements &mdash; Truffle DB - Proposal  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Saving new artifacts and updating existing" href="truffle.html" />
+    <link rel="prev" title="Glossary" href="../glossary.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Truffle DB - Proposal
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases-overview">Use Cases Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#diagram-legend">Diagram Legend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html">1. Saving new artifacts and updating existing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#compiling-smart-contracts">2. Compiling smart contracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#reading-contract-metadata">3. Reading contract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#querying-for-specific-contracts">4. Querying for specific contracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#interacting-with-deployed-instances">5. Interacting with deployed instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#linking-contracts-to-libraries">6. Linking contracts to libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#deploying-new-instances">7. Deploying new instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#migrations">8. Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="truffle.html#testing-smart-contracts">9. Testing smart contracts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data-model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design.html">Software Design</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Truffle DB - Proposal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Requirements</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/requirements/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="use-cases-overview">
+<h2>Use Cases Overview<a class="headerlink" href="#use-cases-overview" title="Permalink to this headline">¶</a></h2>
+<p>The following use cases represent the kinds of interaction users may have with
+Truffle and other tools. These use cases serve to help validate proposals for
+changes to Truffle’s artifact format.</p>
+<p>These use cases are written primarily for Truffle, as the primary producer
+and consumer of artifacts, but should apply generally for any and all
+tooling for smart contract / decentralized application development.</p>
+<p>Since the process to develop and deploy a decentralized applications can
+include many participants, these use cases refer to several different user
+profiles:</p>
+<ul class="simple">
+<li>Smart Contract Developer</li>
+<li>Frontend Developer</li>
+<li>Business Stakeholder</li>
+<li>Auditor</li>
+</ul>
+<p>Not all of these users interact with development tooling directly, or in the
+same ways. As such, these use cases should specify appropriately.</p>
+<p>This list may not be exhaustive, but should cover the vast majority of required
+behaviors.</p>
+<div class="section" id="diagram-legend">
+<h3>Diagram Legend<a class="headerlink" href="#diagram-legend" title="Permalink to this headline">¶</a></h3>
+<p>This document uses <abbr title="Unified Modeling Language">UML</abbr> Use Case Diagrams
+rendered with <a class="reference external" href="http://plantuml.com">PlantUML</a>.</p>
+<p>The following conventions are used throughout:</p>
+<p class="plantuml">
+<object data="../_images/plantuml-021bf102c40e932c319549fd0749a38d43bdef67.svg" type="image/svg+xml" style="width:600px;height:121px;">
+<img src="../_images/plantuml-021bf102c40e932c319549fd0749a38d43bdef67.png" alt="left to right direction
+
+:User:
+
+(Use case) as (UseCase)
+(Base case) as (BaseCase)
+(Dependent use case) as (Dependent)
+
+User -- UseCase : &lt;&lt; interaction &gt;&gt;
+UseCase ..|&gt; BaseCase : &lt;&lt; extends &gt;&gt;
+UseCase --&gt; Dependent : &lt;&lt; includes &gt;&gt;" />
+
+</object></p>
+<p>Use cases may include others, in that in order to achieve one type of behavior,
+another is required.</p>
+<p>Use cases may extend others, indicating that one use case is a specific form
+of another. Where it is not indicated, user interactions with base use cases
+also imply user interaction with extensions.</p>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html">1. Saving new artifacts and updating existing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#save-contract-type">1.1. Save contract type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#save-contract-instance">1.2. Save contract instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#save-library-instance">1.3. Save library instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#save-interface-instance">1.4. Save interface instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#compiling-smart-contracts">2. Compiling smart contracts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#compile-all-project-sources">2.1. Compile all project sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#compile-modified-project-sources">2.2. Compile modified project sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#determine-modified-sources">2.3. Determine modified sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#compile-source-file">2.4. Compile source file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#compile-primary-and-related-source-files">2.5. Compile primary and related source files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#reading-contract-metadata">3. Reading contract metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#read-contract-instance-information">3.1. Read contract instance information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#read-contract-type-info">3.2. Read contract type info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#read-contract-instance-historical-type-info">3.3. Read contract instance historical type info</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#querying-for-specific-contracts">4. Querying for specific contracts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-for-instance-by-network-and-address">4.1. Query for instance by network and address</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-all-contracts-with-a-given-bytecode">4.2. Query all contracts with a given bytecode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-for-bytecode-ignoring-link-references">4.3. Query for bytecode ignoring link references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-known-instances-on-a-given-network">4.4. Query known instances on a given network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-all-networks-for-a-given-type">4.5. Query all networks for a given type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#query-all-networks-for-instances-with-a-given-role">4.6. Query all networks for instances with a given role</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#interacting-with-deployed-instances">5. Interacting with deployed instances</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#call-read-only-method">5.1. Call read-only method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#invoke-method-via-a-transaction">5.2. Invoke method via a transaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#send-eth-to-a-contract-instance">5.3. Send ETH to a contract instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#linking-contracts-to-libraries">6. Linking contracts to libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#link-contract-type-to-library-instance">6.1. Link contract type to library instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#link-contract-instance-to-library-instance">6.2. Link contract instance to library instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#deploying-new-instances">7. Deploying new instances</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#deploy-instance-of-a-type">7.1. Deploy instance of a type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#deploy-multiple-instances">7.2. Deploy multiple instances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#migrations">8. Migrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#determine-last-completed-migration">8.1. Determine last completed migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-all-migrations">8.2. Run all migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-specific-migration">8.3. Run specific migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-with-historical-types">8.4. Run with historical types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="truffle.html#testing-smart-contracts">9. Testing smart contracts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-automated-tests-for-contract-type">9.1. Run automated tests for contract type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-automated-tests-for-contract-instance">9.2. Run automated tests for contract instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-automated-tests-for-library-type">9.3. Run automated tests for library type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="truffle.html#run-automated-tests-for-library-instance">9.4. Run automated tests for library instance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="truffle.html" class="btn btn-neutral float-right" title="1. Saving new artifacts and updating existing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../glossary.html" class="btn btn-neutral" title="Glossary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Truffle Suite.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
