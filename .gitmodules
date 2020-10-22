@@ -1,0 +1,3 @@
+[submodule "artifact-updates"]
+	path = artifact-updates
+	url = https://github.com/trufflesuite/artifact-updates

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="299.75px" preserveAspectRatio="none" style="width:645px;height:299px;" version="1.1" viewBox="0 0 645 299" width="645.7px" zoomAndPan="magnify"><defs><filter height="300%" id="f3w80ghfxv35w" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.1"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="2.2" dy="2.2" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster Querying--><rect fill="#FFFFFF" filter="url(#f3w80ghfxv35w)" height="58.85" style="stroke: #000000; stroke-width: 0.8250000000000001;" width="114.95" x="516.45" y="162.8"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="40.15" x="553.85" y="171.0473">«external»</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="39.6" x="554.125" y="180.0106">Querying</text><!--cluster Interacting--><rect fill="#FFFFFF" filter="url(#f3w80ghfxv35w)" height="58.85" style="stroke: #000000; stroke-width: 0.8250000000000001;" width="114.95" x="516.45" y="234.85"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="40.15" x="553.85" y="243.0973">«external»</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46.75" x="550.55" y="252.0606">Interacting</text><!--cluster Linking--><rect fill="#FFFFFF" filter="url(#f3w80ghfxv35w)" height="62.15" style="stroke: #000000; stroke-width: 0.8250000000000001;" width="131.45" x="508.2" y="13.2"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="40.15" x="553.85" y="21.4473">«external»</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="30.8" x="558.525" y="30.4106">Linking</text><!--cluster Deployment--><rect fill="#FFFFFF" filter="url(#f3w80ghfxv35w)" height="61.05" style="stroke: #000000; stroke-width: 0.8250000000000001;" width="126.5" x="510.675" y="88.55"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="40.15" x="553.85" y="96.7973">«external»</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="51.7" x="548.075" y="105.7606">Deployment</text><!--cluster Migrations--><rect fill="#FFFFFF" filter="url(#f3w80ghfxv35w)" height="140.25" style="stroke: #000000; stroke-width: 0.8250000000000001;" width="277.2" x="127.05" y="69.85"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45.1" x="243.1" y="78.0973">Migrations</text><ellipse cx="573.8435" cy="201.8887" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="48.5935" ry="11.0387" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="82.5" x="532.5935" y="204.4453">Query for a given type</text><ellipse cx="573.8435" cy="273.9387" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="48.5935" ry="11.0387" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="82.5" x="532.5935" y="276.4953">Call read-only method</text><ellipse cx="573.9897" cy="53.9679" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="56.9897" ry="12.7179" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="101.2" x="523.3897" y="56.5246">Link contract type to library</text><ellipse cx="573.962" cy="128.8174" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="54.487" ry="12.2174" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="95.7" x="526.112" y="131.374">Deploy instance of a type</text><ellipse cx="322.2201" cy="99.094" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="41.9951" ry="9.719" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="67.1" x="288.6701" y="101.6507">Run all migrations</text><ellipse cx="322.4275" cy="139.2855" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="49.0775" ry="11.1355" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="83.6" x="280.6275" y="141.8421">Run specific migration</text><ellipse cx="175.8117" cy="98.4123" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="39.9617" ry="9.3123" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="62.15" x="144.7367" y="100.969">Run as historical</text><ellipse cx="322.3258" cy="185.3552" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="73.1758" ry="15.9552" style="stroke: #A80036; stroke-width: 0.8250000000000001;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="135.85" x="254.4008" y="187.9118">Determine last completed migration</text><!--entity Developer--><ellipse cx="52.25" cy="139.425" fill="#FEFECE" filter="url(#f3w80ghfxv35w)" rx="4.4" ry="4.4" style="stroke: #A80036; stroke-width: 1.1;"/><path d="M52.25,143.825 L52.25,158.675 M45.1,148.225 L59.4,148.225 M52.25,158.675 L45.1,166.925 M52.25,158.675 L59.4,166.925 " fill="none" filter="url(#f3w80ghfxv35w)" style="stroke: #A80036; stroke-width: 1.1;"/><text fill="#000000" font-family="sans-serif" font-size="7.7" lengthAdjust="spacingAndGlyphs" textLength="97.9" x="3.3" y="177.9223">Smart Contract Developer</text><!--link RunHistorical to RunMigrations--><path d="M215.6429,98.5991 C232.0797,98.6612 251.4199,98.7344 269.0545,98.8009 " fill="none" id="RunHistorical-RunMigrations" style="stroke: #A80036; stroke-width: 0.55; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="269.0749,94.9509,280.0606,98.8422,269.0457,102.6509,269.0749,94.9509" style="stroke: #A80036; stroke-width: 0.55;"/><!--link RunMigrations to RunSpecific--><path d="M322.3,108.7471 C322.3,114.2163 322.3,119.6855 322.3,125.1547 " fill="none" id="RunMigrations-RunSpecific" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="322.3,128.0147,324.5,123.0647,322.3,125.2647,320.1,123.0647,322.3,128.0147" style="stroke: #A80036; stroke-width: 0.55;"/><!--link DetermineLastCompleted to RunMigrations--><path d="M262.2582,174.3566 C250.0955,169.097 239.0102,161.3321 232.375,149.875 C227.4745,141.4138 227.4745,136.3362 232.375,127.875 C242.0721,111.1319 261.9353,103.6888 280.5325,100.5296 " fill="none" id="DetermineLastCompleted-RunMigrations" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="264.8685,175.4418,261.1416,171.5107,262.329,174.3865,259.4532,175.5739,264.8685,175.4418" style="stroke: #A80036; stroke-width: 0.55;"/><!--link DetermineLastCompleted to QueryType--><path d="M392.469,189.9354 C434.3103,192.6909 486.5482,196.1317 524.1187,198.6061 " fill="none" id="DetermineLastCompleted-QueryType" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="527.0243,198.7975,522.2296,196.2769,524.2802,198.6168,521.9404,200.6674,527.0243,198.7975" style="stroke: #A80036; stroke-width: 0.55;"/><text fill="#000000" font-family="sans-serif" font-size="7.15" lengthAdjust="spacingAndGlyphs" textLength="85.25" x="413.6" y="189.2368">find deployed Migrations</text><!--link DetermineLastCompleted to Call--><path d="M361.1718,198.8954 C411.6365,216.7325 499.2488,247.6995 544.4912,263.6908 " fill="none" id="DetermineLastCompleted-Call" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="547.1439,264.6285,543.2096,260.905,544.551,263.7123,541.7437,265.0537,547.1439,264.6285" style="stroke: #A80036; stroke-width: 0.55;"/><text fill="#000000" font-family="sans-serif" font-size="7.15" lengthAdjust="spacingAndGlyphs" textLength="68.2" x="422.125" y="215.0868">read instance state</text><!--link RunSpecific to DeployInstance--><path d="M370.5614,137.1601 C412.3757,135.4155 473.198,132.8789 517.3212,131.0381 " fill="none" id="RunSpecific-DeployInstance" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="520.2032,130.9182,515.1657,128.9265,517.4556,131.0329,515.3493,133.3227,520.2032,130.9182" style="stroke: #A80036; stroke-width: 0.55;"/><!--link RunSpecific to LinkType--><path d="M358.2084,131.6557 C373.8053,128.0637 392.2749,123.4173 408.65,118.25 C457.4202,102.8599 512.462,80.2543 544.967,66.3383 " fill="none" id="RunSpecific-LinkType" style="stroke: #A80036; stroke-width: 0.55;"/><polygon fill="#A80036" points="547.6543,65.1855,542.2379,65.1136,545.1267,66.2689,543.9714,69.1577,547.6543,65.1855" style="stroke: #A80036; stroke-width: 0.55;"/><!--link Developer to RunMigrations--><path d="M101.3491,146.3253 C156.5757,134.4668 245.0718,115.4648 291.3356,105.5307 " fill="none" id="Developer-RunMigrations" style="stroke: #A80036; stroke-width: 0.55;"/><!--link Developer to RunSpecific--><path d="M101.3496,156.6356 C137.5864,156.2176 188.2876,154.9306 232.65,151.25 C248.8294,149.9075 266.5685,147.6591 281.9289,145.4618 " fill="none" id="Developer-RunSpecific" style="stroke: #A80036; stroke-width: 0.55;"/><!--link Developer to RunHistorical--><path d="M95.1291,133.8475 C102.5948,129.9986 110.3339,126.1282 117.7,122.65 C129.8396,116.9179 143.704,111.0609 154.7739,106.5449 " fill="none" id="Developer-RunHistorical" style="stroke: #A80036; stroke-width: 0.55;"/><!--link Developer to DetermineLastCompleted--><path d="M101.3491,161.9129 C144.6979,166.5224 208.5452,173.3116 256.3765,178.398 " fill="none" id="Developer-DetermineLastCompleted" style="stroke: #A80036; stroke-width: 0.55;"/><!--
+@startuml
+scale 0.55
+left to right direction
+
+:Smart Contract Developer: as :Developer:
+
+rectangle Querying << external >> {
+  (Query for a given type) as (QueryType)
+}
+
+rectangle Interacting << external >> {
+  (Call read-only method) as (Call)
+}
+
+rectangle Linking << external >> {
+  (Link contract type to library) as (LinkType)
+}
+
+rectangle Deployment << external >> {
+  (Deploy instance of a type) as (DeployInstance)
+}
+
+rectangle Migrations {
+  (Run all migrations) as (RunMigrations)
+  (Run specific migration) as (RunSpecific)
+  (Run as historical) as (RunHistorical)
+  (Determine last completed migration) as (DetermineLastCompleted)
+
+
+  RunHistorical ..|> RunMigrations
+
+  RunMigrations -right-> RunSpecific
+  RunMigrations -left-> DetermineLastCompleted
+
+  DetermineLastCompleted -down-> QueryType : find deployed Migrations
+  DetermineLastCompleted -down-> Call : read instance state
+  RunSpecific -down-> DeployInstance
+  RunSpecific -down-> LinkType
+
+
+}
+
+Developer - - RunMigrations
+Developer - - RunSpecific
+Developer - - RunHistorical
+Developer - - DetermineLastCompleted
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Linux
+OS Version: 4.15.0-1028-gcp
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

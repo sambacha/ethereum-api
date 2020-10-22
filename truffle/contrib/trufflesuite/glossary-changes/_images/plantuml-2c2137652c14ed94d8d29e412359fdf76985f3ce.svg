@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="667px" preserveAspectRatio="none" style="width:622px;height:667px;" version="1.1" viewBox="0 0 622 667" width="622px" zoomAndPan="magnify"><defs><filter height="300%" id="f5dzi4nns3hsy" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster Querying--><rect fill="#FFFFFF" filter="url(#f5dzi4nns3hsy)" height="632" style="stroke: #000000; stroke-width: 1.5;" width="383" x="228" y="24"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="72" x="383.5" y="38.9951">Querying</text><ellipse cx="419.4876" cy="502.7975" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="156.9876" ry="33.7975" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="297" x="270.9876" y="507.446">Query known instances on a given network</text><ellipse cx="419.6669" cy="90.0334" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="140.6669" ry="30.5334" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="263" x="288.1669" y="94.6818">Query all networks for a given contract</text><ellipse cx="419.3838" cy="192.9768" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="175.3838" ry="37.4768" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="335" x="251.8838" y="197.6252">Query all networks for instances with a given role</text><ellipse cx="419.5055" cy="606.2011" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="156.5055" ry="33.7011" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="296" x="271.5055" y="610.8495">Query for instance by network and address</text><ellipse cx="419.2683" cy="297.8537" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="149.7683" ry="32.3537" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="282" x="278.2683" y="302.5021">Query all contracts with a given bytecode</text><ellipse cx="419.4698" cy="399.894" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="157.4698" ry="33.894" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="298" x="270.4698" y="404.5424">Query for bytecode ignoring link references</text><!--entity Developer--><ellipse cx="95" cy="266.5" fill="#FEFECE" filter="url(#f5dzi4nns3hsy)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M95,274.5 L95,301.5 M82,282.5 L108,282.5 M95,301.5 L82,316.5 M95,301.5 L108,316.5 " fill="none" filter="url(#f5dzi4nns3hsy)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="178" x="6" y="336.4951">Smart Contract Developer</text><!--link QueryInstance to QueryContract--><path d="M419.5,155.18 C419.5,150.31 419.5,145.441 419.5,140.572 " fill="none" id="QueryInstance-QueryContract" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="412.5,140.553,419.5,120.553,426.5,140.553,412.5,140.553" style="stroke: #A80036; stroke-width: 1.0;"/><!--link QueryBytecodeUnlinked to QueryBytecode--><path d="M419.5,365.734 C419.5,360.694 419.5,355.654 419.5,350.614 " fill="none" id="QueryBytecodeUnlinked-QueryBytecode" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="412.5,350.544,419.5,330.544,426.5,350.544,412.5,350.544" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Developer to QueryNetwork--><path d="M119.359,339.632 C141.037,374.49 176.473,422.919 220,451 C241.853,465.098 267.384,475.385 292.718,482.886 " fill="none" id="Developer-QueryNetwork" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Developer to QueryContract--><path d="M117.524,256.401 C138.689,219.669 174.416,167.5 220,138 C243.366,122.879 271.067,112.517 298.247,105.419 " fill="none" id="Developer-QueryContract" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Developer to QueryInstance--><path d="M184.277,260.992 C196.207,256.406 208.349,251.949 220,248 C247.687,238.616 277.933,229.616 306.281,221.713 " fill="none" id="Developer-QueryInstance" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Developer to QueryAddress--><path d="M104.7258,339.751 C118.857,396.794 152.282,498.341 220,554 C239.059,569.665 262.331,580.6596 286.144,588.365 " fill="none" id="Developer-QueryAddress" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Developer to QueryBytecode--><path d="M184.125,298 C210.514,298 240.218,298 269.39,298 " fill="none" id="Developer-QueryBytecode" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+left to right direction
+:Smart Contract Developer: as :Developer:
+
+rectangle Querying {
+  (Query known instances on a given network) as (QueryNetwork)
+  (Query all networks for a given contract) as (QueryContract)
+  (Query all networks for instances with a given role) as (QueryInstance)
+  (Query for instance by network and address) as (QueryAddress)
+  (Query all contracts with a given bytecode) as (QueryBytecode)
+  (Query for bytecode ignoring link references) as (QueryBytecodeUnlinked)
+
+  QueryInstance .|> QueryContract
+  QueryBytecodeUnlinked .|> QueryBytecode
+}
+
+Developer - - QueryNetwork
+Developer - - QueryContract
+Developer - - QueryInstance
+Developer - - QueryAddress
+Developer - - QueryBytecode
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Linux
+OS Version: 4.15.0-1028-gcp
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

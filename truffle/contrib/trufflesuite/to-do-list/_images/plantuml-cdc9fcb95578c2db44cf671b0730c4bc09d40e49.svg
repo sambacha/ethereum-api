@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="98px" preserveAspectRatio="none" style="width:163px;height:98px;" version="1.1" viewBox="0 0 163 98" width="163px" zoomAndPan="magnify"><defs><filter height="300%" id="f18kg1ksm6zvrt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Named--><rect fill="#FEFECE" filter="url(#f18kg1ksm6zvrt)" height="79.5469" id="Named" style="stroke: #A80036; stroke-width: 1.5;" width="146" x="6" y="8"/><ellipse cx="42.15" cy="26.9688" fill="#8A2BE2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M38.0719,22.7344 L38.0719,20.5781 L45.4625,20.5781 L45.4625,22.7344 L42.9938,22.7344 L42.9938,30.8125 L45.4625,30.8125 L45.4625,32.9688 L38.0719,32.9688 L38.0719,30.8125 L40.5406,30.8125 L40.5406,22.7344 L38.0719,22.7344 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="71" x="58.85" y="24.1387">«Interface»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="44" x="72.35" y="38.1074">Named</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="151" y1="45.9375" y2="45.9375"/><ellipse cx="17" cy="57.8398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="26" y="60.1479">name: String</text><ellipse cx="17" cy="70.6445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="26" y="72.9526">role: Maybe&lt;Object&gt;</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="151" y1="79.5469" y2="79.5469"/><!--
+@startuml
+skinparam defaultMonospacedFontName Andale Mono
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Named << (I,blueviolet) Interface >> {
+  + name: String
+  + role: Maybe<Object>
+}
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="98px" preserveAspectRatio="none" style="width:167px;height:98px;" version="1.1" viewBox="0 0 167 98" width="167px" zoomAndPan="magnify"><defs><filter height="300%" id="f1co6h5xsi0lmv" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Network--><rect fill="#FEFECE" filter="url(#f1co6h5xsi0lmv)" height="79.5469" id="Network" style="stroke: #A80036; stroke-width: 1.5;" width="150" x="6" y="8"/><ellipse cx="43.5" cy="26.9688" fill="#DA70D6" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M44.7031,27.1094 Q45.0625,27.1875 45.3359,27.4609 Q45.6094,27.7344 46,28.5156 L48.2344,32.9688 L45.5469,32.9688 L44.0469,29.8438 Q43.9844,29.7031 43.875,29.4688 Q43.2188,28.0781 42.3281,28.0781 L41.5469,28.0781 L41.5469,32.9688 L39.1094,32.9688 L39.1094,20.5781 L42.6406,20.5781 Q45.0313,20.5781 46.0703,21.4219 Q47.1094,22.2656 47.1094,24.1719 Q47.1094,25.4531 46.4922,26.2109 Q45.875,26.9688 44.7031,27.1094 Z M41.5469,22.6406 L41.5469,26.0156 L42.7031,26.0156 Q43.7188,26.0156 44.1484,25.6172 Q44.5781,25.2188 44.5781,24.3125 Q44.5781,23.4219 44.1484,23.0313 Q43.7188,22.6406 42.7031,22.6406 L41.5469,22.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="72" x="60.5" y="24.1387">«Resource»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="51" x="71" y="38.1074">Network</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="155" y1="45.9375" y2="45.9375"/><ellipse cx="17" cy="57.8398" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="26" y="60.1479">name : String</text><ellipse cx="17" cy="70.6445" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="26" y="72.9526">networkId : NetworkID</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="155" y1="79.5469" y2="79.5469"/><!--
+@startuml
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Network << (R,orchid) Resource >> {
+  + name : String
+  + networkId : NetworkID
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="121px" preserveAspectRatio="none" style="width:600px;height:121px;" version="1.1" viewBox="0 0 600 121" width="600px" zoomAndPan="magnify"><defs><filter height="300%" id="f4mttd1qcjeyt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--entity User--><ellipse cx="22" cy="25.5" fill="#FEFECE" filter="url(#f4mttd1qcjeyt)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M22,33.5 L22,60.5 M9,41.5 L35,41.5 M22,60.5 L9,75.5 M22,60.5 L35,75.5 " fill="none" filter="url(#f4mttd1qcjeyt)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="32" x="6" y="95.4951">User</text><ellipse cx="234.7548" cy="57.0236" fill="#FEFECE" filter="url(#f4mttd1qcjeyt)" rx="48.2548" ry="14.5236" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="64" x="202.7548" y="61.6721">Use case</text><ellipse cx="502.9117" cy="22.0236" fill="#FEFECE" filter="url(#f4mttd1qcjeyt)" rx="53.9117" ry="14.5236" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="466.9117" y="26.6721">Base case</text><ellipse cx="503.0998" cy="91.22" fill="#FEFECE" filter="url(#f4mttd1qcjeyt)" rx="86.5998" ry="19.72" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="146" x="430.0998" y="95.8684">Dependent use case</text><!--link User to UseCase--><path d="M38.1746,57 C68.6958,57 138.643,57 186.125,57 " fill="none" id="User-UseCase" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="84" x="69.5" y="52.0669">«interaction»</text><!--link UseCase to BaseCase--><path d="M279.627,51.2597 C321.576,45.74 385.602,37.3155 434.199,30.9212 " fill="none" id="UseCase-BaseCase" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="433.562,23.9448,454.304,28.2758,435.388,37.8251,433.562,23.9448" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="67" x="316" y="33.0669">«extends»</text><!--link UseCase to Dependent--><path d="M264.025,68.4553 C278.66,73.8919 297.014,79.8715 314,83 C345.282,88.7616 379.964,91.2977 410.935,92.2284 " fill="none" id="UseCase-Dependent" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="416.272,92.3742,407.3839,88.1314,411.2738,92.2385,407.1667,96.1284,416.272,92.3742" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="68" x="315.5" y="78.0669">«includes»</text><!--
+@startuml
+left to right direction
+
+:User:
+
+(Use case) as (UseCase)
+(Base case) as (BaseCase)
+(Dependent use case) as (Dependent)
+
+User - - UseCase : << interaction >>
+UseCase ..|> BaseCase : << extends >>
+UseCase - -> Dependent : << includes >>
+
+@enduml
+
+PlantUML version 1.2018.14(Fri Dec 21 16:33:16 UTC 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_151-b12
+Operating System: Linux
+OS Version: 4.4.0-101-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
