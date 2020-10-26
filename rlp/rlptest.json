@@ -89,19 +89,7 @@
       "out": "0xc6827a77c10401"
     },
     "shortListMax1": {
-      "in": [
-        "asdf",
-        "qwer",
-        "zxcv",
-        "asdf",
-        "qwer",
-        "zxcv",
-        "asdf",
-        "qwer",
-        "zxcv",
-        "asdf",
-        "qwer"
-      ],
+      "in": ["asdf", "qwer", "zxcv", "asdf", "qwer", "zxcv", "asdf", "qwer", "zxcv", "asdf", "qwer"],
       "out": "0xf784617364668471776572847a78637684617364668471776572847a78637684617364668471776572847a78637684617364668471776572"
     },
     "longList1": {
