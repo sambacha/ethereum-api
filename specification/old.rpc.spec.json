@@ -11,9 +11,7 @@
     {
       "name": "web3_sha3",
       "desc": "Returns Keccak-256 (*not* the standardized SHA3-256) of the given data.",
-      "params": [
-        "`String` - the data to convert into a SHA3 hash"
-      ],
+      "params": ["`String` - the data to convert into a SHA3 hash"],
       "returns": "`DATA` - The SHA3 result of the given string.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -121,10 +119,7 @@
         "`QUANTITY|TAG` - integer block number, or the string `\"latest\"`, `\"earliest\"` or `\"pending\"`, see the [default block parameter](#the-default-block-parameter)"
       ],
       "returns": "`QUANTITY` - integer of the current balance in wei.",
-      "inputFormatters": [
-        "inputAddressFormatter",
-        "inputDefaultBlockNumberFormatter"
-      ],
+      "inputFormatters": ["inputAddressFormatter", "inputDefaultBlockNumberFormatter"],
       "outputFormatter": "outputBigNumberFormatter"
     },
     {
@@ -136,11 +131,7 @@
         "`QUANTITY|TAG` - integer block number, or the string `\"latest\"`, `\"earliest\"` or `\"pending\"`, see the [default block parameter](#the-default-block-parameter)"
       ],
       "returns": "`DATA` - the value at this storage position.",
-      "inputFormatters": [
-        null,
-        "utils.toHex",
-        "inputDefaultBlockNumberFormatter"
-      ],
+      "inputFormatters": [null, "utils.toHex", "inputDefaultBlockNumberFormatter"],
       "outputFormatter": null
     },
     {
@@ -151,18 +142,13 @@
         "`QUANTITY|TAG` - integer block number, or the string `\"latest\"`, `\"earliest\"` or `\"pending\"`, see the [default block parameter](#the-default-block-parameter)"
       ],
       "returns": "`QUANTITY` - integer of the number of transactions send from this address.",
-      "inputFormatters": [
-        null,
-        "inputDefaultBlockNumberFormatter"
-      ],
+      "inputFormatters": [null, "inputDefaultBlockNumberFormatter"],
       "outputFormatter": "utils.toDecimal"
     },
     {
       "name": "eth_getBlockTransactionCountByHash",
       "desc": "Returns the number of transactions in a block from a block matching the given block hash.",
-      "params": [
-        "`DATA`, 32 Bytes - hash of a block"
-      ],
+      "params": ["`DATA`, 32 Bytes - hash of a block"],
       "returns": "`QUANTITY` - integer of the number of transactions in this block.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -170,9 +156,7 @@
     {
       "name": "eth_getBlockTransactionCountByNumber",
       "desc": "Returns the number of transactions in a block from a block matching the given block number.",
-      "params": [
-        "`QUANTITY|TAG` - integer of a block number, or the string `\"earliest\"`, `\"latest\"` or `\"pending\"`, as in the [default block parameter](#the-default-block-parameter)."
-      ],
+      "params": ["`QUANTITY|TAG` - integer of a block number, or the string `\"earliest\"`, `\"latest\"` or `\"pending\"`, as in the [default block parameter](#the-default-block-parameter)."],
       "returns": "`QUANTITY` - integer of the number of transactions in this block.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -180,9 +164,7 @@
     {
       "name": "eth_getUncleCountByBlockHash",
       "desc": "Returns the number of uncles in a block from a block matching the given block hash.",
-      "params": [
-        "`DATA`, 32 Bytes - hash of a block"
-      ],
+      "params": ["`DATA`, 32 Bytes - hash of a block"],
       "returns": "`QUANTITY` - integer of the number of uncles in this block.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -190,9 +172,7 @@
     {
       "name": "eth_getUncleCountByBlockNumber",
       "desc": "Returns the number of uncles in a block from a block matching the given block number.",
-      "params": [
-        "`QUANTITY` - integer of a block number, or the string \"latest\", \"earliest\" or \"pending\", see the [default block parameter](#the-default-block-parameter)"
-      ],
+      "params": ["`QUANTITY` - integer of a block number, or the string \"latest\", \"earliest\" or \"pending\", see the [default block parameter](#the-default-block-parameter)"],
       "returns": "`QUANTITY` - integer of the number of uncles in this block.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -205,24 +185,15 @@
         "`QUANTITY|TAG` - integer block number, or the string `\"latest\"`, `\"earliest\"` or `\"pending\"`, see the [default block parameter](#the-default-block-parameter)"
       ],
       "returns": "`DATA` - the code from the given address.",
-      "inputFormatters": [
-        "inputAddressFormatter",
-        "inputDefaultBlockNumberFormatter"
-      ],
+      "inputFormatters": ["inputAddressFormatter", "inputDefaultBlockNumberFormatter"],
       "outputFormatter": null
     },
     {
       "name": "eth_sign",
       "desc": "Signs data with a given address.\n**Note** the address to sign must be unlocked.",
-      "params": [
-        "`DATA`, 20 Bytes - address",
-        "`DATA`, Data to sign"
-      ],
+      "params": ["`DATA`, 20 Bytes - address", "`DATA`, Data to sign"],
       "returns": "`DATA`: Signed data",
-      "inputFormatters": [
-        "inputAddressFormatter",
-        null
-      ],
+      "inputFormatters": ["inputAddressFormatter", null],
       "outputFormatter": null
     },
     {
@@ -243,21 +214,15 @@
         }
       ],
       "returns": "`DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.",
-      "inputFormatters": [
-        "inputTransactionFormatter"
-      ],
+      "inputFormatters": ["inputTransactionFormatter"],
       "outputFormatter": null
     },
     {
       "name": "eth_sendRawTransaction",
       "desc": "Creates new message call transaction or a contract creation for signed transactions.",
-      "params": [
-        "`DATA`, The signed transaction data."
-      ],
+      "params": ["`DATA`, The signed transaction data."],
       "returns": "`DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.",
-      "inputFormatters": [
-        null
-      ],
+      "inputFormatters": [null],
       "outputFormatter": null
     },
     {
@@ -278,10 +243,7 @@
         "`QUANTITY|TAG` - integer block number, or the string `\"latest\"`, `\"earliest\"` or `\"pending\"`, see the [default block parameter](#the-default-block-parameter)"
       ],
       "returns": "`DATA` - the return value of executed contract.",
-      "inputFormatters": [
-        "inputCallFormatter",
-        "inputDefaultBlockNumberFormatter"
-      ],
+      "inputFormatters": ["inputCallFormatter", "inputDefaultBlockNumberFormatter"],
       "outputFormatter": null
     },
     {
@@ -289,18 +251,13 @@
       "desc": "Makes a call or transaction, which won't be added to the blockchain and returns the used gas, which can be used for estimating the used gas.",
       "params": [],
       "returns": "`QUANTITY` - the amount of gas used.",
-      "inputFormatters": [
-        "inputCallFormatter"
-      ],
+      "inputFormatters": ["inputCallFormatter"],
       "outputFormatter": "utils.toDecimal"
     },
     {
       "name": "eth_getBlockByHash",
       "desc": "Returns information about a block by hash.",
-      "params": [
-        "`DATA`, 32 Bytes - Hash of a block.",
-        "`Boolean` - If `true` it returns the full transaction objects, if `false` only the hashes of the transactions."
-      ],
+      "params": ["`DATA`, 32 Bytes - Hash of a block.", "`Boolean` - If `true` it returns the full transaction objects, if `false` only the hashes of the transactions."],
       "returns": {
         "description": "`Object` - A block object, or `null` when no block was found:",
         "details": {
@@ -342,9 +299,7 @@
     {
       "name": "eth_getTransactionByHash",
       "desc": "Returns the information about a transaction requested by transaction hash.",
-      "params": [
-        "`DATA`, 32 Bytes - hash of a transaction"
-      ],
+      "params": ["`DATA`, 32 Bytes - hash of a transaction"],
       "returns": {
         "description": "`Object` - A transaction object, or `null` when no transaction was found:",
         "details": {
@@ -367,10 +322,7 @@
     {
       "name": "eth_getTransactionByBlockHashAndIndex",
       "desc": "Returns information about a transaction by block hash and transaction index position.",
-      "params": [
-        "`DATA`, 32 Bytes - hash of a block.",
-        "`QUANTITY` - integer of the transaction index position."
-      ],
+      "params": ["`DATA`, 32 Bytes - hash of a block.", "`QUANTITY` - integer of the transaction index position."],
       "returns": "See [eth_getBlockByHash](#eth_gettransactionbyhash)",
       "inputFormatters": [],
       "outputFormatter": null
@@ -389,9 +341,7 @@
     {
       "name": "eth_getTransactionReceipt",
       "desc": "Returns the receipt of a transaction by transaction hash.\n**Note** That the receipt is not available for pending transactions.",
-      "params": [
-        "`DATA`, 32 Bytes - hash of a transaction"
-      ],
+      "params": ["`DATA`, 32 Bytes - hash of a transaction"],
       "returns": {
         "description": "`Object` - A transaction receipt object, or `null` when no receipt was found:",
         "details": {
@@ -411,10 +361,7 @@
     {
       "name": "eth_getUncleByBlockHashAndIndex",
       "desc": "Returns information about a uncle of a block by hash and uncle index position.",
-      "params": [
-        "`DATA`, 32 Bytes - hash a block.",
-        "`QUANTITY` - the uncle's index position."
-      ],
+      "params": ["`DATA`, 32 Bytes - hash a block.", "`QUANTITY` - the uncle's index position."],
       "returns": "See [eth_getBlockByHash](#eth_getblockbyhash)",
       "inputFormatters": [],
       "outputFormatter": null
@@ -441,9 +388,7 @@
     {
       "name": "eth_compileSolidity",
       "desc": "Returns compiled solidity code.",
-      "params": [
-        "`String` - The source code."
-      ],
+      "params": ["`String` - The source code."],
       "returns": "`DATA` - The compiled source code.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -451,9 +396,7 @@
     {
       "name": "eth_compileLLL",
       "desc": "Returns compiled LLL code.",
-      "params": [
-        "`String` - The source code."
-      ],
+      "params": ["`String` - The source code."],
       "returns": "`DATA` - The compiled source code.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -461,9 +404,7 @@
     {
       "name": "eth_compileSerpent",
       "desc": "Returns compiled serpent code.",
-      "params": [
-        "`String` - The source code."
-      ],
+      "params": ["`String` - The source code."],
       "returns": "`DATA` - The compiled source code.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -503,9 +444,7 @@
     {
       "name": "eth_uninstallFilter",
       "desc": "Uninstalls a filter with given id. Should always be called when watch is no longer needed.\nAdditonally Filters timeout when they aren't requested with [eth_getFilterChanges](#eth_getfilterchanges) for a period of time.",
-      "params": [
-        "`QUANTITY` - The filter id."
-      ],
+      "params": ["`QUANTITY` - The filter id."],
       "returns": "`Boolean` - `true` if the filter was successfully uninstalled, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -513,9 +452,7 @@
     {
       "name": "eth_getFilterChanges",
       "desc": "Polling method for a filter, which returns an array of logs which occurred since last poll.",
-      "params": [
-        "`QUANTITY` - the filter id."
-      ],
+      "params": ["`QUANTITY` - the filter id."],
       "returns": "`Array` - Array of log objects, or an empty array if nothing has changed since last poll.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -523,9 +460,7 @@
     {
       "name": "eth_getFilterLogs",
       "desc": "Returns an array of all logs matching filter with given id.",
-      "params": [
-        "`QUANTITY` - The filter id."
-      ],
+      "params": ["`QUANTITY` - The filter id."],
       "returns": "See [eth_getFilterChanges](#eth_getfilterchanges)",
       "inputFormatters": [],
       "outputFormatter": null
@@ -554,11 +489,7 @@
     {
       "name": "eth_submitWork",
       "desc": "Used for submitting a proof-of-work solution.",
-      "params": [
-        "`DATA`, 8 Bytes - The nonce found (64 bits)",
-        "`DATA`, 32 Bytes - The header's pow-hash (256 bits)",
-        "`DATA`, 32 Bytes - The mix digest (256 bits)"
-      ],
+      "params": ["`DATA`, 8 Bytes - The nonce found (64 bits)", "`DATA`, 32 Bytes - The header's pow-hash (256 bits)", "`DATA`, 32 Bytes - The mix digest (256 bits)"],
       "returns": "`Boolean` - returns `true` if the provided solution is valid, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -566,10 +497,7 @@
     {
       "name": "eth_submitHashrate",
       "desc": "Used for submitting mining hashrate.",
-      "params": [
-        "`Hashrate`, a hexadecimal string representation (32 bytes) of the hash rate ",
-        "`ID`, String - A random hexadecimal(32 bytes) ID identifying the client"
-      ],
+      "params": ["`Hashrate`, a hexadecimal string representation (32 bytes) of the hash rate ", "`ID`, String - A random hexadecimal(32 bytes) ID identifying the client"],
       "returns": "`Boolean` - returns `true` if submitting went through succesfully and `false` otherwise.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -577,11 +505,7 @@
     {
       "name": "db_putString",
       "desc": "Stores a string in the local database.\n**Note** this function is deprecated and will be removed in the future.",
-      "params": [
-        "`String` - Database name.",
-        "`String` - Key name.",
-        "`String` - String to store."
-      ],
+      "params": ["`String` - Database name.", "`String` - Key name.", "`String` - String to store."],
       "returns": "`Boolean` - returns `true` if the value was stored, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -589,10 +513,7 @@
     {
       "name": "db_getString",
       "desc": "Returns string from the local database.\n**Note** this function is deprecated and will be removed in the future.",
-      "params": [
-        "`String` - Database name.",
-        "`String` - Key name."
-      ],
+      "params": ["`String` - Database name.", "`String` - Key name."],
       "returns": "`String` - The previously stored string.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -600,11 +521,7 @@
     {
       "name": "db_putHex",
       "desc": "Stores binary data in the local database.\n**Note** this function is deprecated and will be removed in the future.",
-      "params": [
-        "`String` - Database name.",
-        "`String` - Key name.",
-        "`DATA` - The data to store."
-      ],
+      "params": ["`String` - Database name.", "`String` - Key name.", "`DATA` - The data to store."],
       "returns": "`Boolean` - returns `true` if the value was stored, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -612,10 +529,7 @@
     {
       "name": "db_getHex",
       "desc": "Returns binary data from the local database.\n**Note** this function is deprecated and will be removed in the future.",
-      "params": [
-        "`String` - Database name.",
-        "`String` - Key name."
-      ],
+      "params": ["`String` - Database name.", "`String` - Key name."],
       "returns": "`DATA` - The previously stored data.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -645,9 +559,7 @@
         }
       ],
       "returns": "`Boolean` - returns `true` if the message was send, otherwise `false`.",
-      "inputFormatters": [
-        "inputPostFormatter"
-      ],
+      "inputFormatters": ["inputPostFormatter"],
       "outputFormatter": null
     },
     {
@@ -661,9 +573,7 @@
     {
       "name": "shh_hasIdentity",
       "desc": "Checks if the client hold the private keys for a given identity.",
-      "params": [
-        "`DATA`, 60 Bytes - The identity address to check."
-      ],
+      "params": ["`DATA`, 60 Bytes - The identity address to check."],
       "returns": "`Boolean` - returns `true` if the client holds the privatekey for that identity, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -679,9 +589,7 @@
     {
       "name": "shh_addToGroup",
       "desc": "(?)",
-      "params": [
-        "`DATA`, 60 Bytes - The identity address to add to a group (?)."
-      ],
+      "params": ["`DATA`, 60 Bytes - The identity address to add to a group (?)."],
       "returns": "`Boolean` - returns `true` if the identity was successfully added to the group, otherwise `false` (?).",
       "inputFormatters": [],
       "outputFormatter": null
@@ -705,9 +613,7 @@
     {
       "name": "shh_uninstallFilter",
       "desc": "Uninstalls a filter with given id. Should always be called when watch is no longer needed.\nAdditonally Filters timeout when they aren't requested with [shh_getFilterChanges](#shh_getfilterchanges) for a period of time.",
-      "params": [
-        "`QUANTITY` - The filter id."
-      ],
+      "params": ["`QUANTITY` - The filter id."],
       "returns": "`Boolean` - `true` if the filter was successfully uninstalled, otherwise `false`.",
       "inputFormatters": [],
       "outputFormatter": null
@@ -715,9 +621,7 @@
     {
       "name": "shh_getFilterChanges",
       "desc": "Polling method for whisper filters. Returns new messages since the last call of this method.\n**Note** calling the [shh_getMessages](#shh_getmessages) method, will reset the buffer for this method, so that you won't receive duplicate messages.",
-      "params": [
-        "`QUANTITY` - The filter id."
-      ],
+      "params": ["`QUANTITY` - The filter id."],
       "returns": "`Array` - Array of messages received since last poll:",
       "inputFormatters": [],
       "outputFormatter": null
@@ -725,9 +629,7 @@
     {
       "name": "shh_getMessages",
       "desc": "Get all messages matching a filter. Unlike `shh_getFilterChanges` this returns all messages.",
-      "params": [
-        "`QUANTITY` - The filter id."
-      ],
+      "params": ["`QUANTITY` - The filter id."],
       "returns": "See [shh_getFilterChanges](#shh_getfilterchanges)",
       "inputFormatters": [],
       "outputFormatter": null
@@ -751,9 +653,7 @@
     {
       "name": "eth_newFilterEx",
       "desc": "?",
-      "params": [
-        ""
-      ],
+      "params": [""],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -761,9 +661,7 @@
     {
       "name": "eth_getFilterChangesEx",
       "desc": "?",
-      "params": [
-        ""
-      ],
+      "params": [""],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -771,9 +669,7 @@
     {
       "name": "eth_getFilterLogsEx",
       "desc": "?",
-      "params": [
-        ""
-      ],
+      "params": [""],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -781,9 +677,7 @@
     {
       "name": "eth_getLogsEx",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -791,9 +685,7 @@
     {
       "name": "eth_register",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -801,9 +693,7 @@
     {
       "name": "eth_unregister",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -811,9 +701,7 @@
     {
       "name": "eth_fetchQueuedTransactions",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -821,9 +709,7 @@
     {
       "name": "eth_signTransaction",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -853,9 +739,7 @@
     {
       "name": "eth_inspectTransaction",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -863,9 +747,7 @@
     {
       "name": "eth_notePassword",
       "desc": "?",
-      "params": [
-        "?"
-      ],
+      "params": ["?"],
       "returns": "`Boolean` - whether the call was successful",
       "inputFormatters": [],
       "outputFormatter": null
@@ -873,29 +755,17 @@
     {
       "name": "personal_newAccount",
       "desc": "Creates new account",
-      "params": [
-        "`DATA` - Password"
-      ],
+      "params": ["`DATA` - Password"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        null
-      ],
+      "inputFormatters": [null],
       "outputFormatter": null
     },
     {
       "name": "personal_unlockAccount",
       "desc": "?",
-      "params": [
-        "?",
-        "?",
-        "?"
-      ],
+      "params": ["?", "?", "?"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        null,
-        null,
-        null
-      ],
+      "inputFormatters": [null, null, null],
       "outputFormatter": null
     },
     {
@@ -917,25 +787,17 @@
     {
       "name": "ethcore_setExtraData",
       "desc": "Changes extra data for newly mined blocks",
-      "params": [
-        "`DATA`- Extra Data"
-      ],
+      "params": ["`DATA`- Extra Data"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        "utils.toHex"
-      ],
+      "inputFormatters": ["utils.toHex"],
       "outputFormatter": null
     },
     {
       "name": "ethcore_setMinGasPrice",
       "desc": "Changes minimal gas price for transaction to be accepted to the queue.",
-      "params": [
-        "`QUANTITY` - Minimal gas price"
-      ],
+      "params": ["`QUANTITY` - Minimal gas price"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        "utils.toHex"
-      ],
+      "inputFormatters": ["utils.toHex"],
       "outputFormatter": null
     },
     {
@@ -949,37 +811,25 @@
     {
       "name": "ethcore_setGasFloorTarget",
       "desc": "Changes current gas floor target.",
-      "params": [
-        "`QUANTITY` - Gas Floor Target"
-      ],
+      "params": ["`QUANTITY` - Gas Floor Target"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        "utils.toHex"
-      ],
+      "inputFormatters": ["utils.toHex"],
       "outputFormatter": null
     },
     {
       "name": "ethcore_setAuthor",
       "desc": "Changes author (coinbase) for mined blocks.",
-      "params": [
-        "`DATA`, 20 Bytes - Address"
-      ],
+      "params": ["`DATA`, 20 Bytes - Address"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        "inputAddressFormatter"
-      ],
+      "inputFormatters": ["inputAddressFormatter"],
       "outputFormatter": null
     },
     {
       "name": "ethcore_setTransactionsLimit",
       "desc": "Changes limit for transactions in queue.",
-      "params": [
-        "`QUANTITY` - New Limit"
-      ],
+      "params": ["`QUANTITY` - New Limit"],
       "returns": "`Boolean` - whether the call was successful",
-      "inputFormatters": [
-        "utils.toHex"
-      ],
+      "inputFormatters": ["utils.toHex"],
       "outputFormatter": null
     },
     {
@@ -1033,9 +883,7 @@
     {
       "name": "trace_filter",
       "desc": "Returns traces matching given filter",
-      "params": [
-        "`OBJECT` - The filter object"
-      ],
+      "params": ["`OBJECT` - The filter object"],
       "returns": "`ARRAY` - Traces matching given filter",
       "inputFormatters": [],
       "outputFormatter": null
@@ -1043,10 +891,7 @@
     {
       "name": "trace_get",
       "desc": "Returns trace at given position.",
-      "params": [
-        "`HASH` - Transaction hash",
-        "`INTEGER` - Trace position witing transaction"
-      ],
+      "params": ["`HASH` - Transaction hash", "`INTEGER` - Trace position witing transaction"],
       "returns": "`Object` - Trace",
       "inputFormatters": [],
       "outputFormatter": null
@@ -1054,9 +899,7 @@
     {
       "name": "trace_transaction",
       "desc": "Returns all traces of given transaction",
-      "params": [
-        "`HASH` - Transaction hash"
-      ],
+      "params": ["`HASH` - Transaction hash"],
       "returns": "`ARRAY` - Traces of given transaction",
       "inputFormatters": [],
       "outputFormatter": null
@@ -1064,9 +907,7 @@
     {
       "name": "trace_block",
       "desc": "Returns traces created at given block",
-      "params": [
-        "`BLOCKNUMBER` - Integer block number, or \"latest\" for the last mined block or \"pending\", \"earliest\" for not yet mined transactions"
-      ],
+      "params": ["`BLOCKNUMBER` - Integer block number, or \"latest\" for the last mined block or \"pending\", \"earliest\" for not yet mined transactions"],
       "returns": "`ARRAY` - Block traces",
       "inputFormatters": [],
       "outputFormatter": null

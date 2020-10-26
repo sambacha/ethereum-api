@@ -92,9 +92,7 @@
       "$ref": "#/definitions/GeneratedSources"
     }
   },
-  "required": [
-    "abi"
-  ],
+  "required": ["abi"],
   "patternProperties": {
     "^x-": {
       "anyOf": [
@@ -139,21 +137,21 @@
       "type": "object",
       "patternProperties": {
         "[1-9][0-9]*": {
-         "type": "array",
-         "items": {
-           "type": "object",
-           "properties": {
-             "start": {
-               "type": "integer",
-               "minimum": 0
-             },
-             "length": {
-               "type": "integer",
-               "minimum": 0
-             }
-           },
-           "additionalProperties": false
-         }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "length": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "additionalProperties": false
@@ -177,9 +175,7 @@
     },
     "SourceMap": {
       "type": "string",
-      "examples": [
-        "315:637:1:-;;;452:55;;;;;;;-1:-1:-1;;;;;485:9:1;476:19;:8;:19;;;;;;;;;;498:5;476:27;;452:55;315:637;;;;;;;"
-      ]
+      "examples": ["315:637:1:-;;;452:55;;;;;;;-1:-1:-1;;;;;485:9:1;476:19;:8;:19;;;;;;;;;;498:5;476:27;;452:55;315:637;;;;;;;"]
     },
     "SourcePath": {
       "type": "string"

@@ -9,7 +9,6 @@
 - [trace](#trace)
 - [web3](#web3)
 
-
 ## db
 
 - [db_getHex](#db_getHex)
@@ -70,7 +69,6 @@ Stores a string in the local database. (Deprecated and not supported, to be remo
 #### returns
 
 - `Boolean` - `true` if the value was stored, otherwise `false`
-
 
 ## eth
 
@@ -161,12 +159,12 @@ Executes a new message call immediately without creating a transaction on the bl
 #### parameters
 
 - `Object` - The transaction call object
-    - `data`/`Data` - (optional) Hash of the method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-    - `from`/`Address` - (optional) 20 Bytes - The address the transaction is send from
-    - `gas`/`Quantity` - (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas, but this parameter may be needed by some executions
-    - `gasPrice`/`Quantity` - (optional) Integer of the gasPrice used for each paid gas
-    - `to`/`Address` - 20 Bytes  - The address the transaction is directed to
-    - `value`/`Quantity` - (optional) Integer of the value send with this transaction
+  - `data`/`Data` - (optional) Hash of the method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+  - `from`/`Address` - (optional) 20 Bytes - The address the transaction is send from
+  - `gas`/`Quantity` - (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas, but this parameter may be needed by some executions
+  - `gasPrice`/`Quantity` - (optional) Integer of the gasPrice used for each paid gas
+  - `to`/`Address` - 20 Bytes - The address the transaction is directed to
+  - `value`/`Quantity` - (optional) Integer of the value send with this transaction
 - `BlockNumber` - integer block number, or the string `'latest'`, `'earliest'` or `'pending'`, see the [default block parameter](#the-default-block-parameter)
 
 #### returns
@@ -294,25 +292,25 @@ Returns information about a block by hash.
 #### returns
 
 - `Object` - A block object, or `null` when no block was found
-    - `difficulty`/`Quantity` - integer of the difficulty for this block
-    - `extraData`/`Data` - the 'extra data' field of this block
-    - `gasLimit`/`Quantity` - the maximum gas allowed in this block
-    - `gasUsed`/`Quantity` - the total used gas by all transactions in this block
-    - `hash`/`Hash` - 32 Bytes - hash of the block. `null` when its pending block
-    - `logsBloom`/`Data` - 256 Bytes - the bloom filter for the logs of the block. `null` when its pending block
-    - `miner`/`Address` - 20 Bytes - the address of the beneficiary to whom the mining rewards were given
-    - `nonce`/`Data` - 8 Bytes - hash of the generated proof-of-work. `null` when its pending block
-    - `number`/`Quantity` - The block number. `null` when its pending block
-    - `parentHash`/`Hash` - 32 Bytes - hash of the parent block
-    - `receiptsRoot`/`Data` - 32 Bytes - the root of the receipts trie of the block
-    - `sha3Uncles`/`Data` - 32 Bytes - SHA3 of the uncles data in the block
-    - `size`/`Quantity` - integer the size of this block in bytes
-    - `stateRoot`/`Data` - 32 Bytes - the root of the final state trie of the block
-    - `timestamp`/`Quantity` - the unix timestamp for when the block was collated
-    - `totalDifficulty`/`Quantity` - integer of the total difficulty of the chain until this block
-    - `transactions`/`Array` - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter
-    - `transactionsRoot`/`Data` - 32 Bytes - the root of the transaction trie of the block
-    - `uncles`/`Array` - Array of uncle hashes
+  - `difficulty`/`Quantity` - integer of the difficulty for this block
+  - `extraData`/`Data` - the 'extra data' field of this block
+  - `gasLimit`/`Quantity` - the maximum gas allowed in this block
+  - `gasUsed`/`Quantity` - the total used gas by all transactions in this block
+  - `hash`/`Hash` - 32 Bytes - hash of the block. `null` when its pending block
+  - `logsBloom`/`Data` - 256 Bytes - the bloom filter for the logs of the block. `null` when its pending block
+  - `miner`/`Address` - 20 Bytes - the address of the beneficiary to whom the mining rewards were given
+  - `nonce`/`Data` - 8 Bytes - hash of the generated proof-of-work. `null` when its pending block
+  - `number`/`Quantity` - The block number. `null` when its pending block
+  - `parentHash`/`Hash` - 32 Bytes - hash of the parent block
+  - `receiptsRoot`/`Data` - 32 Bytes - the root of the receipts trie of the block
+  - `sha3Uncles`/`Data` - 32 Bytes - SHA3 of the uncles data in the block
+  - `size`/`Quantity` - integer the size of this block in bytes
+  - `stateRoot`/`Data` - 32 Bytes - the root of the final state trie of the block
+  - `timestamp`/`Quantity` - the unix timestamp for when the block was collated
+  - `totalDifficulty`/`Quantity` - integer of the total difficulty of the chain until this block
+  - `transactions`/`Array` - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter
+  - `transactionsRoot`/`Data` - 32 Bytes - the root of the transaction trie of the block
+  - `uncles`/`Array` - Array of uncle hashes
 
 ### eth_getBlockByNumber
 
@@ -499,21 +497,21 @@ Returns the information about a transaction requested by transaction hash.
 #### returns
 
 - `Object` - A transaction object, or `null` when no transaction was found:
-    - `blockHash`/`Hash` - 32 Bytes - hash of the block where this transaction was in. `null` when its pending.
-    - `blockNumber`/`BlockNumber` - block number where this transaction was in. `null` when its pending.
-    - `from`/`Address` - 20 Bytes - address of the sender.
-    - `gas`/`Quantity` - gas provided by the sender.
-    - `gasPrice`/`Quantity` - gas price provided by the sender in Wei.
-    - `hash`/`Hash` - 32 Bytes - hash of the transaction.
-    - `input`/`Data` - the data send along with the transaction.
-    - `nonce`/`Quantity` - the number of transactions made by the sender prior to this one.
-    - `to`/`Address` - 20 Bytes - address of the receiver. `null` when its a contract creation transaction.
-    - `transactionIndex`/`Quantity` - integer of the transactions index position in the block. `null` when its pending.
-    - `value`/`Quantity` - value transferred in Wei.
+  - `blockHash`/`Hash` - 32 Bytes - hash of the block where this transaction was in. `null` when its pending.
+  - `blockNumber`/`BlockNumber` - block number where this transaction was in. `null` when its pending.
+  - `from`/`Address` - 20 Bytes - address of the sender.
+  - `gas`/`Quantity` - gas provided by the sender.
+  - `gasPrice`/`Quantity` - gas price provided by the sender in Wei.
+  - `hash`/`Hash` - 32 Bytes - hash of the transaction.
+  - `input`/`Data` - the data send along with the transaction.
+  - `nonce`/`Quantity` - the number of transactions made by the sender prior to this one.
+  - `to`/`Address` - 20 Bytes - address of the receiver. `null` when its a contract creation transaction.
+  - `transactionIndex`/`Quantity` - integer of the transactions index position in the block. `null` when its pending.
+  - `value`/`Quantity` - value transferred in Wei.
 
 ### eth_getTransactionCount
 
-Returns the number of transactions *sent* from an address.
+Returns the number of transactions _sent_ from an address.
 
 #### parameters
 
@@ -526,8 +524,7 @@ Returns the number of transactions *sent* from an address.
 
 ### eth_getTransactionReceipt
 
-Returns the receipt of a transaction by transaction hash.
-**Note** That the receipt is not available for pending transactions.
+Returns the receipt of a transaction by transaction hash. **Note** That the receipt is not available for pending transactions.
 
 #### parameters
 
@@ -536,14 +533,14 @@ Returns the receipt of a transaction by transaction hash.
 #### returns
 
 - `Object` - A transaction receipt object, or `null` when no receipt was found:
-    - `blockHash`/`Hash` - 32 Bytes - hash of the block where this transaction was in.
-    - `blockNumber`/`BlockNumber` - block number where this transaction was in.
-    - `contractAddress`/`Address` - 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
-    - `cumulativeGasUsed`/`Quantity` - The total amount of gas used when this transaction was executed in the block.
-    - `gasUsed`/`Quantity` - The amount of gas used by this specific transaction alone.
-    - `logs`/`Array` - Array of log objects, which this transaction generated.
-    - `transactionHash`/`Hash` - 32 Bytes - hash of the transaction.
-    - `transactionIndex`/`Quantity` - integer of the transactions index position in the block.
+  - `blockHash`/`Hash` - 32 Bytes - hash of the block where this transaction was in.
+  - `blockNumber`/`BlockNumber` - block number where this transaction was in.
+  - `contractAddress`/`Address` - 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
+  - `cumulativeGasUsed`/`Quantity` - The total amount of gas used when this transaction was executed in the block.
+  - `gasUsed`/`Quantity` - The amount of gas used by this specific transaction alone.
+  - `logs`/`Array` - Array of log objects, which this transaction generated.
+  - `transactionHash`/`Hash` - 32 Bytes - hash of the transaction.
+  - `transactionIndex`/`Quantity` - integer of the transactions index position in the block.
 
 ### eth_getUncleByBlockHashAndIndex
 
@@ -645,8 +642,7 @@ none
 
 ### eth_newBlockFilter
 
-Creates a filter in the node, to notify when a new block arrives.
-To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
+Creates a filter in the node, to notify when a new block arrives. To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
 
 #### parameters
 
@@ -658,8 +654,7 @@ none
 
 ### eth_newFilter
 
-Creates a filter object, based on filter options, to notify when the state changes (logs).
-To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
+Creates a filter object, based on filter options, to notify when the state changes (logs). To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
 
 #### parameters
 
@@ -668,10 +663,10 @@ none
 #### returns
 
 - `Object` - The filter options:
-    - `address`/`Address` - (optional) 20 Bytes - Contract address or a list of addresses from which logs should originate.
-    - `fromBlock`/`BlockNumber` - (optional) (default: latest) Integer block number, or `'latest'` for the last mined block or `'pending'`, `'earliest'` for not yet mined transactions.
-    - `toBlock`/`BlockNumber` - (optional) (default: latest) Integer block number, or `'latest'` for the last mined block or `'pending'`, `'earliest'` for not yet mined transactions.
-    - `topics`/`Array` - (optional) Array of 32 Bytes `DATA` topics. Topics are order-dependent. Each topic can also be an array of DATA with 'or' options.
+  - `address`/`Address` - (optional) 20 Bytes - Contract address or a list of addresses from which logs should originate.
+  - `fromBlock`/`BlockNumber` - (optional) (default: latest) Integer block number, or `'latest'` for the last mined block or `'pending'`, `'earliest'` for not yet mined transactions.
+  - `toBlock`/`BlockNumber` - (optional) (default: latest) Integer block number, or `'latest'` for the last mined block or `'pending'`, `'earliest'` for not yet mined transactions.
+  - `topics`/`Array` - (optional) Array of 32 Bytes `DATA` topics. Topics are order-dependent. Each topic can also be an array of DATA with 'or' options.
 
 ### eth_newFilterEx
 
@@ -687,8 +682,7 @@ none
 
 ### eth_newPendingTransactionFilter
 
-Creates a filter in the node, to notify when new pending transactions arrive.
-To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
+Creates a filter in the node, to notify when new pending transactions arrive. To check if the state has changed, call [eth_getFilterChanges](#eth_getfilterchanges).
 
 #### parameters
 
@@ -765,13 +759,13 @@ Creates new message call transaction or a contract creation, if the data field c
 #### parameters
 
 - `Object` - The transaction object
-    - `data`/`Data` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-    - `from`/`Address` - 20 Bytes - The address the transaction is send from
-    - `gas`/`Quantity` - (optional) (default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-    - `gasPrice`/`Quantity` - (optional) (default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-    - `nonce`/`Quantity` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
-    - `to`/`Address` - 20 Bytes - (optional when creating new contract) The address the transaction is directed to
-    - `value`/`Quantity` - (optional) Integer of the value send with this transaction
+  - `data`/`Data` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+  - `from`/`Address` - 20 Bytes - The address the transaction is send from
+  - `gas`/`Quantity` - (optional) (default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
+  - `gasPrice`/`Quantity` - (optional) (default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+  - `nonce`/`Quantity` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+  - `to`/`Address` - 20 Bytes - (optional when creating new contract) The address the transaction is directed to
+  - `value`/`Quantity` - (optional) Integer of the value send with this transaction
 
 #### returns
 
@@ -779,8 +773,7 @@ Creates new message call transaction or a contract creation, if the data field c
 
 ### eth_sign
 
-Signs data with a given address.
-**Note** the address to sign must be unlocked.
+Signs data with a given address. **Note** the address to sign must be unlocked.
 
 #### parameters
 
@@ -841,14 +834,13 @@ none
 #### returns
 
 - `Object` - An object with sync status data or `FALSE`, when not syncing
-    - `currentBlock`/`Quantity` - The current block, same as eth_blockNumber
-    - `highestBlock`/`Quantity` - The estimated highest block
-    - `startingBlock`/`Quantity` - The block at which the import started (will only be reset, after the sync reached his head)
+  - `currentBlock`/`Quantity` - The current block, same as eth_blockNumber
+  - `highestBlock`/`Quantity` - The estimated highest block
+  - `startingBlock`/`Quantity` - The block at which the import started (will only be reset, after the sync reached his head)
 
 ### eth_uninstallFilter
 
-Uninstalls a filter with given id. Should always be called when watch is no longer needed.
-Additonally Filters timeout when they aren't requested with [eth_getFilterChanges](#eth_getfilterchanges) for a period of time.
+Uninstalls a filter with given id. Should always be called when watch is no longer needed. Additonally Filters timeout when they aren't requested with [eth_getFilterChanges](#eth_getfilterchanges) for a period of time.
 
 #### parameters
 
@@ -869,7 +861,6 @@ Additonally Filters timeout when they aren't requested with [eth_getFilterChange
 #### returns
 
 - `Boolean` - whether the call was successful
-
 
 ## ethcore
 
@@ -1160,7 +1151,6 @@ none
 
 - `Quantity` - Number of unsigned transactions
 
-
 ## net
 
 - [net_listening](#net_listening)
@@ -1203,7 +1193,6 @@ none
 
 - `String` - The current network protocol version
 
-
 ## personal
 
 - [personal_listAccounts](#personal_listAccounts)
@@ -1238,18 +1227,18 @@ Creates new account
 
 ### personal_signAndSendTransaction
 
-Sends and signs a transaction given account passphrase. Does not require the account to be unlocked nor unlocks the account for future transactions. 
+Sends and signs a transaction given account passphrase. Does not require the account to be unlocked nor unlocks the account for future transactions.
 
 #### parameters
 
 - `Object` - The transaction object
-    - `data`/`Data` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-    - `from`/`Address` - 20 Bytes - The address the transaction is send from
-    - `gas`/`Quantity` - (optional) (default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas
-    - `gasPrice`/`Quantity` - (optional) (default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-    - `nonce`/`Quantity` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
-    - `to`/`Address` - 20 Bytes - (optional when creating new contract) The address the transaction is directed to
-    - `value`/`Quantity` - (optional) Integer of the value send with this transaction
+  - `data`/`Data` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+  - `from`/`Address` - 20 Bytes - The address the transaction is send from
+  - `gas`/`Quantity` - (optional) (default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas
+  - `gasPrice`/`Quantity` - (optional) (default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+  - `nonce`/`Quantity` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+  - `to`/`Address` - 20 Bytes - (optional when creating new contract) The address the transaction is directed to
+  - `value`/`Quantity` - (optional) Integer of the value send with this transaction
 - `String` - Passphrase to unlock `from` account.
 
 #### returns
@@ -1274,14 +1263,11 @@ none
 
 #### parameters
 
-?
-?
-?
+? ? ?
 
 #### returns
 
 - `Boolean` - whether the call was successful
-
 
 ## shh
 
@@ -1310,8 +1296,7 @@ none
 
 ### shh_getFilterChanges
 
-Polling method for whisper filters. Returns new messages since the last call of this method.
-**Note** calling the [shh_getMessages](#shh_getmessages) method, will reset the buffer for this method, so that you won't receive duplicate messages.
+Polling method for whisper filters. Returns new messages since the last call of this method. **Note** calling the [shh_getMessages](#shh_getmessages) method, will reset the buffer for this method, so that you won't receive duplicate messages.
 
 #### parameters
 
@@ -1352,8 +1337,8 @@ Creates filter to notify, when client receives whisper message matching the filt
 #### parameters
 
 - `Object` - The filter options:
-    - `to`/`Data` - (optional) 60 Bytes - Identity of the receiver. *When present it will try to decrypt any incoming message if the client holds the private key to this identity.*
-    - `topics`/`Array` - Array of `DATA` topics which the incoming message's topics should match.  You can use the following combinations
+  - `to`/`Data` - (optional) 60 Bytes - Identity of the receiver. _When present it will try to decrypt any incoming message if the client holds the private key to this identity._
+  - `topics`/`Array` - Array of `DATA` topics which the incoming message's topics should match. You can use the following combinations
 
 #### returns
 
@@ -1390,12 +1375,12 @@ Sends a whisper message.
 #### parameters
 
 - `Object` - The whisper post object:
-    - `from`/`Data` - (optional) 60 Bytes - The identity of the sender
-    - `payload`/`Data` - The payload of the message
-    - `priority`/`Quantity` - The integer of the priority in a rang from ... (?)
-    - `to`/`Data` - (optional) 60 Bytes - The identity of the receiver. When present whisper will encrypt the message so that only the receiver can decrypt it
-    - `topics`/`Array` - Array of `DATA` topics, for the receiver to identify messages
-    - `ttl`/`Quantity` - Integer of the time to live in seconds.
+  - `from`/`Data` - (optional) 60 Bytes - The identity of the sender
+  - `payload`/`Data` - The payload of the message
+  - `priority`/`Quantity` - The integer of the priority in a rang from ... (?)
+  - `to`/`Data` - (optional) 60 Bytes - The identity of the receiver. When present whisper will encrypt the message so that only the receiver can decrypt it
+  - `topics`/`Array` - Array of `DATA` topics, for the receiver to identify messages
+  - `ttl`/`Quantity` - Integer of the time to live in seconds.
 
 #### returns
 
@@ -1403,8 +1388,7 @@ Sends a whisper message.
 
 ### shh_uninstallFilter
 
-Uninstalls a filter with given id. Should always be called when watch is no longer needed.
-Additonally Filters timeout when they aren't requested with [shh_getFilterChanges](#shh_getfilterchanges) for a period of time.
+Uninstalls a filter with given id. Should always be called when watch is no longer needed. Additonally Filters timeout when they aren't requested with [shh_getFilterChanges](#shh_getfilterchanges) for a period of time.
 
 #### parameters
 
@@ -1425,7 +1409,6 @@ none
 #### returns
 
 - `String` - The current whisper protocol version
-
 
 ## trace
 
@@ -1483,7 +1466,6 @@ Returns all traces of given transaction
 
 - `Array` - Traces of given transaction
 
-
 ## web3
 
 - [web3_clientVersion](#web3_clientVersion)
@@ -1503,7 +1485,7 @@ none
 
 ### web3_sha3
 
-Returns Keccak-256 (*not* the standardized SHA3-256) of the given data.
+Returns Keccak-256 (_not_ the standardized SHA3-256) of the given data.
 
 #### parameters
 

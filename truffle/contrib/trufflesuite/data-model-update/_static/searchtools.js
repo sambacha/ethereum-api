@@ -28,9 +28,11 @@ if (!Scorer) {
     // or matches in the last dotted part of the object name
     objPartialMatch: 6,
     // Additive scores depending on the priority of the object
-    objPrio: {0:  15,   // used to be importantResults
-              1:  5,   // used to be objectResults
-              2: -5},  // used to be unimportantResults
+    objPrio: {
+      0: 15, // used to be importantResults
+      1: 5, // used to be objectResults
+      2: -5
+    }, // used to be unimportantResults
     //  Used when the priority is not in the mapping.
     objPrioDefault: 0,
 
@@ -38,12 +40,12 @@ if (!Scorer) {
     title: 15,
     // query found in terms
     term: 5
-  };
+  }
 }
 
 if (!splitQuery) {
   function splitQuery(query) {
-    return query.split(/\s+/);
+    return query.split(/\s+/)
   }
 }
 
@@ -51,390 +53,380 @@ if (!splitQuery) {
  * Search Module
  */
 var Search = {
+  _index: null,
+  _queued_query: null,
+  _pulse_status: -1,
 
-  _index : null,
-  _queued_query : null,
-  _pulse_status : -1,
+  init: function () {
+    var params = $.getQueryParameters()
+    if (params.q) {
+      var query = params.q[0]
+      $('input[name="q"]')[0].value = query
+      this.performSearch(query)
+    }
+  },
 
-  init : function() {
-      var params = $.getQueryParameters();
-      if (params.q) {
-          var query = params.q[0];
-          $('input[name="q"]')[0].value = query;
-          this.performSearch(query);
+  loadIndex: function (url) {
+    $.ajax({
+      type: "GET",
+      url: url,
+      data: null,
+      dataType: "script",
+      cache: true,
+      complete: function (jqxhr, textstatus) {
+        if (textstatus != "success") {
+          document.getElementById("searchindexloader").src = url
+        }
       }
+    })
   },
 
-  loadIndex : function(url) {
-    $.ajax({type: "GET", url: url, data: null,
-            dataType: "script", cache: true,
-            complete: function(jqxhr, textstatus) {
-              if (textstatus != "success") {
-                document.getElementById("searchindexloader").src = url;
-              }
-            }});
-  },
-
-  setIndex : function(index) {
-    var q;
-    this._index = index;
+  setIndex: function (index) {
+    var q
+    this._index = index
     if ((q = this._queued_query) !== null) {
-      this._queued_query = null;
-      Search.query(q);
+      this._queued_query = null
+      Search.query(q)
     }
   },
 
-  hasIndex : function() {
-      return this._index !== null;
+  hasIndex: function () {
+    return this._index !== null
   },
 
-  deferQuery : function(query) {
-      this._queued_query = query;
+  deferQuery: function (query) {
+    this._queued_query = query
   },
 
-  stopPulse : function() {
-      this._pulse_status = 0;
+  stopPulse: function () {
+    this._pulse_status = 0
   },
 
-  startPulse : function() {
-    if (this._pulse_status >= 0)
-        return;
+  startPulse: function () {
+    if (this._pulse_status >= 0) return
     function pulse() {
-      var i;
-      Search._pulse_status = (Search._pulse_status + 1) % 4;
-      var dotString = '';
-      for (i = 0; i < Search._pulse_status; i++)
-        dotString += '.';
-      Search.dots.text(dotString);
-      if (Search._pulse_status > -1)
-        window.setTimeout(pulse, 500);
+      var i
+      Search._pulse_status = (Search._pulse_status + 1) % 4
+      var dotString = ""
+      for (i = 0; i < Search._pulse_status; i++) dotString += "."
+      Search.dots.text(dotString)
+      if (Search._pulse_status > -1) window.setTimeout(pulse, 500)
     }
-    pulse();
+    pulse()
   },
 
   /**
    * perform a search for something (or wait until index is loaded)
    */
-  performSearch : function(query) {
+  performSearch: function (query) {
     // create the required interface elements
-    this.out = $('#search-results');
-    this.title = $('<h2>' + _('Searching') + '</h2>').appendTo(this.out);
-    this.dots = $('<span></span>').appendTo(this.title);
-    this.status = $('<p style="display: none"></p>').appendTo(this.out);
-    this.output = $('<ul class="search"/>').appendTo(this.out);
+    this.out = $("#search-results")
+    this.title = $("<h2>" + _("Searching") + "</h2>").appendTo(this.out)
+    this.dots = $("<span></span>").appendTo(this.title)
+    this.status = $('<p style="display: none"></p>').appendTo(this.out)
+    this.output = $('<ul class="search"/>').appendTo(this.out)
 
-    $('#search-progress').text(_('Preparing search...'));
-    this.startPulse();
+    $("#search-progress").text(_("Preparing search..."))
+    this.startPulse()
 
     // index already loaded, the browser was quick!
-    if (this.hasIndex())
-      this.query(query);
-    else
-      this.deferQuery(query);
+    if (this.hasIndex()) this.query(query)
+    else this.deferQuery(query)
   },
 
   /**
    * execute search (requires search index to be loaded)
    */
-  query : function(query) {
-    var i;
+  query: function (query) {
+    var i
 
     // stem the searchterms and add them to the correct list
-    var stemmer = new Stemmer();
-    var searchterms = [];
-    var excluded = [];
-    var hlterms = [];
-    var tmp = splitQuery(query);
-    var objectterms = [];
+    var stemmer = new Stemmer()
+    var searchterms = []
+    var excluded = []
+    var hlterms = []
+    var tmp = splitQuery(query)
+    var objectterms = []
     for (i = 0; i < tmp.length; i++) {
       if (tmp[i] !== "") {
-          objectterms.push(tmp[i].toLowerCase());
+        objectterms.push(tmp[i].toLowerCase())
       }
 
-      if ($u.indexOf(stopwords, tmp[i].toLowerCase()) != -1 || tmp[i].match(/^\d+$/) ||
-          tmp[i] === "") {
+      if ($u.indexOf(stopwords, tmp[i].toLowerCase()) != -1 || tmp[i].match(/^\d+$/) || tmp[i] === "") {
         // skip this "word"
-        continue;
+        continue
       }
       // stem the word
-      var word = stemmer.stemWord(tmp[i].toLowerCase());
+      var word = stemmer.stemWord(tmp[i].toLowerCase())
       // prevent stemmer from cutting word smaller than two chars
-      if(word.length < 3 && tmp[i].length >= 3) {
-        word = tmp[i];
+      if (word.length < 3 && tmp[i].length >= 3) {
+        word = tmp[i]
       }
-      var toAppend;
+      var toAppend
       // select the correct list
-      if (word[0] == '-') {
-        toAppend = excluded;
-        word = word.substr(1);
-      }
-      else {
-        toAppend = searchterms;
-        hlterms.push(tmp[i].toLowerCase());
+      if (word[0] == "-") {
+        toAppend = excluded
+        word = word.substr(1)
+      } else {
+        toAppend = searchterms
+        hlterms.push(tmp[i].toLowerCase())
       }
       // only add if not already in the list
-      if (!$u.contains(toAppend, word))
-        toAppend.push(word);
+      if (!$u.contains(toAppend, word)) toAppend.push(word)
     }
-    var highlightstring = '?highlight=' + $.urlencode(hlterms.join(" "));
+    var highlightstring = "?highlight=" + $.urlencode(hlterms.join(" "))
 
     // console.debug('SEARCH: searching for:');
     // console.info('required: ', searchterms);
     // console.info('excluded: ', excluded);
 
     // prepare search
-    var terms = this._index.terms;
-    var titleterms = this._index.titleterms;
+    var terms = this._index.terms
+    var titleterms = this._index.titleterms
 
     // array of [filename, title, anchor, descr, score]
-    var results = [];
-    $('#search-progress').empty();
+    var results = []
+    $("#search-progress").empty()
 
     // lookup as object
     for (i = 0; i < objectterms.length; i++) {
-      var others = [].concat(objectterms.slice(0, i),
-                             objectterms.slice(i+1, objectterms.length));
-      results = results.concat(this.performObjectSearch(objectterms[i], others));
+      var others = [].concat(objectterms.slice(0, i), objectterms.slice(i + 1, objectterms.length))
+      results = results.concat(this.performObjectSearch(objectterms[i], others))
     }
 
     // lookup as search terms in fulltext
-    results = results.concat(this.performTermsSearch(searchterms, excluded, terms, titleterms));
+    results = results.concat(this.performTermsSearch(searchterms, excluded, terms, titleterms))
 
     // let the scorer override scores with a custom scoring function
     if (Scorer.score) {
-      for (i = 0; i < results.length; i++)
-        results[i][4] = Scorer.score(results[i]);
+      for (i = 0; i < results.length; i++) results[i][4] = Scorer.score(results[i])
     }
 
     // now sort the results by score (in opposite order of appearance, since the
     // display function below uses pop() to retrieve items) and then
     // alphabetically
-    results.sort(function(a, b) {
-      var left = a[4];
-      var right = b[4];
+    results.sort(function (a, b) {
+      var left = a[4]
+      var right = b[4]
       if (left > right) {
-        return 1;
+        return 1
       } else if (left < right) {
-        return -1;
+        return -1
       } else {
         // same score: sort alphabetically
-        left = a[1].toLowerCase();
-        right = b[1].toLowerCase();
-        return (left > right) ? -1 : ((left < right) ? 1 : 0);
+        left = a[1].toLowerCase()
+        right = b[1].toLowerCase()
+        return left > right ? -1 : left < right ? 1 : 0
       }
-    });
+    })
 
     // for debugging
     //Search.lastresults = results.slice();  // a copy
     //console.info('search results:', Search.lastresults);
 
     // print the results
-    var resultCount = results.length;
+    var resultCount = results.length
     function displayNextItem() {
       // results left, load the summary and display it
       if (results.length) {
-        var item = results.pop();
-        var listItem = $('<li style="display:none"></li>');
-        if (DOCUMENTATION_OPTIONS.FILE_SUFFIX === '') {
+        var item = results.pop()
+        var listItem = $('<li style="display:none"></li>')
+        if (DOCUMENTATION_OPTIONS.FILE_SUFFIX === "") {
           // dirhtml builder
-          var dirname = item[0] + '/';
+          var dirname = item[0] + "/"
           if (dirname.match(/\/index\/$/)) {
-            dirname = dirname.substring(0, dirname.length-6);
-          } else if (dirname == 'index/') {
-            dirname = '';
+            dirname = dirname.substring(0, dirname.length - 6)
+          } else if (dirname == "index/") {
+            dirname = ""
           }
-          listItem.append($('<a/>').attr('href',
-            DOCUMENTATION_OPTIONS.URL_ROOT + dirname +
-            highlightstring + item[2]).html(item[1]));
+          listItem.append(
+            $("<a/>")
+              .attr("href", DOCUMENTATION_OPTIONS.URL_ROOT + dirname + highlightstring + item[2])
+              .html(item[1])
+          )
         } else {
           // normal html builders
-          listItem.append($('<a/>').attr('href',
-            item[0] + DOCUMENTATION_OPTIONS.FILE_SUFFIX +
-            highlightstring + item[2]).html(item[1]));
+          listItem.append(
+            $("<a/>")
+              .attr("href", item[0] + DOCUMENTATION_OPTIONS.FILE_SUFFIX + highlightstring + item[2])
+              .html(item[1])
+          )
         }
         if (item[3]) {
-          listItem.append($('<span> (' + item[3] + ')</span>'));
-          Search.output.append(listItem);
-          listItem.slideDown(5, function() {
-            displayNextItem();
-          });
+          listItem.append($("<span> (" + item[3] + ")</span>"))
+          Search.output.append(listItem)
+          listItem.slideDown(5, function () {
+            displayNextItem()
+          })
         } else if (DOCUMENTATION_OPTIONS.HAS_SOURCE) {
-          var suffix = DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX;
+          var suffix = DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX
           if (suffix === undefined) {
-            suffix = '.txt';
+            suffix = ".txt"
           }
-          $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[5] + (item[5].slice(-suffix.length) === suffix ? '' : suffix),
-                  dataType: "text",
-                  complete: function(jqxhr, textstatus) {
-                    var data = jqxhr.responseText;
-                    if (data !== '' && data !== undefined) {
-                      listItem.append(Search.makeSearchSummary(data, searchterms, hlterms));
-                    }
-                    Search.output.append(listItem);
-                    listItem.slideDown(5, function() {
-                      displayNextItem();
-                    });
-                  }});
+          $.ajax({
+            url: DOCUMENTATION_OPTIONS.URL_ROOT + "_sources/" + item[5] + (item[5].slice(-suffix.length) === suffix ? "" : suffix),
+            dataType: "text",
+            complete: function (jqxhr, textstatus) {
+              var data = jqxhr.responseText
+              if (data !== "" && data !== undefined) {
+                listItem.append(Search.makeSearchSummary(data, searchterms, hlterms))
+              }
+              Search.output.append(listItem)
+              listItem.slideDown(5, function () {
+                displayNextItem()
+              })
+            }
+          })
         } else {
           // no source available, just display title
-          Search.output.append(listItem);
-          listItem.slideDown(5, function() {
-            displayNextItem();
-          });
+          Search.output.append(listItem)
+          listItem.slideDown(5, function () {
+            displayNextItem()
+          })
         }
       }
       // search finished, update title and status message
       else {
-        Search.stopPulse();
-        Search.title.text(_('Search Results'));
-        if (!resultCount)
-          Search.status.text(_('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.'));
-        else
-            Search.status.text(_('Search finished, found %s page(s) matching the search query.').replace('%s', resultCount));
-        Search.status.fadeIn(500);
+        Search.stopPulse()
+        Search.title.text(_("Search Results"))
+        if (!resultCount) Search.status.text(_("Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."))
+        else Search.status.text(_("Search finished, found %s page(s) matching the search query.").replace("%s", resultCount))
+        Search.status.fadeIn(500)
       }
     }
-    displayNextItem();
+    displayNextItem()
   },
 
   /**
    * search for object names
    */
-  performObjectSearch : function(object, otherterms) {
-    var filenames = this._index.filenames;
-    var docnames = this._index.docnames;
-    var objects = this._index.objects;
-    var objnames = this._index.objnames;
-    var titles = this._index.titles;
+  performObjectSearch: function (object, otherterms) {
+    var filenames = this._index.filenames
+    var docnames = this._index.docnames
+    var objects = this._index.objects
+    var objnames = this._index.objnames
+    var titles = this._index.titles
 
-    var i;
-    var results = [];
+    var i
+    var results = []
 
     for (var prefix in objects) {
       for (var name in objects[prefix]) {
-        var fullname = (prefix ? prefix + '.' : '') + name;
+        var fullname = (prefix ? prefix + "." : "") + name
         if (fullname.toLowerCase().indexOf(object) > -1) {
-          var score = 0;
-          var parts = fullname.split('.');
+          var score = 0
+          var parts = fullname.split(".")
           // check for different match types: exact matches of full name or
           // "last name" (i.e. last dotted part)
           if (fullname == object || parts[parts.length - 1] == object) {
-            score += Scorer.objNameMatch;
-          // matches in last name
+            score += Scorer.objNameMatch
+            // matches in last name
           } else if (parts[parts.length - 1].indexOf(object) > -1) {
-            score += Scorer.objPartialMatch;
+            score += Scorer.objPartialMatch
           }
-          var match = objects[prefix][name];
-          var objname = objnames[match[1]][2];
-          var title = titles[match[0]];
+          var match = objects[prefix][name]
+          var objname = objnames[match[1]][2]
+          var title = titles[match[0]]
           // If more than one term searched for, we require other words to be
           // found in the name/title/description
           if (otherterms.length > 0) {
-            var haystack = (prefix + ' ' + name + ' ' +
-                            objname + ' ' + title).toLowerCase();
-            var allfound = true;
+            var haystack = (prefix + " " + name + " " + objname + " " + title).toLowerCase()
+            var allfound = true
             for (i = 0; i < otherterms.length; i++) {
               if (haystack.indexOf(otherterms[i]) == -1) {
-                allfound = false;
-                break;
+                allfound = false
+                break
               }
             }
             if (!allfound) {
-              continue;
+              continue
             }
           }
-          var descr = objname + _(', in ') + title;
+          var descr = objname + _(", in ") + title
 
-          var anchor = match[3];
-          if (anchor === '')
-            anchor = fullname;
-          else if (anchor == '-')
-            anchor = objnames[match[1]][1] + '-' + fullname;
+          var anchor = match[3]
+          if (anchor === "") anchor = fullname
+          else if (anchor == "-") anchor = objnames[match[1]][1] + "-" + fullname
           // add custom score for some objects according to scorer
           if (Scorer.objPrio.hasOwnProperty(match[2])) {
-            score += Scorer.objPrio[match[2]];
+            score += Scorer.objPrio[match[2]]
           } else {
-            score += Scorer.objPrioDefault;
+            score += Scorer.objPrioDefault
           }
-          results.push([docnames[match[0]], fullname, '#'+anchor, descr, score, filenames[match[0]]]);
+          results.push([docnames[match[0]], fullname, "#" + anchor, descr, score, filenames[match[0]]])
         }
       }
     }
 
-    return results;
+    return results
   },
 
   /**
    * search for full-text terms in the index
    */
-  performTermsSearch : function(searchterms, excluded, terms, titleterms) {
-    var docnames = this._index.docnames;
-    var filenames = this._index.filenames;
-    var titles = this._index.titles;
+  performTermsSearch: function (searchterms, excluded, terms, titleterms) {
+    var docnames = this._index.docnames
+    var filenames = this._index.filenames
+    var titles = this._index.titles
 
-    var i, j, file;
-    var fileMap = {};
-    var scoreMap = {};
-    var results = [];
+    var i, j, file
+    var fileMap = {}
+    var scoreMap = {}
+    var results = []
 
     // perform the search on the required terms
     for (i = 0; i < searchterms.length; i++) {
-      var word = searchterms[i];
-      var files = [];
+      var word = searchterms[i]
+      var files = []
       var _o = [
         {files: terms[word], score: Scorer.term},
         {files: titleterms[word], score: Scorer.title}
-      ];
+      ]
 
       // no match but word was a required one
-      if ($u.every(_o, function(o){return o.files === undefined;})) {
-        break;
+      if (
+        $u.every(_o, function (o) {
+          return o.files === undefined
+        })
+      ) {
+        break
       }
       // found search word in contents
-      $u.each(_o, function(o) {
-        var _files = o.files;
-        if (_files === undefined)
-          return
+      $u.each(_o, function (o) {
+        var _files = o.files
+        if (_files === undefined) return
 
-        if (_files.length === undefined)
-          _files = [_files];
-        files = files.concat(_files);
+        if (_files.length === undefined) _files = [_files]
+        files = files.concat(_files)
 
         // set score for the word in each file to Scorer.term
         for (j = 0; j < _files.length; j++) {
-          file = _files[j];
-          if (!(file in scoreMap))
-            scoreMap[file] = {}
-          scoreMap[file][word] = o.score;
+          file = _files[j]
+          if (!(file in scoreMap)) scoreMap[file] = {}
+          scoreMap[file][word] = o.score
         }
-      });
+      })
 
       // create the mapping
       for (j = 0; j < files.length; j++) {
-        file = files[j];
-        if (file in fileMap)
-          fileMap[file].push(word);
-        else
-          fileMap[file] = [word];
+        file = files[j]
+        if (file in fileMap) fileMap[file].push(word)
+        else fileMap[file] = [word]
       }
     }
 
     // now check if the files don't contain excluded terms
     for (file in fileMap) {
-      var valid = true;
+      var valid = true
 
       // check if all requirements are matched
-      if (fileMap[file].length != searchterms.length)
-          continue;
+      if (fileMap[file].length != searchterms.length) continue
 
       // ensure that none of the excluded terms is in the search result
       for (i = 0; i < excluded.length; i++) {
-        if (terms[excluded[i]] == file ||
-            titleterms[excluded[i]] == file ||
-            $u.contains(terms[excluded[i]] || [], file) ||
-            $u.contains(titleterms[excluded[i]] || [], file)) {
-          valid = false;
-          break;
+        if (terms[excluded[i]] == file || titleterms[excluded[i]] == file || $u.contains(terms[excluded[i]] || [], file) || $u.contains(titleterms[excluded[i]] || [], file)) {
+          valid = false
+          break
         }
       }
 
@@ -442,11 +434,15 @@ var Search = {
       if (valid) {
         // select one (max) score for the file.
         // for better ranking, we should calculate ranking by using words statistics like basic tf-idf...
-        var score = $u.max($u.map(fileMap[file], function(w){return scoreMap[file][w]}));
-        results.push([docnames[file], titles[file], '', null, score, filenames[file]]);
+        var score = $u.max(
+          $u.map(fileMap[file], function (w) {
+            return scoreMap[file][w]
+          })
+        )
+        results.push([docnames[file], titles[file], "", null, score, filenames[file]])
       }
     }
-    return results;
+    return results
   },
 
   /**
@@ -456,26 +452,23 @@ var Search = {
    * words. the first one is used to find the occurrence, the
    * latter for highlighting it.
    */
-  makeSearchSummary : function(text, keywords, hlwords) {
-    var textLower = text.toLowerCase();
-    var start = 0;
-    $.each(keywords, function() {
-      var i = textLower.indexOf(this.toLowerCase());
-      if (i > -1)
-        start = i;
-    });
-    start = Math.max(start - 120, 0);
-    var excerpt = ((start > 0) ? '...' : '') +
-      $.trim(text.substr(start, 240)) +
-      ((start + 240 - text.length) ? '...' : '');
-    var rv = $('<div class="context"></div>').text(excerpt);
-    $.each(hlwords, function() {
-      rv = rv.highlightText(this, 'highlighted');
-    });
-    return rv;
+  makeSearchSummary: function (text, keywords, hlwords) {
+    var textLower = text.toLowerCase()
+    var start = 0
+    $.each(keywords, function () {
+      var i = textLower.indexOf(this.toLowerCase())
+      if (i > -1) start = i
+    })
+    start = Math.max(start - 120, 0)
+    var excerpt = (start > 0 ? "..." : "") + $.trim(text.substr(start, 240)) + (start + 240 - text.length ? "..." : "")
+    var rv = $('<div class="context"></div>').text(excerpt)
+    $.each(hlwords, function () {
+      rv = rv.highlightText(this, "highlighted")
+    })
+    return rv
   }
-};
+}
 
-$(document).ready(function() {
-  Search.init();
-});
+$(document).ready(function () {
+  Search.init()
+})
