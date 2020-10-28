@@ -1,3 +1,9 @@
+= CMC Ideal API
+
+:docbook:
+:toc:
+
+
 *Ideal API Endpoint Samples*
 
 *(Last Updated: 10 Jun 2020)*
