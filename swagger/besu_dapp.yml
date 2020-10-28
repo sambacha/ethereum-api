@@ -1,0 +1,2569 @@
+ swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Besu JSON-RPC
+  description: >-
+    EVM RPC
+  contact: {}
+host: localhost:8565
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /clientVersion:
+    post:
+      description: >-
+        Returns the current client version.
+        **Parameters**
+        none
+        **Returns**
+        `String` - The current client version
+      tags:
+      - web3
+      operationId: clientRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/clientVersionRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /sha3:
+    post:
+      description: >-
+        Returns Keccak-256 (not the standardized SHA3-256) of the given data.
+        **Parameters**
+        - `DATA` - the data to convert into a SHA3 hash
+        `params:
+        [
+          "0x68656c6c6f20776f726c64"
+        ]`
+        **Returns**
+        `DATA` - The SHA3 result of the given string.
+      tags:
+      - web3
+      operationId: sha3Request
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/sha3request'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /version:
+    post:
+      description: >-
+        Returns the current network id.
+        **Parameters**
+        none
+        **Returns**
+        - `String` - The current network id.
+          - `"88"`: $NETWORK_ID Mainnet
+          - `"89"`: $NETWORK_ID Testnet
+      tags:
+      - net
+      operationId: versionRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/versionrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /listening:
+    post:
+      description: >-
+        Returns `true` if client is actively listening for network connections.
+        **Parameters**
+        none
+        **Returns**
+        - `Boolean` - `true` when listening, otherwise `false`.
+      tags:
+      - net
+      operationId: listeningRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/listeningrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /peerCount:
+    post:
+      description: >-
+        Returns number of peers currently connected to the client.
+        **Parameters**
+        none
+        **Returns**
+        - `QUANTITY` - integer of the number of connected peers.
+      tags:
+      - net
+      operationId: peerCountRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/peerCountRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /protocolVersion:
+    post:
+      description: >-
+        Returns the current ethereum protocol version.
+        **Parameters**
+        none
+        **Returns**
+        - `String` - The current ethereum protocol version
+      tags:
+      - eth
+      operationId: protocolVersionRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/protocolVersionRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /syncing:
+    post:
+      description: >-
+        Returns an object with data about the sync status or false.
+        **Parameters**
+        none
+        **Returns**
+        - `Object|Boolean`, An object with sync status data or FALSE, when not syncing:
+          - `startingBlock`: `QUANTITY` - The block at which the import started (will only be reset, after the sync reached his head)
+          - `currentBlock`: `QUANTITY` - The current block, same as eth_blockNumber
+          - `highestBlock`: `QUANTITY` - The estimated highest block
+      tags:
+      - eth
+      operationId: syncingrequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/syncingrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /coinbase:
+    post:
+      description: >-
+        Returns the client coinbase address.
+        **Parameters**
+        none
+        **Returns**
+        - `DATA`, 20 bytes - the current coinbase address.
+      tags:
+        - eth
+      operationId: coinbase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/coinbaserequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /gasPrice:
+    post:
+      description: >-
+        Returns the current price per gas in wei.
+        **Parameters**
+        none
+        **Returns**
+        - `QUANTITY` - integer of the current gas price in wei.
+      tags:
+        - eth
+      operationId: gasPrice
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/gasPriceRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /accounts:
+    post:
+      description: >-
+        Returns a list of addresses owned by client.
+        **Parameters**
+        none
+        **Returns**
+        - `Array of DATA`, 20 Bytes - addresses owned by the client
+      tags:
+        - eth
+      operationId: accounts
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/accountsrequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /blockNumber:
+    post:
+      description: >-
+        Returns the number of most recent block.
+        **Parameters**
+        none
+        **Returns**
+        - `QUANTITY` - integer of the current block number the client is on.
+      tags:
+        - eth
+      operationId: blockNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/blockNumberRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /getBalance:
+    post:
+      description: >-
+        Returns the balance of the account of given address.
+        **Parameters**
+        - `DATA`, 20 Bytes - address to check for balance.
+        - `QUANTITY|TAG` - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
+        `params: [
+           ' 0x2b5634c42055806a59e9107ed44d43c426e58258',
+           'latest'
+        ]`
+        **Returns**
+        - `QUANTITY` - integer of the current balance in wei.
+      tags:
+        - eth
+      operationId: getBalance
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBalanceRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /getStorageAt:
+    post:
+      description: >-
+        Returns the balance of the account of given address.
+        **Parameters**
+        - `DATA`, 20 Bytes - address to check for balance.
+        - `QUANTITY|TAG` - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
+        `params: [
+              '0x2b5634c42055806a59e9107ed44d43c426e58258',
+              'latest'
+              ]`
+        **Returns**
+        - `QUANTITY` - integer of the current balance in wei.
+      tags:
+        - eth
+      operationId: getStorageAt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getStorageAtRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionCount:
+    post:
+      description: >-
+        
+          Returns the number of transactions sent from an address.
+          **Parameters**
+          - `DATA`, 20 Bytes - address.
+          - `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+          `params: [
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+            'latest' // state at the latest block
+          ]`
+          **Returns**
+          - `QUANTITY` - integer of the number of transactions send from this address.
+      tags:
+        - eth
+      operationId: getTransactionCount
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionCountRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockTransactionCountByHash:
+    post:
+      description: >-
+        
+        Returns the number of transactions in a block from a block matching the given block hash.
+        **Parameters**
+        - `DATA`, 32 Bytes - hash of a block
+        `params: [
+          '0xc8b967161c671ce952a3d50987a78d64157fb5a8e1724804b87d3e9b11e3aa34'
+        ]`
+        **Returns**
+        - `QUANTITY` - integer of the number of transactions in this block.
+      tags:
+        - eth
+      operationId: getBlockTransactionCountByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockTransactionCountByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockTransactionCountByNumber:
+    post:
+      description: >-
+        
+        Returns the number of transactions in a block matching the given block number.
+        **Parameters**
+        - `QUANTITY|TAG` - integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the default block parameter.
+        `params: [
+          '0x85', // 232
+        ]`
+        **Returns**
+        - `QUANTITY` - integer of the number of transactions in this block.
+      tags:
+        - eth
+      operationId: getBlockTransactionCountByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockTransactionCountByNumberRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getCode:
+    post:
+      description: >-
+        
+        Returns code at a given address.
+        **Parameters**
+        - `DATA`, 20 Bytes - address
+        - `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+        `params: [
+          '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          '0x2'  // 2
+        ]`
+        **Returns**
+        - `DATA` - the code from the given address.
+      tags:
+        - eth
+      operationId: getCode
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getCodeRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /sign:
+    post:
+      description: >-
+        
+        The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
+        
+        By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. 
+        This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+        **Note:** the address to sign with must be unlocked.
+        **Parameters**
+          - `DATA`, 20 Bytes - address
+          - `DATA`, N Bytes - message to sign
+        **Returns**
+        - `DATA`: Signature
+      tags:
+        - eth
+      operationId: sign
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/signrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /sendTransaction:
+    post:
+      description: >-
+        
+        Creates new message call transaction or a contract creation, if the data field contains code.
+        **Parameters**
+        `Object` - The transaction object
+          - `from`: `DATA`, 20 Bytes - The address the transaction is send from.
+          - `to`: `DATA`, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
+          - `gas`: `QUANTITY` - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
+          - `gasPrice`: `QUANTITY` - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+          - `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+          - `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
+          - `nonce`: `QUANTITY` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+        `params: [{
+          "from": " 0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+          "to": " 0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+          "gas": "0x76c0", // 30400
+          "gasPrice": "0x9184e72a000", // 10000000000000
+          "value": "0x9184e72a", // 2441406250
+          "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+        }]`
+        **Returns**
+        - `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+         Use `eth_getTransactionReceipt` to get the contract address, after the transaction was mined, when you created a contract.
+      tags:
+        - eth
+      operationId: sendTransaction
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/sendTransactionRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /sendRawTransaction:
+    post:
+      description: >-
+        
+          Creates new message call transaction or a contract creation for signed transactions.
+          **Parameters**
+          - `DATA`, The signed transaction data.
+          `params: ["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"]`
+          **Returns**
+          - `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+          Use `eth_getTransactionReceipt` to get the contract address, after the transaction was mined, when you created a contract.
+      tags:
+        - eth
+      operationId: sendRawTransaction
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/sendRawTransactionRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /call:
+    post:
+      description: >-
+        
+        Executes a new message call immediately without creating a transaction on the block chain.
+        **Parameters**
+        `Object` [required]- The transaction call object
+          - `from`: `DATA`, 20 Bytes - (optional) The address the transaction is sent from.
+          - `to`: `DATA`, 20 Bytes - The address the transaction is directed to.
+          - `gas`: `QUANTITY` - (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas, but this parameter may be needed by some executions.
+          - `gasPrice`: `QUANTITY` - (optional) Integer of the gasPrice used for each paid gas
+          - `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+          - `data`: `DATA` - (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI
+          - `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+        **Returns**
+        - `DATA` - the return value of executed contract.
+      tags:
+        - eth
+      operationId: call
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/callrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /estimateGas:
+    post:
+      description: >-
+        
+        Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. 
+        The transaction will not be added to the blockchain. Note that the estimate may be significantly more 
+        than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
+        **Parameters**
+        See `eth_call` parameters, expect that all properties are optional. If no gas limit is specified geth uses 
+        the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be 
+        enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
+        **Returns**
+        - `QUANTITY` - the amount of gas used.
+      tags:
+        - eth
+      operationId: estimateGas
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/estimateGasRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockByHash:
+    post:
+      description: >-
+        
+          Returns information about a block by hash.
+          **Parameters**
+          - `BLOCKHASH` [required] - a string representing a BLOCKHASH
+          - `Boolean` [required] - If true it returns the full transaction objects, if false only the hashes of the transactions.
+          `params: [
+            '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624',
+            true
+          ]`
+          **Returns**
+          `Object` - A block object, or null when no block was found:
+            - `number`: `QUANTITY` - the block number. null when its pending block.
+            - `hash`: `DATA`, 32 Bytes - hash of the block. `null` when its pending block.
+            - `parentHash`: `DATA`, 32 Bytes - hash of the parent block.
+            - `nonce`: `DATA`, 8 Bytes - hash of the generated proof-of-work. `null` when its pending block.
+            - `sha3Uncles`: `DATA`, 32 Bytes - SHA3 of the uncles data in the block.
+            - `logsBloom`: `DATA`, 256 Bytes - the bloom filter for the logs of the block. `null` when its pending block.
+            - `transactionsRoot`: `DATA`, 32 Bytes - the root of the transaction trie of the block.
+            - `stateRoot`: `DATA`, 32 Bytes - the root of the final state trie of the block.
+            - `receiptsRoot`: `DATA`, 32 Bytes - the root of the receipts trie of the block.
+            - `miner`: `DATA`, 20 Bytes - the address of the beneficiary to whom the mining rewards were given.
+            - `difficulty`: `QUANTITY` - integer of the difficulty for this block.
+            - `totalDifficulty`: `QUANTITY` - integer of the total difficulty of the chain until this block.
+            - `extraData`: `DATA` - the "extra data" field of this block.
+            - `size`: `QUANTITY` - integer the size of this block in bytes.
+            - `gasLimit`: `QUANTITY` - the maximum gas allowed in this block.
+            - `gasUsed`: `QUANTITY` - the total used gas by all transactions in this block.
+            - `timestamp`: `QUANTITY` - the unix timestamp for when the block was collated.
+            - `transactions`: `Array` - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+            - `uncles`: `Array` - Array of uncle hashes.
+      tags:
+        - eth
+      operationId: getBlockByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockByNumber:
+    post:
+      description: >-
+        
+          Returns information about a block by block number.
+          **Parameters**
+          `BLOCKNUMBER` [required] - a hex code of an integer representing the BLOCKNUMBER or one of the following special params:
+            
+            - `latest`: get block data of the latest block
+            - `pending`: get block data of pending block
+            - `earliest`: get the genesis block
+          `FULLTX` [required] - a boolean value specified whether you want to get transactions list or not
+          `params: [
+            '0x0',
+            true
+          ]`
+          **Returns**
+          - `RETURN VALUE` - block data of the given `BLOCKNUMBER`
+          
+          See `eth_getBlockByHash`
+      tags:
+        - eth
+      operationId: getBlockByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockByNumberRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockSignersByNumber:
+    post:
+      description: >-
+        
+          Returns the signers set of the block of given `BLOCKNUMBER`.
+          **Parameters**
+          `BLOCKNUMBER` [required] - a hex code of an integer representing the `BLOCKNUMBER` or one of the following special params:
+            
+            - `latest`: get block data of the latest block
+            - `pending`: get block data of pending block
+            - `earliest`: get the genesis block
+          `params: [
+            '0xA61F98'
+          ]`
+          **Returns**
+          - `SIGNERS` - signers set of the block of given `BLOCKNUMBER`
+          
+      tags:
+        - eth
+      operationId: getBlockSignersByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockSignersByNumberRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockSignersByHash:
+    post:
+      description: >-
+        
+          Returns the signers set of the block of given `BLOCKHASH`.
+          **Parameters**
+          - `BLOCKHASH` [required] - a string representing a `BLOCKHASH`
+          `params: [
+            '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
+          ]`
+          **Returns**
+          - `SIGNERS` - signers set of the block of given `BLOCKHASH`
+          
+      tags:
+        - eth
+      operationId: getBlockSignersByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockSignersByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockFinalityByNumber:
+    post:
+      description: >-
+        
+          Returns the the finality of the block of given BLOCKNUMBER.
+          **Parameters**
+          - `BLOCKNUMBER` [required] - a hex code of an integer representing the `BLOCKNUMBER` or one of the following special params:
+            - `latest`: get block data of the latest block
+            - `pending`: get block data of pending block
+            - `earliest`: get the genesis block
+          `params: [
+            '0xA61F98'
+          ]`
+          **Returns**
+          - `BLOCK_FINALITY` - integer of the the finality of the block of given `BLOCKNUMBER`.
+          
+      tags:
+        - eth
+      operationId: getBlockFinalityByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockFinalityByNumberRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockFinalityByHash:
+    post:
+      description: >-
+        
+          Returns the the finality of the block of given `BLOCKHASH`.
+          **Parameters**
+          `BLOCKHASH` [required] - a string representing a `BLOCKHASH`
+          `params: [
+            '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
+          ]`
+          **Returns**
+          - `BLOCK_FINALITY` - integer of the the finality of the block of given `BLOCKHASH`.
+          
+      tags:
+        - eth
+      operationId: getBlockFinalityByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockFinalityByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error' 
+  /getCandidates:
+    post:
+      description: >-
+        
+        Returns the statuses of all candidates at a specific epoch
+        **Parameters**
+          - `EPOCH_NUMBER` [required] - a hex code of an integer representing the `EPOCH_NUMBER` or the following special param:
+              - `latest`: get the status of candidate at the current time
+          `params: [
+            'latest'
+          ]`
+        **Returns**
+          - `EPOCH` - the epoch number of the query of this request
+          - `CANDIDATES` - list of candidates along with their statuses and capacities
+              - `STATUS` - a string representing status of the corresponding candidate
+              - `MASTERNODE` - if the candidate is a masternode
+              
+              - `SLASHED` - if the candidate is slashed
+              - `PROPOSED` - if the candidate is proposed, have not been a masternode yet
+              - `empty string` - if it's not a candidate
+          - `CAPACITY` - capacity of the corresponding candidate
+          - `SUCCESS` - true if the request is successful, otherwise it's false
+          
+      tags:
+        - eth
+      operationId: getCandidates
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getCandidatesRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getCandidateStatus:
+    post:
+      description: >-
+        
+        Returns the status of the candidate of given `COINBASE_ADDRESS` at a specific epoch
+        **Parameters**
+          - `COINBASE_ADDRESS` [required] - a string representing a `COINBASE_ADDRESS` (length: 40, start with 0x )
+          - `EPOCH_NUMBER` [required] - a hex code of an integer representing the `EPOCH_NUMBER` or the following special param:
+          - `latest`: get the status of candidate at the current time
+        **Example**
+          `params: [
+            '0x1d50df657b6dce50bac634bf18e2d986d807e940',
+            'latest'
+          ]`
+        **Returns**
+          - `STATUS` - a string representing status of the candicate of given `COINBASE_ADDRESS`
+              - `MASTERNODE` - if the candidate is a masternode
+              - `SLASHED` - if the candidate is slashed
+              - `PROPOSED` - if the candidate is proposed, have not been a masternode yet
+              - `empty string` - if it's not a candidate
+          - `CAPACITY` - capacity of the candidate
+          - `EPOCH` - the epoch number of the query of this request
+          - `SUCCESS` - true if the request is successful, otherwise it's false
+          
+      tags:
+        - eth
+      operationId: getCandidateStatus
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getCandidateStatusRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'              
+  /getTransactionByHash:
+    post:
+      description: >-
+        
+        Returns the information about a transaction requested by transaction hash.
+        **Parameters**
+        - `DATA`, 32 Bytes - hash of a transaction
+        **Example**
+        `params: [
+          "0xd83b26e101dd6480764bade90fc283407919f60b7e65ff83fbf6cdc92f1138a1"
+        ]`
+        **Returns**
+        `Object` - A transaction object, or null when no transaction was found:
+          - `hash`: `DATA`, 32 Bytes - hash of the transaction.
+          - `nonce`: `QUANTITY` - the number of transactions made by the sender prior to this one.
+          - `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in. `null` when its pending.
+          - `blockNumber`: `QUANTITY` - block number where this transaction was in. `null` when its pending.
+          - `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block. `null` when its pending.
+          - `from`: `DATA`, 20 Bytes - address of the sender.
+          - `to`: `DATA`, 20 Bytes - address of the receiver. `null` when its a contract creation transaction.
+          - `value`: `QUANTITY` - value transferred in Wei.
+          - `gasPrice`: `QUANTITY` - gas price provided by the sender in Wei.
+          - `gas`: `QUANTITY` - gas provided by the sender.
+          - `input`: `DATA` - the data send along with the transaction.
+      tags:
+        - eth
+      operationId: getTransactionByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionByBlockHashAndIndex:
+    post:
+      description: >-
+        
+        Returns information about a transaction by block hash and transaction index position.
+        **Parameters**
+        - `DATA`, 32 Bytes - hash of a block.
+        - `QUANTITY` - integer of the transaction index position.
+        **Example**
+        `params: [
+          '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7',
+          '0x0' // 0
+        ]`
+        **Returns**
+        See `eth_getTransactionByHash`
+      tags:
+        - eth
+      operationId: getTransactionByBlockHashAndIndex
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByBlockHashAndIndexRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionByBlockNumberAndIndex:
+    post:
+      description: >-
+        
+          Returns information about a transaction by block number and transaction index position.
+          **Parameters**
+          - `QUANTITY|TAG` - a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the default block parameter.
+          - `QUANTITY` - the transaction index position.
+          **Example**
+          `params: [
+            '0x29c', // 668
+            '0x0' // 0
+          ]`
+          **Returns**
+          See `eth_getTransactionByHash`
+      tags:
+        - eth
+      operationId: getTransactionByBlockNumberAndIndex
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByBlockNumberAndIndexRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionReceipt:
+    post:
+      description: >-
+        
+        Returns the receipt of a transaction by transaction hash.
+        **Note:** That the receipt is not available for pending transactions.
+        **Parameters**
+        - `DATA`, 32 Bytes - hash of a transaction
+        **Example**
+          `params: [
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          ]`
+        **Returns**
+        `Object` - A transaction receipt object, or `null` when no receipt was found:
+          - `transactionHash`: `DATA`, 32 Bytes - hash of the transaction.
+          - `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block.
+          - `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in.
+          - `blockNumber`: `QUANTITY` - block number where this transaction was in.
+          - `cumulativeGasUsed`: `QUANTITY` - The total amount of gas used when this transaction was executed in the block.
+          - `gasUsed`: `QUANTITY` - The amount of gas used by this specific transaction alone.
+          - `contractAddress`: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
+          - `logs`: `Array` - Array of log objects, which this transaction generated.
+          - `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
+        It also returns either :
+          - `root` : `DATA` 32 bytes of post-transaction stateroot (pre Byzantium)
+          - `status`: `QUANTITY` either `1` (success) or `0` (failure)
+      tags:
+        - eth
+      operationId: getTransactionReceipt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionReceiptRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+
+  /getAskTree:
+    post:
+      description: >-
+        
+        Returns the ask tree (price, orders, amount)
+        **Parameters**
+        - `baseToken`, 32 Bytes - hash of a base token
+        - `quoteToken`, 32 Bytes - hash of a quote token
+        **Example**
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - A ask tree (price, orders, amount)
+      tags:
+        - contract-x
+      operationId: getAskTree
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getAskTree'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getAsks:
+    post:
+      description: >-
+        
+        Returns the asks (price, amount)
+        **Parameters**
+        - `baseToken`, 32 Bytes - hash of a base token
+        - `quoteToken`, 32 Bytes - hash of a quote token
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - A asks (price, amount)
+      tags:
+        - contract-x
+      operationId: getAsks
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getAsks'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBestAsk:
+    post:
+      description: >-
+        
+        Returns the best ask
+        **Parameters**
+        - `baseToken`, hash of a base token
+        - `quoteToken`, hash of a quote token
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - the best ask (price, volume)
+      tags:
+        - contract-x
+      operationId: getBestAsk
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBestAsk'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBidTree:
+    post:
+      description: >-
+        
+        Returns the bid tree (price, orders, amount)
+        **Parameters**
+        - `baseToken`, hash of a base token
+        - `quoteToken`, hash of a quote token
+        **Example**
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - A bid tree (price, orders, amount)
+      tags:
+        - contract-x
+      operationId: getBidTree
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBidTree'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBids:
+    post:
+      description: >-
+        
+        Returns the bids (price, amount)
+        **Parameters**
+        - `baseToken`, hash of a base token
+        - `quoteToken`, hash of a quote token
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - A bids (price, amount)
+      tags:
+        - contract-x
+      operationId: getBids
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBids'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBestBid:
+    post:
+      description: >-
+        
+        Returns the best ask
+        **Parameters**
+        - `baseToken`, hash of a base token
+        - `quoteToken`, hash of a quote token
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+        **Returns**
+        `Object` - the best ask (price, volume)
+      tags:
+        - contract-x
+      operationId: getBestBid
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBestBid'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBorrows:
+    post:
+      description: >-
+        
+        Returns the borrows (interest, amount)
+        **Parameters**
+        - `lendingToken`, hash of a lending token
+        - `term`, perior of the loan (seconds)
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            86400
+          ]`
+        **Returns**
+        `Object` - list borrows (interest, amount)
+      tags:
+        - contract-x
+      operationId: getBorrows
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBorrows'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getInvest:
+    post:
+      description: >-
+        
+        Returns the invests (interest, amount)
+        **Parameters**
+        - `lendingToken`, hash of a lending token
+        - `term`, perior of the loan (seconds)
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            86400
+          ]`
+        **Returns**
+        `Object` - list invests (interest, amount)
+      tags:
+        - contract-x
+      operationId: getInvests
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getInvests'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getNetworkInformation:
+    post:
+      description: >-
+        
+        Returns the network information (chainId, special contracts)
+        **Returns**
+        `Object` - network information
+      tags:
+        - besu
+      operationId: getNetworkInformation
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getNetworkInformation'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+definitions:
+  clientVersionRequest:
+    title: clientVersionRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'web3_clientVersion'
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  sha3request:
+    title: sha3request
+    example:
+      jsonrpc: '2.0'
+      method: 'web3_sha3'
+      params:
+      - '0x68656c6c6f20776f726c64'
+      id: 64
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  versionrequest:
+    title: versionrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'net_version'
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  listeningrequest:
+    title: listeningrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'net_listening'
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  peerCountRequest:
+    title: peerCountRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'net_peerCount'
+      params: []
+      id: 74
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  protocolVersionRequest:
+    title: protocolVersionRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_protocolVersion'
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  syncingrequest:
+    title: syncingrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_syncing'
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  coinbaserequest:
+    title: coinbaserequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_coinbase'
+      params: []
+      id: 64
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  gasPriceRequest:
+    title: gasPriceRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_gasPrice'
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  accountsrequest:
+    title: accountsrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_accounts'
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  blockNumberRequest:
+    title: blockNumberRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_blockNumber'
+      params: []
+      id: 83
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBalanceRequest:
+    title: getBalanceRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBalance'
+      params:
+      - '0x2b5634c42055806a59e9107ed44d43c426e58258'
+      - 'latest'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getStorageAtRequest:
+    title: getStorageAtRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getStorageAt'
+      params:
+      - '0x295a70b2de5e3953354a6a8344e616ed314d7251'
+      - '0x0'
+      - 'latest'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionCountRequest:
+    title: getTransactionCountRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionCount'
+      params:
+      - '0xbf1dcb735e512b731abd3404c15df6431bd03d42'
+      - 'latest'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockTransactionCountByHashRequest:
+    title: getBlockTransactionCountByHashRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockTransactionCountByHash'
+      params:
+      - '0xc8b967161c671ce952a3d50987a78d64157fb5a8e1724804b87d3e9b11e3aa34'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockTransactionCountByNumberRequest:
+    title: getBlockTransactionCountByNumberRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockTransactionCountByNumber'
+      params:
+      - '0x52A8CA'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getCodeRequest:
+    title: getCodeRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getCode'
+      params:
+      - '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+      - '0x2'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  signrequest:
+    title: signrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_sign'
+      params:
+      - '0x9b2055d370f73ec7d8a03e965129118dc8f5bf83'
+      - '0xdeadbeaf'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  sendTransactionRequest:
+    title: sendTransactionRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_sendTransaction'
+      params:
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param:
+    title: Param
+    example:
+      from: 0xb60e8dd61c5d32be8058bb8eb970870f07233155
+      to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567
+      gas: 0x76c0
+      gasPrice: 0x9184e72a000
+      value: 0x9184e72a
+      data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+    type: object
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+      gas:
+        type: string
+      gasPrice:
+        type: string
+      value:
+        type: string
+      data:
+        type: string
+    required:
+    - from
+    - to
+    - gas
+    - gasPrice
+    - value
+    - data
+  sendRawTransactionRequest:
+    title: sendRawTransactionRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_sendRawTransaction'
+      params:
+      - '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  callrequest:
+    title: callrequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_call'
+      params:
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
+      - latest
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param1'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param1:
+    title: Param1
+    example:
+      from: ''
+      to: ''
+      gas: ''
+      gasPrice: ''
+      value: ''
+      data: ''
+    type: object
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+      gas:
+        type: string
+      gasPrice:
+        type: string
+      value:
+        type: string
+      data:
+        type: string
+  estimateGasRequest:
+    title: estimateGasRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_estimateGas'
+      params: 
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockByHashRequest:
+    title: getBlockByHashRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockByHash'
+      params:
+      - '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624'
+      - true
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockByNumberRequest:
+    title: getBlockByNumberRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockByNumber'
+      params:
+      - '0x0'
+      - true
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockSignersByNumberRequest:
+    title: getBlockSignersByNumberRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockSignersByNumber'
+      params:
+      - '0xA61F98'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id  
+  getBlockSignersByHashRequest:
+    title: getBlockSignersByHashRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockSignersByHash'
+      params:
+      - '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id  
+  getBlockFinalityByNumberRequest:
+    title: getBlockFinalityByNumberRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockFinalityByNumber'
+      params:
+      - '0xA61F98'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockFinalityByHashRequest:
+    title: getBlockFinalityByHashRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getBlockFinalityByHash'
+      params:
+      - '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByHashRequest:
+    title: getTransactionByHashRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByHash'
+      params:
+      - '0xd83b26e101dd6480764bade90fc283407919f60b7e65ff83fbf6cdc92f1138a1'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByBlockHashAndIndexRequest:
+    title: getTransactionByBlockHashAndIndexRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByBlockHashAndIndex'
+      params:
+      - '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7'
+      - '0x0'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByBlockNumberAndIndexRequest:
+    title: getTransactionByBlockNumberAndIndexRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByBlockNumberAndIndex'
+      params:
+      - '0x52A96E'
+      - '0x1'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionReceiptRequest:
+    title: getTransactionReceiptRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionReceipt'
+      params:
+      - '0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getCandidatesRequest:
+    title: getCandidateStatusRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getCandidates'
+      params:
+      - 'latest'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getCandidateStatusRequest:
+    title: getCandidateStatusRequest
+    example:
+      jsonrpc: '2.0'
+      method: 'eth_getCandidateStatus'
+      params:
+      - '0x1d50df657b6dce50bac634bf18e2d986d807e940'
+      - 'latest'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getAskTree:
+    title: getAskTree
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getAskTree'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getAsks:
+    title: getAsks
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getAsks'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBestAsk:
+    title: getBestAsk
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getBestAsk'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBidTree:
+    title: getBidTree
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getBidTree'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBids:
+    title: getBids
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getBids'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBestBid:
+    title: getBestBid
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getBestBid'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBorrows:
+    title: getBorrows
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getBorrows'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - 86400
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getInvests:
+    title: getInvest
+    example:
+      jsonrpc: '2.0'
+      method: 'contract-x_getInvests'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - 86400
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getNetworkInformation:
+    title: getNetworkInformation
+    example:
+      jsonrpc: '2.0'
+      method: 'besu_getNetworkInformation'
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+tags:
+- name: web3
+  description: API for web3 request
+- name: net
+  description: API for network request
+- name: eth
+  description: API for eth information
+- name: contract-x
+  description: API for contract-x request
+- name: besu
+  description: API for besu request
