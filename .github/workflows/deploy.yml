@@ -1,0 +1,32 @@
+# GitHub Nodejs CI
+name: deploy
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['12.x']
+
+    steps:
+    - uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator @qiwi/semantic-release-gh-pages-plugin
+        ./node_modules/.bin/semantic-release
+      env:
+        CI: false
