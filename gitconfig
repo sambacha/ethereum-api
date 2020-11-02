@@ -1,2 +1,0 @@
-[core]
-	pager = /path/to/diff-syntax-highlight.rb | less
