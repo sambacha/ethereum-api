@@ -1,0 +1,89 @@
+{
+  "name": "@open-rpc/playground",
+  "version": "0.0.0-development",
+  "homepage": "https://playground.open-rpc.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-rpc/playground.git"
+  },
+  "bin": {
+    "open-rpc-playground": "./bin/cli.js"
+  },
+  "bugs": "https://github.com/open-rpc/playground/issues",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@etclabscore/monaco-add-json-schema-diagnostics": "^1.0.3",
+    "@etclabscore/react-monaco-editor": "^1.0.4",
+    "@material-ui/core": "^4.9.8",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/lab": "^4.0.0-alpha.47",
+    "@open-rpc/docs-react": "^1.2.1",
+    "@open-rpc/examples": "^1.3.3",
+    "@open-rpc/inspector": "^1.4.18",
+    "@open-rpc/meta-schema": "^1.13.13",
+    "@open-rpc/schema-utils-js": "^1.13.0",
+    "@use-it/interval": "^0.1.3",
+    "ajv": "^6.10.0",
+    "classnames": "^2.2.6",
+    "commander": "^2.20.0",
+    "isomorphic-fetch": "^2.2.1",
+    "json-schema-empty": "^1.1.1",
+    "json-schema-ref-parser": "^6.1.0",
+    "jsonschema": "^1.2.4",
+    "lodash": "^4.17.20",
+    "monaco-editor": "^0.18.1",
+    "monaco-vim": "0.0.14",
+    "open": "^6.4.0",
+    "qs": "^6.7.0",
+    "react": "^16.12.0",
+    "react-app-polyfill": "^1.0.1",
+    "react-dom": "^16.12.0",
+    "react-json-view": "^1.19.1",
+    "react-markdown": "^4.1.0",
+    "react-split-pane": "^0.1.87",
+    "reusable": "^1.0.0-alpha.12"
+  },
+  "scripts": {
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "lint": "tslint --fix -p .",
+    "test": "npm run lint && rescripts test"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@rescripts/cli": "0.0.13",
+    "@rescripts/utilities": "0.0.6",
+    "@types/classnames": "^2.2.9",
+    "@types/css-mediaquery": "^0.1.0",
+    "@types/jest": "^24.0.23",
+    "@types/json-schema": "^7.0.3",
+    "@types/lodash": "^4.14.135",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.8.4",
+    "css-mediaquery": "^0.1.2",
+    "monaco-editor-webpack-plugin": "^1.7.0",
+    "react-scripts": "^3.4.3",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
+  },
+  "rescripts": [
+    "rescript-monaco"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(monaco-editor)/)",
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ]
+  }
+}
