@@ -1,7 +1,0 @@
-*.json diff=jsondiff
-
-*.png    text diff=exif
-*.svg    text diff=exif
-*.html   text diff=html
-*.yml    text
-
