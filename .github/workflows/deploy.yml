@@ -16,7 +16,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: '**/node_modules'
-         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
