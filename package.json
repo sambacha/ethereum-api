@@ -1,23 +1,26 @@
 {
   "name": "besu-api",
-  "version": "2.0.0",
-  "description": "",
-  "files": [
-    "packages/**/*"
-  ],
+  "version": "3.0.0",
+  "description": "Hyperledger Besu API and Documentation",
   "directories": {
     "doc": "docs"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sambacha/besu-api.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "hyperledger",
+    "besu",
+    "ethereum",
+    "enterprise",
+    "solidity",
+    "smart contracts",
+    "web3"
+  ],
+  "author": "SEE CONTRIBUTORS",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/sambacha/besu-api/issues"
   },
