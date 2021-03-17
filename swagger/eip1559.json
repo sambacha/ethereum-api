@@ -1,0 +1,293 @@
+{
+  "info": {
+    "title": "This module is a standalone HTTP service enabling to submit Ethereum transactions. ",
+    "description": "This component aims to help with the development of EIP-1559 since there are no wallet providers nor web3 libraries supporting new format transactions.\n\nDon't use it in production and use only debug private keys.\n\n",
+    "contact": {
+      "email": "contact@manifoldfinance.comt"
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "tags": [{
+    "name": "Transaction API",
+    "description": "Transaction Web API documentation"
+  }, {
+    "name": "Basefee API",
+    "description": "Basefee Web API documentation"
+  }],
+  "paths": {
+    "/basefee": {
+      "get": {
+        "tags": ["Basefee API"],
+        "summary": "Retrieve the latest base fee",
+        "operationId": "getBaseFee",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetBasefeeResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponseBody"
+            }
+          }
+        },
+        "parameters": [],
+        "produces": ["application/json", "application/octet-stream"]
+      }
+    },
+    "/basefee/{block}": {
+      "get": {
+        "tags": ["Basefee API"],
+        "summary": "Retrieve the base fee at given block",
+        "operationId": "getBaseFee_1",
+        "parameters": [{
+          "name": "block",
+          "in": "path",
+          "description": "block number or one of earliest, latest, pending",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetBasefeeResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponseBody"
+            }
+          }
+        },
+        "produces": ["application/json", "application/octet-stream"]
+      }
+    },
+    "/tx/legacy/{privateKey}": {
+      "post": {
+        "tags": ["Transaction API"],
+        "summary": "Submit a legacy Ethereum transaction",
+        "operationId": "submitTransaction",
+        "parameters": [{
+          "name": "privateKey",
+          "in": "path",
+          "description": "private key to use to sign the transaction",
+          "required": true,
+          "type": "string"
+        }, {
+          "required": true,
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/Transaction"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubmitTransactionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponseBody"
+            }
+          }
+        },
+        "consumes": ["application/json"],
+        "produces": ["application/json", "application/octet-stream"]
+      }
+    },
+    "/tx/eip1559/{privateKey}": {
+      "post": {
+        "tags": ["Transaction API"],
+        "summary": "Submit an EIP-1559 Ethereum transaction",
+        "operationId": "submitTransaction_1",
+        "parameters": [{
+          "name": "privateKey",
+          "in": "path",
+          "description": "private key to use to sign the transaction",
+          "required": true,
+          "type": "string"
+        }, {
+          "required": true,
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/EIP1559Transaction"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubmitTransactionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponseBody"
+            }
+          }
+        },
+        "consumes": ["application/json"],
+        "produces": ["application/json", "application/octet-stream"]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "host": "localhost:8080",
+  "schemes": ["http"],
+  "basePath": "/",
+  "definitions": {
+    "ExceptionResponseBody": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorLabel": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "GetBasefeeResponse": {
+      "type": "object",
+      "properties": {
+        "baseFee": {
+          "type": "string"
+        }
+      }
+    },
+    "Transaction": {
+      "required": ["gasLimit", "to", "value"],
+      "type": "object",
+      "properties": {
+        "nonce": {
+          "type": "integer"
+        },
+        "to": {
+          "maxLength": 42,
+          "minLength": 42,
+          "type": "string",
+          "description": "the recipient address",
+          "example": "0x61aCB88dA0DBA1A43592f7cc548b3319Fa615e1b"
+        },
+        "value": {
+          "type": "integer",
+          "description": "the amount of ETH to send, in WEI",
+          "example": 1000000
+        },
+        "gasPrice": {
+          "type": "integer",
+          "description": "the gas price of the transaction, in WEI",
+          "example": 1000
+        },
+        "gasLimit": {
+          "type": "integer",
+          "description": "the gas limit of the transaction",
+          "example": 21000
+        }
+      }
+    },
+    "SubmitTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transactionHash": {
+          "type": "string"
+        }
+      }
+    },
+    "EIP1559Transaction": {
+      "required": ["feecap", "gasLimit", "minerBribe", "to", "value"],
+      "type": "object",
+      "properties": {
+        "nonce": {
+          "type": "integer"
+        },
+        "to": {
+          "maxLength": 42,
+          "minLength": 42,
+          "type": "string",
+          "description": "the recipient address",
+          "example": "0x61aCB88dA0DBA1A43592f7cc548b3319Fa615e1b"
+        },
+        "value": {
+          "type": "integer",
+          "description": "the amount of ETH to send, in WEI",
+          "example": 1000000
+        },
+        "gasPrice": {
+          "type": "integer",
+          "description": "the gas price of the transaction, in WEI",
+          "example": 1000
+        },
+        "gasLimit": {
+          "type": "integer",
+          "description": "the gas limit of the transaction",
+          "example": 21000
+        },
+        "minerBribe": {
+          "type": "integer",
+          "description": "the miner bribe, in WEI",
+          "example": 1000
+        },
+        "feecap": {
+          "type": "integer",
+          "description": "the maximum of ETH the user is willing to pay for the transaction, in WEI",
+          "example": 1000000000
+        }
+      }
+    }
+  },
+  "x-components": {}
