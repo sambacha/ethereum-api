@@ -95,6 +95,90 @@ subscribe to logs using the link:../HowTo/Interact/APIs/RPC-PubSub.md#logs[RPC P
 Use link:../Reference/API-Methods.md#admin_generatelogbloomcache[`admin_generateLogBloomCache`] to
 improve log retrieval performance.
 
+== Events in Solidity
+
+Solidity provides two types of events, **anonymous** and **non-anonymous**. The default is non-anonymous, and most developers will not need to worry about anonymous events.
+
+For non-anonymous events, up to 3 topics may be indexed (instead of 4), since the first topic is reserved to specify the event signature. This allows non-anonymous events to always be filtered by their event signature.
+
+This topic hash is always in the first slot of the indexed data, and is computed by normalizing the Event signature and taking the keccak256 hash of it.
+
+For anonymous events, up to 4 topics may be indexed, and there is no signature topic hash, so the events cannot be filtered by the event signature.
+
+Each additional indexed property is processed depending on whether its length is fixed or dynamic.
+
+For fixed length types (e.g. uint, bytes5), all of which are internally exactly 32 bytes (shorter types are padded with zeros; numeric values are padded on the left, data values padded on the right), these are included directly by their actual value, 32 bytes of data.
+
+For dynamic types (e.g. string, uint256[]) , the value is hashed using keccak256 and this hash is used.
+
+Because dynamic types are hashed, there are important consequences in parsing events that should be kept in mind. Mainly that the original value is lost in the event. So, it is possible to tell is a topic is equal to a given string, but if they do not match, there is no way to determine what the value was.
+
+If a developer requires that a string value is required to be both able to be filtered and also able to be read, the value must be included in the signature twice, once indexed and once non-indexed (e.g. someEvent(string indexed searchBy, string clearText)).
+
+For a more detailed description, please refer to the https://docs.soliditylang.org/en/v0.8.1/abi-spec.html#events Solidity Event Documentation 
+
+=== Example of Event Indexing 
+
+[source, javascript]
+-----------------
+// Short example of manually creating filters for an ERC-20
+// Transfer event.
+//
+// Most users should generally use the Contract API to
+// compute filters, as it is much simpler, but this is
+// provided as an illustration for those curious. See
+// below for examples of the equivalent Contract API.
+
+// ERC-20:
+//   Transfer(address indexed src, address indexed dst, uint val
+//
+// -------------------^
+// ----------------------------------------^
+//
+// Notice that only *src* and *dst* are *indexed*, so ONLY they
+// qualify for filtering.
+//
+// Also, note that in Solidity an Event uses the first topic to
+// identify the Event name; for Transfer this will be:
+//   id("Transfer(address,address,uint256)")
+//
+// Other Notes:
+//  - A topic must be 32 bytes; so shorter types must be padded
+
+// List all token transfers  *from*  myAddress
+filter = {
+    address: tokenAddress,
+    topics: [
+        id("Transfer(address,address,uint256)"),
+        hexZeroPad(myAddress, 32)
+    ]
+}
+
+// List all token transfers  *to*  myAddress:
+filter = {
+    address: tokenAddress,
+    topics: [
+        id("Transfer(address,address,uint256)"),
+        null,
+        hexZeroPad(myAddress, 32)
+    ]
+}
+
+// List all token transfers  *to*  myAddress or myOtherAddress:
+filter = {
+    address: tokenAddress,
+    topics: [
+        id("Transfer(address,address,uint256)"),
+        null,
+        [
+            hexZeroPad(myAddress, 32),
+            hexZeroPad(myOtherAddress, 32),
+        ]
+    ]
+}
+-----------------
+
+
 == DotEnv Configuration
 
 These settings directly affect query/response time for Hyperledger Besu
