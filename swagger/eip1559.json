@@ -1,7 +1,7 @@
 {
   "info": {
-    "title": "This module is a standalone HTTP service enabling to submit Ethereum transactions. ",
-    "description": "This component aims to help with the development of EIP-1559 since there are no wallet providers nor web3 libraries supporting new format transactions.\n\nDon't use it in production and use only debug private keys.\n\n",
+    "title": "Ethereum Transaction EIP1559 Spec",
+    "description": "EIP1559 API Reference \n",
     "contact": {
       "email": "contact@manifoldfinance.comt"
     },
@@ -289,5 +289,5 @@
         }
       }
     }
-  },
-  "x-components": {}
+  }
+}
