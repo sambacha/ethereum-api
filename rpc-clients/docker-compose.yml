@@ -1,0 +1,22 @@
+version: '3'
+services:
+  dshackle:
+    container_name: dshackle
+    image: emeraldpay/dshackle:0.9.6
+    restart: unless-stopped
+    volumes:
+      - /data/dshackle:/etc/dshackle
+    ports:
+      - "8080:8080"
+    environment:
+      - ALCHEMY_KEY=
+      - ANYBLOCK_KEY=
+      - CHAINSTACK_NODE=
+      - CHAINSTACK_USERNAME=
+      - CHAINSTACK_PASSWORD=
+      - INFURA_KEY=
+      - RIVET_KEY=
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: unless-stopped

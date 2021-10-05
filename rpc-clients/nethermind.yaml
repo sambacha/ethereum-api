@@ -1,0 +1,70 @@
+upstreams:
+  - id: nethermind
+    chain: ethereum
+    labels:
+      provider: nethermind
+      archive: false
+    methods:
+      enabled:
+        - name: debug_getBlockRlp
+        - name: debug_getBlockRlpByHash
+        - name: debug_getChainLevel
+        - name: debug_traceBlock
+        - name: debug_traceBlockByHash
+        - name: debug_traceBlockByNumber
+        - name: debug_traceTransaction
+        - name: debug_traceTransactionByBlockAndIndex
+        - name: debug_traceTransactionByBlockhashAndIndex
+        - name: debug_traceTransactionInBlockByHash
+        - name: debug_traceTransactionInBlockByIndex
+        - name: eth_chainId
+        - name: eth_protocolVersion
+        - name: eth_syncing
+        - name: eth_blockNumber
+        - name: eth_getBalance
+        - name: eth_getStorageAt
+        - name: eth_getTransactionCount
+        - name: eth_getBlockTransactionCountByHash
+        - name: eth_getBlockTransactionCountByNumber
+        - name: eth_getUncleCountByBlockHash
+        - name: eth_getUncleCountByBlockNumber
+        - name: eth_getCode
+        - name: eth_sendTransaction
+        - name: eth_sendRawTransaction
+        - name: eth_estimateGas
+        - name: eth_getBlockByHash
+        - name: eth_getBlockByNumber
+        - name: eth_getTransactionByHash
+        - name: eth_pendingTransactions
+        - name: eth_getTransactionByBlockHashAndIndex
+        - name: eth_getTransactionByBlockNumberAndIndex
+        - name: eth_getTransactionReceipt
+        - name: eth_getUncleByBlockHashAndIndex
+        - name: eth_getUncleByBlockNumberAndIndex
+        - name: eth_newFilter
+        - name: eth_newBlockFilter
+        - name: eth_newPendingTransactionFilter
+        - name: eth_uninstallFilter
+        - name: eth_getFilterChanges
+        - name: eth_getFilterLogs
+        - name: eth_getLogs
+        - name: eth_getProof
+        - name: eth_subscribe
+        - name: eth_unsubscribe
+        - name: parity_enode
+        - name: parity_getBlockReceipts
+        - name: parity_pendingTransactions
+        - name: proof_getTransactionByHash
+        - name: proof_getTransactionReceipt
+        - name: trace_block
+        - name: trace_rawTransaction
+        - name: trace_replayBlockTransactions
+        - name: trace_replayTransaction
+        - name: trace_transaction
+        - name: web3_sha3
+      disabled:
+        - name: eth_gasPrice
+    connection:
+      ethereum:
+        rpc:
+          url: "http://nethermind:8545"

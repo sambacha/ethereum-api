@@ -1,0 +1,40 @@
+host: 0.0.0.0
+port: 2449
+tls:
+  enabled: false
+
+cache:
+  redis:
+    enabled: true
+    host: redis
+    password: ""
+
+proxy:
+  host: 0.0.0.0
+  port: 8080
+  tls:
+    enabled: false
+  routes:
+    - id: eth
+      blockchain: ethereum
+
+cluster:
+  defaults:
+    - chains:
+        - ethereum
+      options:
+        min-peers: 10
+  include:
+    # Local Nodes
+    - "geth.yaml"
+    - "nethermind.yaml"
+    - "turbogeth.yaml"
+    # Freemium Nodes
+    - "alchemy.yaml"
+    - "anyblock.yaml"
+    - "chainstack.yaml"
+    - "infura.yaml"
+    - "rivet.yaml"
+    # Public Nodes
+    - "cloudflare.yaml"
+    - "avado.yaml"

@@ -1,0 +1,69 @@
+upstreams:
+  - id: alchemy
+    chain: ethereum
+    role: fallback
+    labels:
+      provider: geth
+      archive: true
+    options:
+      disable-validation: true
+    methods:
+      enabled:
+        - name: alchemy_getAssetTransfers
+        - name: alchemy_getTokenAllowance
+        - name: alchemy_getTokenBalances
+        - name: alchemy_getTokenMetadata
+        - name: eth_accounts
+        - name: eth_blockNumber
+        - name: eth_call
+        - name: eth_chainId
+        - name: eth_estimateGas
+        - name: eth_gasPrice
+        - name: eth_getBalance
+        - name: eth_getBlockByHash
+        - name: eth_getBlockByNumber
+        - name: eth_getBlockTransactionCountByHash
+        - name: eth_getBlockTransactionCountByNumber
+        - name: eth_getCode
+        - name: eth_getFilterChanges
+        - name: eth_getFilterLogs
+        - name: eth_getLogs
+        - name: eth_getProof
+        - name: eth_getStorageAt
+        - name: eth_getTransactionByBlockHashAndIndex
+        - name: eth_getTransactionByBlockNumberAndIndex
+        - name: eth_getTransactionByHash
+        - name: eth_getTransactionCount
+        - name: eth_getTransactionReceipt
+        - name: eth_getUncleByBlockHashAndIndex
+        - name: eth_getUncleByBlockNumberAndIndex
+        - name: eth_getUncleCountByBlockHash
+        - name: eth_getUncleCountByBlockNumber
+        - name: eth_newBlockFilter
+        - name: eth_newFilter
+        - name: eth_newPendingTransactionFilter
+        - name: eth_protocolVersion
+        - name: eth_sendRawTransaction
+        - name: eth_subscribe
+        - name: eth_syncing
+        - name: eth_uninstallFilter
+        - name: eth_unsubscribe
+        - name: net_listening
+        - name: net_version
+        - name: trace_block
+        - name: trace_call
+        - name: trace_callMany
+        - name: trace_filter
+        - name: trace_get
+        - name: trace_rawTransaction
+        - name: trace_replayBlockTransactions
+        - name: trace_replayTransaction
+        - name: trace_transaction
+        - name: web3_clientVersion
+        - name: web3_sha3
+    connection:
+      ethereum:
+        rpc:
+          url: "https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}"
+        ws:
+          url: "wss://eth-mainnet.ws.alchemyapi.io/v2/${ALCHEMY_KEY}"

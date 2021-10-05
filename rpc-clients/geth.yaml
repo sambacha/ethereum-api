@@ -1,0 +1,73 @@
+upstreams:
+  - id: geth
+    chain: ethereum
+    labels:
+      provider: geth
+      archive: false
+    methods:
+      enabled:
+        - name: debug_traceBlock
+        - name: debug_traceBlockByNumber
+        - name: debug_traceBlockByHash
+        - name: debug_traceTransaction
+        - name: eth_accounts
+        - name: eth_blockNumber
+        - name: eth_call
+        - name: eth_chainId
+        - name: eth_coinbase
+        - name: eth_compileLLL
+        - name: eth_compileSerpent
+        - name: eth_compileSolidity
+        - name: eth_estimateGas
+        - name: eth_gasPrice
+        - name: eth_getBalance
+        - name: eth_getBlockByHash
+        - name: eth_getBlockByNumber
+        - name: eth_getBlockTransactionCountByHash
+        - name: eth_getBlockTransactionCountByNumber
+        - name: eth_getCode
+        - name: eth_getCompilers
+        - name: eth_getFilterChanges
+        - name: eth_getFilterLogs
+        - name: eth_getLogs
+        - name: eth_getStorageAt
+        - name: eth_getTransactionByBlockHashAndIndex
+        - name: eth_getTransactionByBlockNumberAndIndex
+        - name: eth_getTransactionByHash
+        - name: eth_getTransactionCount
+        - name: eth_getTransactionReceipt
+        - name: eth_getUncleByBlockHashAndIndex
+        - name: eth_getUncleByBlockNumberAndIndex
+        - name: eth_getUncleCountByBlockHash
+        - name: eth_getUncleCountByBlockNumber
+        - name: eth_getWork
+        - name: eth_hashrate
+        - name: eth_mining
+        - name: eth_newBlockFilter
+        - name: eth_newFilter
+        - name: eth_newPendingTransactionFilter
+        - name: eth_protocolVersion
+        - name: eth_sendRawTransaction
+        - name: eth_sendTransaction
+        - name: eth_sign
+        - name: eth_signTransaction
+        - name: eth_submitHashrate
+        - name: eth_submitWork
+        - name: eth_subscribe
+        - name: eth_syncing
+        - name: eth_uninstallFilter
+        - name: eth_unsubscribe
+        - name: net_listening
+        - name: net_peerCount
+        - name: net_version
+        - name: txpool_content
+        - name: txpool_inspect
+        - name: txpool_status
+        - name: web3_clientVersion
+        - name: web3_sha3
+    connection:
+      ethereum:
+        rpc:
+          url: "http://geth:8545"
+        ws:
+          url: "ws://geth:8545"
